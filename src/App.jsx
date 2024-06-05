@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/SignUpPage'
+import AddTopicPage from './pages/AddTopicPage'
+import ProductsPage from './pages/ProductsPage'
+import AllEventsPage from './pages/AllEventsPagee'
+import AdminDashboardPage from './pages/AdminDashboardPage'
+import AddProductPage from './pages/AddProductPage'
+import NavBar from './components/Navbar'
+import IsAnon from './components/IsAnon'
+import IsPrivate from './components/IsPrivate'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className={`app light`}>
+
+      <NavBar />
+
+      <Routes>
+        <Route path='/' element={<IsAnon> <HomePage /> </IsAnon>} />
+        <Route path='/admin-dashboard' element={<IsPrivate> <AdminDashboardPage /> </IsPrivate>} />
+        <Route path='/add-product' element={<IsPrivate> <AddProductPage /> </IsPrivate>} />
+        <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
+        <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
+        <Route path='/add-topic' element={<IsPrivate> <AddTopicPage /> </IsPrivate>} />
+        <Route path='/all-events' element={<IsPrivate> <AllEventsPage /> </IsPrivate>} />
+        <Route path='/products' element={<IsPrivate> <ProductsPage /> </IsPrivate>} />
+        <Route path='/products/:productId' element={<IsPrivate> <ProductDetailsPage /> </IsPrivate>} />
+        <Route path='*' element={<div> 404 Page Not Found </div>} />
+      </Routes>
+
+    </div>
   )
 }
 
