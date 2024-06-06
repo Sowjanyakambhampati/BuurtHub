@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AddTopicPage() {
+function TopicPage() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function AddTopicPage() {
   )
 }
 
-export default AddTopicPage
+export default TopicPage
