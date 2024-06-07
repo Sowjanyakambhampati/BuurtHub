@@ -17,10 +17,8 @@ function App() {
 
   return (
     <div className={`app light`}>
-      <h1>Welcome to the Netherlands Community Forum</h1>
-      
-
       <NavBar />
+      <h1>Welcome to the Netherlands Community Forum</h1>
 
       <Routes>
         <Route path='/' element={<IsAnon> <HomePage /> </IsAnon>} />
