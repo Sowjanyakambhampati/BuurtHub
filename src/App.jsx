@@ -12,13 +12,15 @@ import NavBar from './components/Navbar'
 import IsAnon from './components/IsAnon'
 import IsPrivate from './components/IsPrivate'
 import Footer from './components/Footer'
+import CitySelection from './components/CitySelection'
+import UserHome from './pages/UserHome'
+
 
 function App() {
 
   return (
     <div className={`app light`}>
       <NavBar />
-      <h1>Welcome to the Netherlands Community Forum</h1>
 
       <Routes>
         <Route path='/' element={<IsAnon> <HomePage /> </IsAnon>} />
@@ -30,6 +32,8 @@ function App() {
         <Route path='/all-events' element={<IsPrivate> <AllEventsPage /> </IsPrivate>} />
         <Route path='/products' element={<IsPrivate> <AllProductsPage /> </IsPrivate>} />
         {/* <Route path='/products/:productId' element={<IsPrivate> <ProductDetailsPage /> </IsPrivate>} /> */}
+        <Route path='/city-selection' element={<CitySelection />} />  
+        <Route path='/userhome/:city' element={<UserHome />} /> 
         <Route path='*' element={<div> 404 Page Not Found </div>} />
       </Routes>
       <Footer />
