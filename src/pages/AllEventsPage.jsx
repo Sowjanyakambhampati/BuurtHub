@@ -9,3 +9,5 @@ function AllEventsPage() {
 }
 
 export default AllEventsPage
+
+//add the "add/delete event button only for admin"
