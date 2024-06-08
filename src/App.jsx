@@ -12,8 +12,8 @@ import NavBar from './components/Navbar'
 import IsAnon from './components/IsAnon'
 import IsPrivate from './components/IsPrivate'
 import Footer from './components/Footer'
-import CitySelection from './components/CitySelection'
-import UserHome from './pages/UserHome'
+import CitySelection from './components/CitySelection';
+import UserCityPage from './pages/UserCityPage'
 
 
 function App() {
@@ -23,18 +23,18 @@ function App() {
       <NavBar />
 
       <Routes>
-        <Route path='/' element={<IsAnon> <HomePage /> </IsAnon>} />
-        <Route path='/admin-dashboard' element={<IsPrivate> <AdminDashboardPage /> </IsPrivate>} />
-        <Route path='/add-product' element={<IsPrivate> <AddProductPage /> </IsPrivate>} />
+        <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
+        <Route path='/admin-dashboard' element={<IsPrivate><AdminDashboardPage /></IsPrivate>} />
+        <Route path='/add-product' element={<IsPrivate><AddProductPage /></IsPrivate>} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
-        <Route path='/add-topic' element={<IsPrivate> <AddTopicPage /> </IsPrivate>} />
-        <Route path='/all-events' element={<IsPrivate> <AllEventsPage /> </IsPrivate>} />
-        <Route path='/products' element={<IsPrivate> <AllProductsPage /> </IsPrivate>} />
-        {/* <Route path='/products/:productId' element={<IsPrivate> <ProductDetailsPage /> </IsPrivate>} /> */}
-        <Route path='/city-selection' element={<CitySelection />} />  
-        <Route path='/userhome/:city' element={<UserHome />} /> 
-        <Route path='*' element={<div> 404 Page Not Found </div>} />
+        <Route path='/add-topic' element={<IsPrivate><AddTopicPage /></IsPrivate>} />
+        <Route path='/all-events' element={<IsPrivate><AllEventsPage /></IsPrivate>} />
+        <Route path='/products' element={<IsPrivate><AllProductsPage /></IsPrivate>} />
+        <Route path='/city-selection' element={<CitySelection />} />
+        <Route path='/usercitypage/:city' element={<UserCityPage />} /> 
+        {/* <Route path='/add-product-listing' element={<AddProduct />} />   */}
+        <Route path='*' element={<div>404 Page Not Found</div>} />
       </Routes>
       <Footer />
 

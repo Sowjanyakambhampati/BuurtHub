@@ -1,5 +1,16 @@
 
+import React from 'react'
 
+function AdminDashboardPage() {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default AdminDashboardPage
+/*
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -46,3 +57,4 @@ function AdminDashboardPage() {
 }
 
 export default AdminDashboardPage;
+*/

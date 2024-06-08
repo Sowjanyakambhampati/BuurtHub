@@ -9,16 +9,16 @@ function CitySelection() {
     const selectedCity = event.target.value;
     setSelectCity(selectedCity);
     if (selectedCity) {
-      navigate(`/userdashboard/${selectedCity}`);
+      navigate(`/usercitypage/${selectedCity}`);
     }
   };
 
   return (
     <div>
       <div className="control">
-        <label htmlFor="city-select">Select your city here</label>
+        <label htmlFor="city-select"></label>
         <select id="city-select" name="city-select" onChange={handleSelectCity}>
-          <option value="">Select...</option>
+          <option value="select">Select your city</option>
           <option value="Amsterdam">Amsterdam</option>
           <option value="Den-Haag">Den Haag</option>
           <option value="Dordrecht">Dordrecht</option>
