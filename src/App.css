@@ -58,3 +58,10 @@
   width: auto;
   
 }
+
+.select-style {
+  font-size: 16px;
+  color: #ced6cd;
+  padding: 10px;
+  width: 200px;
+}
