@@ -34,3 +34,27 @@
 .read-the-docs {
   color: #888;
 }
+
+/* REMOVE LATER WHEN TAILWIND CSS WORKS*/
+.tile{
+  height: 120px;
+  border-radius: 10px;
+}
+.tile2{
+  height: 200px;
+  border-radius: 20px;
+}
+.benefits{
+  background-color: rgb(214, 209, 209);
+  border-radius: 20px;
+}
+.all-benefits{
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+}
+.city-img{
+  height: auto;
+  width: auto;
+  
+}
