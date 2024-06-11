@@ -21,7 +21,7 @@
 //           <option value="select">Select your city</option>
 //           <option value="Amsterdam">Amsterdam</option>
 //           <option value="Den-Haag">Den Haag</option>
-//           <option value="Dordrecht">Dordrecht</option>
+//           <option value="Gieten">Gieten</option>
 //           <option value="Groningen">Groningen</option>
 //           <option value="Haarlem">Haarlem</option>
 //           <option value="Hoofddorp">Hoofddorp</option>
