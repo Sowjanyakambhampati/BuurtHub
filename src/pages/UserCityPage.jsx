@@ -31,19 +31,19 @@ function UserCityPage() {
         </div> */}
         <div>
           <div>
-            <img className="tile2" src='/public/products/washing-machine.jpg' alt='events' />
+            <img className="tile2" src='/products/washing-machine.jpg' alt='events' />
             <p>Bosch Washing Machine</p>
             <p>100 $</p>
             <p>Very Good</p>
           </div>
           <div>
-            <img className="tile2" src='/public/products/kids-table.jpg' alt='kids' />
+            <img className="tile2" src='/products/kids-table.jpg' alt='kids' />
             <p>kids table</p>
             <p>30 $</p>
             <p>Very Good</p>
           </div>
           <div>
-            <img className="tile2" src='/public/products/womens-dress.jpg' alt='womens-dress' />
+            <img className="tile2" src='/products/womens-dress.jpg' alt='womens-dress' />
             <p>womens white dress</p>
             <p>100 $</p>
             <p>Very Good</p>
