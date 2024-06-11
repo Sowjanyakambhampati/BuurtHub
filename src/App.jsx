@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
@@ -8,7 +9,7 @@ import AllProductsPage from './pages/AllProductsPage'
 import AllEventsPage from './pages/AllEventsPage'
 import AdminDashboardPage from './pages/AdminDashboardPage'
 import AddProductPage from './pages/AddProductPage'
-import NavBar from './components/Navbar'
+import Navbar from './components/Navbar'
 import IsAnon from './components/IsAnon'
 import IsPrivate from './components/IsPrivate'
 import Footer from './components/Footer'
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className={`app light`}>
-      <NavBar />
+      <Navbar />
 
       <Routes>
         <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
