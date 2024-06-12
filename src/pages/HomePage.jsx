@@ -11,7 +11,7 @@ function HomePage() {
       <div>
         <h1> Why register on Community Forum ?</h1>
       </div>
-      <div classname = 'all-benefits'>
+      <div className = 'all-benefits'>
         <section className='benefits'>
         <img className="tile" src = '/events.jpg' alt = 'events' />
         <h3>Stay Informed and Engaged with Community Events and News</h3>
@@ -33,5 +33,6 @@ function HomePage() {
     </div>
   )
 }
+
 
 export default HomePage

@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 function AllProductsPage() {
+  const { city } = useParams([]);
   return (
     <div>
-      <form>
-        
-      </form>
+        <h1> Upcoming Events in {city} </h1>
+
+
+
+  
     </div>
   )
 }

@@ -31,7 +31,7 @@ function App() {
         <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
         <Route path='/add-topic' element={<IsPrivate><AddTopicPage /></IsPrivate>} />
         <Route path='/all-events' element={<IsPrivate><AllEventsPage /></IsPrivate>} />
-        <Route path='/products' element={<IsPrivate><AllProductsPage /></IsPrivate>} />
+        <Route path='/products' element={<IsAnon><AllProductsPage /></IsAnon>} />
         <Route path='/city-selection' element={<CitySelection />} />
         <Route path='/usercitypage/:city' element={<UserCityPage />} /> 
         {/* <Route path='/add-product-listing' element={<AddProduct />} />   */}

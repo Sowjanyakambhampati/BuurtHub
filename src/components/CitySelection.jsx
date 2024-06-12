@@ -41,14 +41,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 function CitySelection() {
     const [cities, setCities] = useState([]);
     const [selectCity, setSelectCity] = useState('');
     const navigate = useNavigate();
-
     useEffect(() => {
-        axios.get('http://localhost:5005/cities')
+        axios.get('http://localhost:5005/city')
             .then(response => {
               console.log("Cities List :: " + response.data)
                 setCities(response.data);
@@ -57,7 +55,6 @@ function CitySelection() {
                 console.error('There was an error fetching the cities!', error);
             });
     }, []);
-
     const handleSelectCity = (event) => {
         const selectedCity = event.target.value;
         setSelectCity(selectedCity);
@@ -65,7 +62,6 @@ function CitySelection() {
             navigate(`/usercitypage/${selectedCity}`);
         }
     };
-
     return (
         <div>
             <div className="control">
@@ -81,5 +77,4 @@ function CitySelection() {
         </div>
     );
 }
-
 export default CitySelection;

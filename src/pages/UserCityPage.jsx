@@ -1,55 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 function UserCityPage() {
 
   const { city } = useParams([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // const { product } = useParams([]);
+
   // const { event } = useParams([]);
+useEffect(() => {
+    axios.get(`http://localhost:5005/products/${city}`)
+      .then(response => {
+        setProducts(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the products!', error);
+        setLoading(false);
+      });
+  }, [city]);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
       <div>
         <h1>Hi! Welcome to the {city} Community!</h1>
-
       </div>
       <div>
         <img className='city-img' src={`/cities/${city}.jpg`} alt={`${city}`} />
-
       </div>
       <div>
         <h2>Product Listing</h2>
         <h3>See all products</h3>
-
-        {/* <div>
-        <img className="tile2" src = {'image'} alt = {image} />
-        <p>{productName}</p>
-        <p>{price}</p>
-        <p>{condition}</p>
-        </div> */}
         <div>
-          <div>
-            <img className="tile2" src='/products/washing-machine.jpg' alt='events' />
-            <p>Bosch Washing Machine</p>
-            <p>100 $</p>
-            <p>Very Good</p>
-          </div>
-          <div>
-            <img className="tile2" src='/products/kids-table.jpg' alt='kids' />
-            <p>kids table</p>
-            <p>30 $</p>
-            <p>Very Good</p>
-          </div>
-          <div>
-            <img className="tile2" src='/products/womens-dress.jpg' alt='womens-dress' />
-            <p>womens white dress</p>
-            <p>100 $</p>
-            <p>Very Good</p>
-          </div>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div key={product._id}>
+                <img className="tile2" src={product.image} alt={product.productName} />
+                <p>{product.productName}</p>
+                <p>{product.price} $</p>
+                <p>{product.condition}</p>
+              </div>
+            ))
+          ) : (
+            <p>No products found for this city.</p>
+          )}
         </div>
-
       </div>
       <div>
         <h2>Upcoming Events</h2>
@@ -83,4 +85,5 @@ function UserCityPage() {
   )
 }
 
-export default UserCityPage
+export default UserCityPage;
+
