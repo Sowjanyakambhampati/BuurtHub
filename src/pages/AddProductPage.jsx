@@ -7,7 +7,7 @@ import axios from 'axios';
 function AddProduct() {
   const [product, setProduct] = useState({
     id: '',
-    neighbourhood: '',
+    city: '',
     productName: '',
     price: '',
     description: '',

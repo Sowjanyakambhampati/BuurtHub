@@ -36,7 +36,7 @@ function UserCityPage() {
                 <img
                   className="tile2"
                   src="/events.jpg"
-                  alt={product.productName}
+                  alt={product.city}
                 />
                 <p>{product.productName}</p>
                 <p>{product.price} €</p>
