@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function UserCityPage() {
   const { city } = useParams([]);
@@ -28,7 +28,7 @@ function UserCityPage() {
       </div>
       <div>
         <h2>Product Listing</h2>
-        <h3>See all products</h3>
+        <Link to = {'/all-products'}>See all products</Link> 
         <div>
           {products.length > 0 ? (
             products.map((product) => (

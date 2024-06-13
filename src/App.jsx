@@ -26,12 +26,12 @@ function App() {
       <Routes>
         <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
         <Route path='/admin-dashboard' element={<IsPrivate><AdminDashboardPage /></IsPrivate>} />
-        <Route path='/add-product' element={<IsPrivate><AddProductPage /></IsPrivate>} />
+        <Route path='/usercitypage/:city/add-product' element={<AddProductPage />} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
         <Route path='/add-topic' element={<IsPrivate><AddTopicPage /></IsPrivate>} />
         <Route path='/all-events' element={<IsPrivate><AllEventsPage /></IsPrivate>} />
-        <Route path='/products' element={<IsAnon><AllProductsPage /></IsAnon>} />
+        <Route path='/all-products' element={<IsAnon><AllProductsPage /></IsAnon>} />
         <Route path='/city-selection' element={<CitySelection />} />
         <Route path='/usercitypage/:city' element={<UserCityPage />} /> 
         {/* <Route path='/add-product-listing' element={<AddProduct />} />   */}
