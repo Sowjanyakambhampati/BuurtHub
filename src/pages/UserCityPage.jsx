@@ -33,12 +33,14 @@ function UserCityPage() {
           {products.length > 0 ? (
             products.map((product) => (
               <div key={product._id}>
+
                 <img
                   className="tile2"
                   src="/events.jpg"
-                  alt={product.city}
+                  alt={product.productName}
                 />
                 <p>{product.productName}</p>
+                <p>{product.city}</p>
                 <p>{product.price} €</p>
                 <p>{product.productOwner}</p>
                 <p>{product.category}</p>
