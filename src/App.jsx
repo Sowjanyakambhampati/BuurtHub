@@ -16,6 +16,7 @@ import Footer from './components/Footer'
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
 import PostsPage from './pages/UserCityPage';
+import UserManagement from './pages/UserManagement'
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
         <Route path='/all-products' element={<IsAnon><AllProductsPage /></IsAnon>} />
         <Route path='/city-selection' element={<CitySelection />} />
         <Route path='/usercitypage/:city' element={<UserCityPage />} /> 
-        <Route path='/usercitypage/:city' element={<UserCityPage />} /> 
+        <Route path='/manage-user' element={<UserManagement />} /> 
         <Route path='/posts' element={<PostsPage />} /> 
         {/* <Route path='/add-product-listing' element={<AddProduct />} />   */}
         <Route path='*' element={<div>404 Page Not Found</div>} />
