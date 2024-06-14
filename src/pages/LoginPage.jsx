@@ -1,70 +1,114 @@
-// src/pages/LoginPage.jsx
+import React, { useState } from 'react';
 
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+function LogInPage() {
+    // States for login
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-const API_URL = "http://localhost:5005";
+    // States for checking the errors 
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
 
+    // Handling the email change 
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        setSubmitted(false);
+    };
 
-function LoginPage(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(undefined);
-  
-  const navigate = useNavigate();
+    // Handling the password change 
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+        setSubmitted(false);
+    };
 
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
+    // Handling the form submission 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (email === "" || password === "") {
+            setError(true);
+        } else {
+            setSubmitted(true);
+            setError(false);
+        }
+    };
 
-  
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    const requestBody = { email, password };
- 
-    axios.post(`${API_URL}/auth/login`, requestBody)
-      .then((response) => {
-      // Request to the server's endpoint `/auth/login` returns a response
-      // with the JWT string ->  response.data.authToken
-        console.log('JWT token', response.data.authToken );
-      
-        navigate(`/usercitypage/${selectedCity}`);;                                  
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      })
-  };
-  
-  return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    // Showing success message 
+    const successMessage = () => {
+        return (
+            <div
+                className="text-green-500 mb-4"
+                style={{
+                    display: submitted ? "" : "none",
+                }}
+            >
+                <h1>User successfully logged in!!</h1>
+            </div>
+        );
+    };
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input 
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
+    // Showing error message if error is true 
+    const errorMessage = () => {
+        return (
+            <div
+                className="text-red-500 mb-4"
+                style={{
+                    display: error ? "" : "none",
+                }}
+            >
+                <h3>Please enter all the fields</h3>
+            </div>
+        );
+    };
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+    return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+                <div className="flex justify-center mb-4">
+                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+                </div>
+                <div>
+                    <h1 className="text-2xl font-bold mb-4 text-center">Log In Here</h1>
+                </div>
 
-        <button type="submit">Login</button>
-      </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+                {/* Calling to the methods */}
+                <div className="messages">
+                    {errorMessage()}
+                    {successMessage()}
+                </div>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
-  )
+                <form className="space-y-4">
+                    {/* Labels and inputs for form data */}
+                    <div className="flex flex-col">
+                        <label className="block text-gray-700 mb-1">Email</label>
+                        <input
+                            onChange={handleEmail}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={email}
+                            type="email"
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label className="block text-gray-700 mb-1">Password</label>
+                        <input
+                            onChange={handlePassword}
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                            value={password}
+                            type="password"
+                        />
+                    </div>
+
+                    <button
+                        onClick={handleSubmit}
+                        className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        type="submit"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
 }
 
-export default LoginPage;
+export default LogInPage;
