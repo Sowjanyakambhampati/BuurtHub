@@ -75,9 +75,7 @@ function NavBar() {
           <img src="/logo.png" alt="Logo" />
         </Link>
       </div>
-      <div className="navbar-search">
-        <input type="text" placeholder="Search..." />
-      </div>
+    
       <div className="navbar-buttons">
         {isLoggedIn ? (
           <>
