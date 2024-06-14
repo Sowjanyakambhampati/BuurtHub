@@ -32,9 +32,9 @@ function AllProductsPage() {
             products.map((product) => (
               <div key={product._id}>
 
-                <img
-                  className="tile2"
-                  src="https://res.cloudinary.com/dvlqkjs7x/image/upload/v1718306669/movie-gallery/fbojq2kup37cu8uicccf.png"
+              <img
+                  className="tile2 w-48 h-48 object-cover"
+                  src={product.image}
                   alt={product.productName}
                 />
                 <p>{product.productName}</p>
