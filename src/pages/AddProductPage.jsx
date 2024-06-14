@@ -1,5 +1,3 @@
-// src/pages/AddProductPage.jsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -77,8 +75,8 @@ function AddProduct() {
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-semibold mb-6">Add Product Listing</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">Neighbourhood:</label>
+        <div className="flex flex-col">
+          <label htmlFor="city" className="text-sm font-medium text-gray-700 mb-1">Neighbourhood:</label>
           <input
             type="text"
             id="city"
@@ -89,8 +87,8 @@ function AddProduct() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label htmlFor="productName" className="block text-sm font-medium text-gray-700">Product Name:</label>
+        <div className="flex flex-col">
+          <label htmlFor="productName" className="text-sm font-medium text-gray-700 mb-1">Product Name:</label>
           <input
             type="text"
             id="productName"
@@ -101,8 +99,8 @@ function AddProduct() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price: €</label>
+        <div className="flex flex-col">
+          <label htmlFor="price" className="text-sm font-medium text-gray-700 mb-1">Price: €</label>
           <input
             type="number"
             id="price"
@@ -113,8 +111,8 @@ function AddProduct() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
+        <div className="flex flex-col">
+          <label htmlFor="description" className="text-sm font-medium text-gray-700 mb-1">Description:</label>
           <textarea
             id="description"
             name="description"
@@ -124,8 +122,8 @@ function AddProduct() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
-        <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category:</label>
+        <div className="flex flex-col">
+          <label htmlFor="category" className="text-sm font-medium text-gray-700 mb-1">Category:</label>
           <select
             id="category"
             name="category"
@@ -144,8 +142,8 @@ function AddProduct() {
             <option value="Sports">Sports</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image:</label>
+        <div className="flex flex-col">
+          <label htmlFor="image" className="text-sm font-medium text-gray-700 mb-1">Image:</label>
           <input
             type="file"
             id="image"
@@ -167,104 +165,3 @@ function AddProduct() {
 }
 
 export default AddProduct;
-
-
-
-
-
-/*
-const API_URL = "http://localhost:5005"; // Adjust the URL as needed
-
-function AddProductPage() {
-    const navigate = useNavigate();
-    const [product, setProduct] = useState({
-        name: '',
-        price: '',
-        description: '',
-        inStock: true,
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const storedToken = localStorage.getItem("authToken");
-
-        // Add the new product to the API
-        axios.post(`${API_URL}/products`, {
-            headers: {
-                'Authorization': `Bearer ${storedToken}`
-            }
-        })
-            .then(response => {
-                console.log('Product added:', response.data);
-                navigate('/dashboard');
-            })
-            .catch(error => console.error('Error adding product:', error));
-    };
-
-    return (
-        <div>
-            <h1>Add New Product</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        Name:
-                        <input
-                            type="text"
-                            name="name"
-                            value={product.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Price:
-                        <input
-                            type="number"
-                            name="price"
-                            value={product.price}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Description:
-                        <textarea
-                            name="description"
-                            value={product.description}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        In Stock:
-                        <select
-                            name="inStock"
-                            value={product.inStock}
-                            onChange={handleChange}
-                        >
-                            <option value={true}>Yes</option>
-                            <option value={false}>No</option>
-                        </select>
-                    </label>
-                </div>
-                <button type="submit">Add Product</button>
-            </form>
-        </div>
-    );
-}
-
-export default AddProductPage;
-*/
-
