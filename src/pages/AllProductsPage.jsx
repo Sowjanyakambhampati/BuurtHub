@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import SideNav from "../components/SideNav";
 
 function AllProductsPage() {
   const { city } = useParams([]);
@@ -19,9 +20,11 @@ function AllProductsPage() {
     fetchProducts();
   }, []);
   return (
-    <div>
-
-      <div>
+    <div className="flex">
+    <div className="w-1/4">
+        <SideNav />
+      </div>
+      <div className="w-3/4 p-4">
         <h2>Product Listing</h2>
 
         <div>
