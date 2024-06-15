@@ -35,7 +35,7 @@ function a11yProps(index) {
   };
 }
 
-export default function UserManagement() {
+export default function AddItem() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -53,7 +53,7 @@ export default function UserManagement() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <ManageProduct/>
+        <ManageProduct />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Posts

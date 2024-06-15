@@ -11,7 +11,7 @@ function UserCityPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/product");
+        const response = await axios.get("https://community-forum-backend.adaptable.app");
         setProducts(response.data.slice(-3)); // Displaying only the first three products
       } catch (error) {
         console.error("Failed to fetch products", error);
