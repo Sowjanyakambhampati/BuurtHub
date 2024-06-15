@@ -14,7 +14,7 @@ function ManageProduct(){
         productOwner: '',
         category: ''
       });
-    
+      const navigate = useNavigate();
       const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct((prevProduct) => ({
@@ -65,6 +65,8 @@ function ManageProduct(){
               category: '',
     
             });
+            // Navigate to the /all-products route
+        navigate('/all-products');
           })
           .catch(error => {
             console.error('There was an error submitting the product!', error);
@@ -75,10 +77,10 @@ function ManageProduct(){
         <div>
         {/* ADD PRODUCT */}
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-          <h2 className="text-2xl font-semibold mb-6">Add Product Listing</h2>
+          <h2 className="text-2xl font-semibold mb-6">Add New Product Listing Here</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="city" className="block text-sm font-medium text-gray-700">Neighbourhood:</label>
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700">City:</label>
               <input
                 type="text"
                 id="city"
@@ -97,6 +99,7 @@ function ManageProduct(){
                 name="productName"
                 value={product.productName}
                 onChange={handleChange}
+                placeholder="e.g. Bosch Washing Machine"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
@@ -120,6 +123,7 @@ function ManageProduct(){
                 name="description"
                 value={product.description}
                 onChange={handleChange}
+                placeholder="e.g. Only used for one year, works perfectly well with very minimal noise"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
@@ -142,6 +146,23 @@ function ManageProduct(){
                 <option value="Pet Care">Pet Care</option>
                 <option value="Entertainment">Entertainment</option>
                 <option value="Sports">Sports</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="condition" className="block text-sm font-medium text-gray-700">Condition:</label>
+              <select
+                id="condition"
+                name="condition"
+                value={product.condition}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="">Select a condition</option>
+                <option value="New-with-tags">New</option>
+                <option value="Electronics">Very Good</option>
+                <option value="Clothing">Good</option>
+                <option value="Kids">Satisfactory</option>
               </select>
             </div>
             <div>

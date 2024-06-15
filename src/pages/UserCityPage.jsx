@@ -6,17 +6,28 @@ import SideNav from "../components/SideNav";
 function UserCityPage() {
   const { city } = useParams();
   const [products, setProducts] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:5005/product");
-        setProducts(response.data);
+        setProducts(response.data.slice(-3)); // Displaying only the first three products
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
     };
     fetchProducts();
+
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:5005/events");
+        setEvents(response.data.slice(-3)); // Displaying only the first three events
+      } catch (error) {
+        console.error("Failed to fetch events", error);
+      }
+    };
+    fetchEvents();
   }, []);
 
   return (
@@ -26,30 +37,24 @@ function UserCityPage() {
       </div>
       <div className="w-3/4 p-4">
         <div>
-          <h1>Hi! Welcome to the {city} Community!</h1>
+          <h1 className="text-3xl font-bold mb-4">Hi! Welcome to the {city} Community!</h1>
+          <img className="w-full h-auto mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
-          <img className="city-img" src={`/cities/${city}.jpg`} alt={`${city}`} />
-        </div>
-        <div>
-          <h2>Product Listing</h2>
-          <Link to={'/all-products'}>See all products</Link>
-          <div>
+          <h2 className="text-2xl font-bold mb-2">Product Listing</h2>
+          <Link to={'/all-products'} className="text-blue-500 underline mb-2">See all products</Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
               products.map((product) => (
-                <div key={product._id}>
-                  <img
-                    className="tile2"
-                    src="/events.jpg"
-                    alt={product.productName}
-                  />
-                  <p>{product.productName}</p>
-                  <p>{product.city}</p>
-                  <p>{product.price} €</p>
-                  <p>{product.productOwner}</p>
-                  <p>{product.category}</p>
-                  <p>{product.condition}</p>
-                  <p>{product.description}</p>
+                <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
+                  <img className="w-full h-40 object-cover mb-2" src={product.image} alt={product.productName} />
+                  <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
+                  <p className="text-gray-600 mb-2">{product.city}</p>
+                  <p className="text-gray-600 mb-2">{product.price} €</p>
+                  <p className="text-gray-600 mb-2">{product.productOwner}</p>
+                  <p className="text-gray-600 mb-2">{product.category}</p>
+                  <p className="text-gray-600 mb-2">{product.condition}</p>
+                  <p className="text-gray-600">{product.description}</p>
                 </div>
               ))
             ) : (
@@ -58,38 +63,26 @@ function UserCityPage() {
           </div>
         </div>
         <div>
-          <h2>Upcoming Events</h2>
-          <h3>See all events</h3>
-          <div>
-            <div>
-              <img className="tile2" src="/events.jpg" alt="Community Cleanup" />
-              <p>Community Cleanup</p>
-              <p>June 15, 2024</p>
-              <p>
-                Join us for a community-wide cleanup event to keep our neighborhood beautiful.
-              </p>
-            </div>
-            <div>
-              <img className="tile2" src="/events.jpg" alt="Summer Festival" />
-              <p>Summer Festival</p>
-              <p>July 20, 2024</p>
-              <p>
-                Celebrate summer with music, food, and fun activities for all ages.
-              </p>
-            </div>
-            <div>
-              <img className="tile2" src="/events.jpg" alt="Book Club" />
-              <p>Book Club Meeting</p>
-              <p>August 5, 2024</p>
-              <p>
-                Join our monthly book club meeting to discuss the latest read with fellow book enthusiasts.
-              </p>
-            </div>
+          <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events</h2>
+          <Link to={'/all-events'} className="text-blue-500 underline mb-2">See all events</Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {events.length > 0 ? (
+              events.map((event) => (
+                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
+                  <img className="w-full h-40 object-cover mb-2" src="/events.jpg" alt="Event" />
+                  <h3 className="text-xl font-semibold mb-2">{event.eventName}</h3>
+                  <p className="text-gray-600 mb-2">{event.date}</p>
+                  <p className="text-gray-600">{event.description}</p>
+                </div>
+              ))
+            ) : (
+              <p>No events found for this city.</p>
+            )}
           </div>
         </div>
         <div>
-          <h2>Discussions</h2>
-          <h3>See all discussions</h3>
+          <h2 className="text-2xl font-bold mb-2 mt-8">Discussions</h2>
+          <h3 className="text-blue-500 underline">See all discussions</h3>
         </div>
       </div>
     </div>
