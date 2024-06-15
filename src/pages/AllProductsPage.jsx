@@ -14,7 +14,7 @@ function AllProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5005/product');
+        const response = await axios.get('https://community-forum-backend.adaptable.app');
         setProducts(response.data);
         setFilteredProducts(response.data);
       } catch (error) {

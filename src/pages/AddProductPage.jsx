@@ -45,7 +45,7 @@ function AddProduct() {
     formData.append('condition', product.condition);
     formData.append('category', product.category);
 
-    axios.post('http://localhost:5005/product', formData, {
+    axios.post('https://community-forum-backend.adaptable.app', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
