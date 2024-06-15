@@ -160,7 +160,7 @@ function ManageProduct() {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             >
               <option value="">Select a condition</option>
-              <option value="New-with-tags">New</option>
+              <option value="New">New</option>
               <option value="Electronics">Very Good</option>
               <option value="Clothing">Good</option>
               <option value="Kids">Satisfactory</option>
@@ -184,6 +184,10 @@ function ManageProduct() {
               Add Product
             </button>
           </form>
+        </div>
+        {/* Display the user's product added */}
+        <div>
+
         </div>
         </div>
       );

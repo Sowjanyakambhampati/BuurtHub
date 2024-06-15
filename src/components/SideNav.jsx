@@ -1,4 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { BiHome } from "react-icons/bi";
+import { AiOutlineProduct } from "react-icons/ai";
+import { MdEvent } from "react-icons/md";
+import { IoChatboxEllipses } from "react-icons/io5";
+import { IoChatbubbles } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa";
 
 function MainNav() {
     return (
@@ -10,9 +16,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            Home
-                        </span>
+                        <BiHome className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>Home</span>
                     </NavLink>
                 </li>
                 <li>
@@ -21,9 +26,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            Products
-                        </span>
+                        <AiOutlineProduct className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>Products</span>
                     </NavLink>
                 </li>
                 <li>
@@ -32,9 +36,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            Events
-                        </span>
+                        <MdEvent className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>Events</span>
                     </NavLink>
                 </li>
                 <li>
@@ -43,9 +46,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            Topics
-                        </span>
+                        <IoChatbubbles className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>Topics</span>
                     </NavLink>
                 </li>
                 <li>
@@ -54,9 +56,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            Posts
-                        </span>
+                        <IoChatboxEllipses className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>Posts</span>
                     </NavLink>
                 </li>
                 <li>
@@ -65,9 +66,8 @@ function MainNav() {
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
-                        <span className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600">
-                            User
-                        </span>
+                        <FaUserCircle className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
+                        <span>User</span>
                     </NavLink>
                 </li>
             </ul>
