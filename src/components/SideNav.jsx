@@ -67,7 +67,7 @@ function MainNav() {
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
                         <FaUserCircle className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
-                        <span>Posts</span>
+                        <span>User</span>
                     </NavLink>
                 </li>
             </ul>
