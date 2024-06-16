@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ManageProduct from '../components/ManageProducts';
 import AddPost from '../components/AddPost';
+import AddEvent from '../components/AddEvent';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,7 +63,7 @@ export default function AddItem() {
             } />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Events
+      <AddEvent />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
         Discussions
