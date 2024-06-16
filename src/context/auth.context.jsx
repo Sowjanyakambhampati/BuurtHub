@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const API_URL = "http://localhost:5005";
+const API_URL = "https://community-forum-backend.adaptable.app";
 
 const AuthContext = React.createContext();
 
@@ -12,70 +12,70 @@ function AuthProviderWrapper(props) {
 
   const storeToken = (token) => {                    // <== CHANGE THIS?
     localStorage.setItem('authToken', token);
-  }  
+  }
 
 
   const removeToken = () => {                    // <== CHANGE THIS?
     // Upon logout, remove the token from the localStorage
     localStorage.removeItem("authToken");
   }
- 
- 
+
+
   const logOutUser = () => {                   // <== CHANGE THIS  ?
     // To log out the user, remove the token
     removeToken();
     // and update the state variables    
     authenticateUser();
-  }  
+  }
 
 
-  useEffect(() => {                                    
-    authenticateUser();    
-   }, []);   
-  
+  useEffect(() => {
+    authenticateUser();
+  }, []);
+
   const authenticateUser = () => {           //  <==  CHANGE THIS  ?  
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem('authToken');
-    
+
     // If the token exists in the localStorage
     if (storedToken) {
       // We must send the JWT token in the request's "Authorization" Headers
       axios.get(
-        `${API_URL}/auth/verify`, 
-        { headers: { Authorization: `Bearer ${storedToken}`} }
+        `${API_URL}/auth/verify`,
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
-      .then((response) => {
-        // If the server verifies that the JWT token is valid  
-        const user = response.data;
-       // Update state variables        
-        setIsLoggedIn(true);
-        setIsLoading(false);
-        setUser(user);        
-      })
-      .catch((error) => {
-        // If the server sends an error response (invalid token) 
-        // Update state variables         
-        setIsLoggedIn(false);
-        setIsLoading(false);
-        setUser(null);        
-      });      
+        .then((response) => {
+          // If the server verifies that the JWT token is valid  
+          const user = response.data;
+          // Update state variables        
+          setIsLoggedIn(true);
+          setIsLoading(false);
+          setUser(user);
+        })
+        .catch((error) => {
+          // If the server sends an error response (invalid token) 
+          // Update state variables         
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          setUser(null);
+        });
     } else {
       // If the token is not available (or is removed)
-        setIsLoggedIn(false);
-        setIsLoading(false);
-        setUser(null);      
-    }   
+      setIsLoggedIn(false);
+      setIsLoading(false);
+      setUser(null);
+    }
   }
 
-  
+
   useEffect(() => {                 //  <==  ADD                                   
     // to be updated in the next step
   }, []);
 
-  
-  return (                                                   
-    <AuthContext.Provider 
-      value={{ 
+
+  return (
+    <AuthContext.Provider
+      value={{
         isLoggedIn,
         isLoading,
         user,

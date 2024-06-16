@@ -8,7 +8,7 @@ function CitySelection() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5005/city')
+        axios.get('https://community-forum-backend.adaptable.app/city')
             .then(response => {
                 console.log("Cities List :: " + response.data);
                 setCities(response.data);
