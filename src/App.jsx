@@ -15,7 +15,9 @@ import Footer from './components/Footer'
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
 import PostsPage from './pages/PostsPage';
-import AddItem from './pages/AddItem'
+import AddItem from './pages/AddItem';
+import AboutUs from './pages/AboutUs';
+
 
 
 function App() {
@@ -37,7 +39,7 @@ function App() {
         <Route path='/usercitypage/:city' element={<UserCityPage />} />
         <Route path='/manage-user' element={<AddItem />} />
         <Route path='/posts' element={<PostsPage />} />
-        {/* <Route path='/add-product-listing' element={<AddProduct />} />   */}
+        <Route path='/about' element={<AboutUs/>} />  
         <Route path='*' element={<div>404 Page Not Found</div>} />
       </Routes>
       <Footer />
