@@ -11,11 +11,10 @@ import DashboardPage from './pages/Dashboard'
 import AddProductPage from './pages/AddProductPage'
 import Navbar from './components/Navbar'
 import IsAnon from './components/IsAnon'
-import IsPrivate from './components/IsPrivate'
 import Footer from './components/Footer'
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
-import PostsPage from './pages/UserCityPage';
+import PostsPage from './pages/PostsPage';
 import AddItem from './pages/AddItem'
 
 

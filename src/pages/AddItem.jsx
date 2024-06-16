@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ManageProduct from '../components/ManageProducts';
-
+import AddPost from '../components/AddPost';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +56,10 @@ export default function AddItem() {
         <ManageProduct />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Posts
+      <AddPost onAddRequest={
+                (newRequest) =>
+                    setRequests([newRequest, ...requests])
+            } />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Events
