@@ -72,6 +72,9 @@ function AllEventsPage() {
                 <p className="text-gray-600 mb-2">City: {event.city}</p>
                 <p className="text-gray-600 mb-2">Location: {event.location}</p>
                 <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
+                {event.image && (
+                  <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
+                )}
               </div>
             ))
           ) : (
