@@ -11,7 +11,7 @@ function UserCityPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://community-forum-backend.adaptable.app");
+        const response = await axios.get("https://community-forum-backend.adaptable.app/product");
         setProducts(response.data.slice(-3)); // Displaying only the first three products
       } catch (error) {
         console.error("Failed to fetch products", error);
@@ -21,7 +21,7 @@ function UserCityPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/events");
+        const response = await axios.get("https://community-forum-backend.adaptable.app/events");
         setEvents(response.data.slice(-3)); // Displaying only the first three events
       } catch (error) {
         console.error("Failed to fetch events", error);
