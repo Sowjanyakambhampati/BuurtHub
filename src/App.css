@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 80%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -35,33 +35,4 @@
   color: #888;
 }
 
-/* REMOVE LATER WHEN TAILWIND CSS WORKS*/
-.tile{
-  height: 120px;
-  border-radius: 10px;
-}
-.tile2{
-  height: 200px;
-  border-radius: 20px;
-}
-.benefits{
-  background-color: rgb(211, 209, 214);
-  border-radius: 20px;
-}
-.all-benefits{
-  display:flex;
-  align-items: center;
-  flex-direction: row;
-}
-.city-img{
-  height: auto;
-  width: auto;
-  
-}
 
-/* .select-style {
-  font-size: 16px;
-  color: #b9b9de;
-  padding: 10px;
-  width: 200px;
-} */
