@@ -11,7 +11,7 @@ function AllEventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('https://community-forum-backend.adaptable.app/event');
+        const response = await axios.get('http://localhost:5005/event');
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {
@@ -58,8 +58,16 @@ function AllEventsPage() {
           >
             <option value="">All Cities</option>
             {/* Add more city options here if needed */}
-            <option value="City1">City1</option>
-            <option value="City2">City2</option>
+            <option value="City1">Amsterdam</option>
+            <option value="City2">Rotterdam</option>
+            <option value="City3">Utrecht</option>
+            <option value="City4">Den Hague</option>
+            <option value="City5">Eindhoven</option>
+            <option value="City6">Gronigen</option>
+            <option value="City7">Zwolle</option>
+            <option value="City8">Leiden</option>
+            <option value="City9">Nijmegen</option>
+            <option value="City10">Hoofddorp</option>
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
