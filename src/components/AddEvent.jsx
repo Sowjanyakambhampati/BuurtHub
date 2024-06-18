@@ -1,118 +1,202 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-const AddEvent = ({ onAddEvent }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [city, setCity] = useState('');
-  const [location, setLocation] = useState('');
-  const [organiser, setOrganiser] = useState('');
-  const [image, setImage] = useState(null);
+function AddEvent() {
+  const [event, setEvent] = useState({
+    title: '',
+    description: '',
+    date: '',
+    city: '',
+    location: '',
+    organiser: '',
+    image: null
+  });
+
+  // const AddEvent = ({ onAddEvent }) => {
+  //   const [title, setTitle] = useState('');
+  //   const [description, setDescription] = useState('');
+  //   const [date, setDate] = useState('');
+  //   const [city, setCity] = useState('');
+  //   const [location, setLocation] = useState('');
+  //   const [organiser, setOrganiser] = useState('');
+  //   const [image, setImage] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEvent((prevEvent) => ({
+      ...prevEvent,
+      [name]: value
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    setEvent((prevEvent) => ({
+      ...prevEvent,
+      image: e.target.files[0],
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('date', date);
-    formData.append('city', city);
-    formData.append('location', location);
-    formData.append('organiser', organiser);
-    if (image) {
-      formData.append('image', image);
+    formData.append("title", event.title);
+    formData.append("description", event.description);
+    formData.append("date", event.date);
+    formData.append("city", event.city);
+    formData.append("location", event.location);
+    formData.append("organiser", event.organiser);
+    if (event.image) {
+      formData.append("image", event.image); // Ensure this matches the field name in multer configuration
     }
 
-    try {
-      const response = await axios.post('https://community-forum-backend.adaptable.app/event', formData, {
+    axios
+      .post("http://localhost:5005/event", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
+      })
+      .then((response) => {
+        console.log("Event submitted: ", response.data);
+        // Reset form fields
+        setEvent({
+          title: '',
+          description: '',
+          date: '',
+          city: '',
+          location: '',
+          organiser: '',
+          image: '',
+        });
+      })
+      .catch((error) => {
+        console.error("There was an error submitting the product!", error);
       });
-
-      onAddEvent(response.data);
-      setTitle('');
-      setDescription('');
-      setDate('');
-      setCity('');
-      setLocation('');
-      setOrganiser('');
-      setImage(null);
-    } catch (error) {
-      console.error('Error creating event:', error);
-    }
   };
+
+  //     ;
+
+  //     onAddEvent(response.data);
+  //     setTitle('');
+  //     setDescription('');
+  //     setDate('');
+  //     setCity('');
+  //     setLocation('');
+  //     setOrganiser('');
+  //     setImage(null);
+  //   } catch (error) {
+  //     console.error('Error creating event:', error);
+  //   }
+  // };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">Add Event</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-group">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Title:
+          </label>
           <input
             id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            value={event.title}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description:</label>
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Description:
+          </label>
           <textarea
             id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+            value={event.description}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date:</label>
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Date:
+          </label>
           <input
             id="date"
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            name="date"
+            value={event.date}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">City:</label>
+          <label
+            htmlFor="city"
+            className="block text-sm font-medium text-gray-700"
+          >
+            City:
+          </label>
           <input
             id="city"
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            name="city"
+            value={event.city}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location:</label>
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Location:
+          </label>
           <input
             id="location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            name="location"
+            value={event.location}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="organiser" className="block text-sm font-medium text-gray-700">Organiser:</label>
+          <label
+            htmlFor="organiser"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Organiser:
+          </label>
           <input
             id="organiser"
-            type="text"
-            value={organiser}
-            onChange={(e) => setOrganiser(e.target.value)}
+            name="organiser"
+            value={event.organiser}
+            onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image:</label>
+          <label
+            htmlFor="image"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Image:
+          </label>
           <input
             id="image"
+            name="image"
             type="file"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={handleImageChange}
+            accept="image/*"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
@@ -125,6 +209,6 @@ const AddEvent = ({ onAddEvent }) => {
       </form>
     </div>
   );
-};
+}
 
 export default AddEvent;
