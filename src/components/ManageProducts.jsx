@@ -47,7 +47,7 @@ function ManageProduct() {
     formData.append('condition', product.condition);
     formData.append('category', product.category);
 
-    axios.post('https://community-forum-backend.adaptable.app', formData, {
+    axios.post('https://community-forum-backend.adaptable.app/product', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -161,9 +161,9 @@ function ManageProduct() {
             >
               <option value="">Select a condition</option>
               <option value="New">New</option>
-              <option value="Electronics">Very Good</option>
-              <option value="Clothing">Good</option>
-              <option value="Kids">Satisfactory</option>
+              <option value="Very Good">Very Good</option>
+              <option value="Good">Good</option>
+              <option value="Satisfactory">Satisfactory</option>
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">
