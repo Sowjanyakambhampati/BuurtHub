@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { CityContext } from "./CityContext";
 
 function AddEvent() {
+  const { selectedCity } = useContext(CityContext);
   const [event, setEvent] = useState({
     title: '',
     description: '',
     date: '',
-    city: '',
+    city: selectedCity || '',
     location: '',
     organiser: '',
+    category: '',
     image: null
   });
 
@@ -37,12 +40,13 @@ function AddEvent() {
     formData.append("city", event.city);
     formData.append("location", event.location);
     formData.append("organiser", event.organiser);
+    formData.append("category", event.category);
     if (event.image) {
       formData.append("image", event.image); // Ensure this matches the field name in multer configuration
     }
 
     try {
-      const response = await axios.post("http://localhost:5005/event", formData, {
+      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -53,9 +57,10 @@ function AddEvent() {
         title: '',
         description: '',
         date: '',
-        city: '',
+        city: selectedCity || '',
         location: '',
         organiser: '',
+        category: '',
         image: null,
       });
     } catch (error) {
@@ -120,25 +125,14 @@ function AddEvent() {
           >
             City:
           </label>
-          <select
+          <input
             id="city"
             name="city"
             value={event.city}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          >
-            <option value="">Select a city</option>
-            <option value="Amsterdam">Amsterdam</option>
-            <option value="Rotterdam">Rotterdam</option>
-            <option value="Utrecht">Utrecht</option>
-            <option value="Den Haag">Den Haag</option>
-            <option value="Eindhoven">Haarlem</option>
-            <option value="Groningen">Groningen</option>
-            <option value="Zwolle">Zwolle</option>
-            <option value="Leiden">Leiden</option>
-            <option value="Nijmegen">Nijmegen</option>
-            <option value="Hoofddorp">Hoofddorp</option>
-          </select>
+            readOnly
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-100"
+          />
         </div>
         <div className="form-group">
           <label
@@ -169,6 +163,30 @@ function AddEvent() {
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
+        </div>
+        <div className="form-group">
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Category:
+          </label>
+          <select
+            id="category"
+            name="category"
+            value={event.category}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          >
+            <option value="">Select a category</option>
+            <option value="Art and Culture">Art and Culture</option>
+            <option value="Health and Wellness">Health and Wellness</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Sports">Sports</option>
+            <option value="Technology">Technology</option>
+            <option value="Education">Education</option>
+            <option value="Community & Environment">Community & Environment</option>
+          </select>
         </div>
         <div className="form-group">
           <label

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import SideNav from "../components/SideNav";
@@ -7,6 +7,7 @@ function UserCityPage() {
   const { city } = useParams();
   const [products, setProducts] = useState([]);
   const [events, setEvents] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,6 +29,16 @@ function UserCityPage() {
       }
     };
     fetchEvents();
+
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("https://community-forum-backend.adaptable.app/posts");
+        setPosts(response.data.slice(-3)); // Displaying only the first three posts
+      } catch (error) {
+        console.error("Failed to fetch posts", error);
+      }
+    };
+    fetchPosts();
   }, []);
 
   return (
@@ -42,7 +53,7 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2">Product Listing</h2>
-          <Link to={'/all-products'} className="text-blue-500 underline mb-2">See all products</Link>
+          <Link to="/all-products" className="text-blue-500 underline mb-2">See all products</Link>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
               products.map((product) => (
@@ -64,15 +75,17 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events</h2>
-          <Link to={'/all-events'} className="text-blue-500 underline mb-2">See all events</Link>
+          <Link to="/all-events" className="text-blue-500 underline mb-2">See all events</Link>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
                 <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
                   <img className="w-full h-40 object-cover mb-2" src="/events.jpg" alt="Event" />
-                  <h3 className="text-xl font-semibold mb-2">{event.eventName}</h3>
-                  <p className="text-gray-600 mb-2">{event.date}</p>
-                  <p className="text-gray-600">{event.description}</p>
+                  <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                  <p className="text-gray-600 mb-2">{event.price}</p>
+                  <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
+                  <p className="text-gray-600 mb-2">{new Date(event.time).toLocaleTimeString()}</p>
+                  <p className="text-gray-600 mb-2">{event.location}</p>
                 </div>
               ))
             ) : (
@@ -81,8 +94,24 @@ function UserCityPage() {
           </div>
         </div>
         <div>
-          <h2 className="text-2xl font-bold mb-2 mt-8">Discussions</h2>
-          <h3 className="text-blue-500 underline">See all discussions</h3>
+          <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
+          <Link to="/posts" className="text-blue-500 underline">See all posts</Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md">
+                  <img className="w-8 h-8 rounded-full mb-2" src={post.image} alt="Profile" />
+                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-2">{post.content}</p>
+                  <p className="text-gray-600 mb-2">By {post.author}</p>
+                  <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
+                  {post.contactInfo && <p className="text-gray-600 mb-2">Contact: {post.contactInfo}</p>}
+                </div>
+              ))
+            ) : (
+              <p>No posts found for this city.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
