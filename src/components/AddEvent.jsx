@@ -12,15 +12,6 @@ function AddEvent() {
     image: null
   });
 
-  // const AddEvent = ({ onAddEvent }) => {
-  //   const [title, setTitle] = useState('');
-  //   const [description, setDescription] = useState('');
-  //   const [date, setDate] = useState('');
-  //   const [city, setCity] = useState('');
-  //   const [location, setLocation] = useState('');
-  //   const [organiser, setOrganiser] = useState('');
-  //   const [image, setImage] = useState(null);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent((prevEvent) => ({
@@ -50,44 +41,27 @@ function AddEvent() {
       formData.append("image", event.image); // Ensure this matches the field name in multer configuration
     }
 
-    axios
-      .post("http://localhost:5005/event", formData, {
+    try {
+      const response = await axios.post("http://localhost:5005/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
-      .then((response) => {
-        console.log("Event submitted: ", response.data);
-        // Reset form fields
-        setEvent({
-          title: '',
-          description: '',
-          date: '',
-          city: '',
-          location: '',
-          organiser: '',
-          image: '',
-        });
-      })
-      .catch((error) => {
-        console.error("There was an error submitting the product!", error);
       });
+      console.log("Event submitted: ", response.data);
+      // Reset form fields
+      setEvent({
+        title: '',
+        description: '',
+        date: '',
+        city: '',
+        location: '',
+        organiser: '',
+        image: null,
+      });
+    } catch (error) {
+      console.error("There was an error submitting the product!", error);
+    }
   };
-
-  //     ;
-
-  //     onAddEvent(response.data);
-  //     setTitle('');
-  //     setDescription('');
-  //     setDate('');
-  //     setCity('');
-  //     setLocation('');
-  //     setOrganiser('');
-  //     setImage(null);
-  //   } catch (error) {
-  //     console.error('Error creating event:', error);
-  //   }
-  // };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -146,13 +120,25 @@ function AddEvent() {
           >
             City:
           </label>
-          <input
+          <select
             id="city"
             name="city"
             value={event.city}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
+          >
+            <option value="">Select a city</option>
+            <option value="Amsterdam">Amsterdam</option>
+            <option value="Rotterdam">Rotterdam</option>
+            <option value="Utrecht">Utrecht</option>
+            <option value="Den Haag">Den Haag</option>
+            <option value="Eindhoven">Haarlem</option>
+            <option value="Groningen">Groningen</option>
+            <option value="Zwolle">Zwolle</option>
+            <option value="Leiden">Leiden</option>
+            <option value="Nijmegen">Nijmegen</option>
+            <option value="Hoofddorp">Hoofddorp</option>
+          </select>
         </div>
         <div className="form-group">
           <label

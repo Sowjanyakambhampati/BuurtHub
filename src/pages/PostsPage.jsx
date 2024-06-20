@@ -36,17 +36,13 @@ function PostsPage() {
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">Posts</h2>
         <ul className="space-y-4">
-          {posts.map((post) => (
+          {posts.map((posts) => (
             <li key={post._id} className="bg-white p-4 rounded-lg shadow-md">
-              <p className="text-lg font-semibold mb-2">{post.residentName}</p>
-              <p className="text-gray-700 mb-2">{post.content}</p>
-              <p className="text-gray-500 mb-2">Likes: {post.likes}</p>
-              <button 
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                onClick={() => handleLike(post._id)}
-              >
-                Like
-              </button>
+              <p className="text-lg font-semibold mb-2">{posts.title}</p>
+              <p className="text-gray-700 mb-2">{posts.content}</p>
+              <p className="text-gray-700 mb-2">{posts.author}</p>
+              <p className="text-gray-700 mb-2">{posts.createdAt}</p>
+              
             </li>
           ))}
         </ul>
