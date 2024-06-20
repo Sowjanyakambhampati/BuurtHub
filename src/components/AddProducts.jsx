@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { CityContext } from '../context/CityContext'; // Adjust the path based on your actual file structure
 
-function ManageProduct() {
+function AddProduct() {
+  const { selectedCity } = useContext(CityContext); // Access selectedCity from context
   const [product, setProduct] = useState({
     id: '',
-    city: '',
+    city: selectedCity, // Set initial city value from context
     productName: '',
     price: '',
     image: null,
@@ -57,7 +59,7 @@ function ManageProduct() {
         // Reset form fields
         setProduct({
           id: '',
-          city: '',
+          city: selectedCity, // Reset to selectedCity from context after submission
           productName: '',
           price: '',
           image: null,
@@ -187,9 +189,10 @@ function ManageProduct() {
       </div>
       {/* Display the user's product added */}
       <div>
-
+        {/* You can display a success message or confirmation here */}
       </div>
     </div>
   );
 }
-export default ManageProduct;
+
+export default AddProduct;

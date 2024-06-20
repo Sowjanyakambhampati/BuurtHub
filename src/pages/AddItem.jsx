@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import ManageProduct from '../components/ManageProducts';
+import AddProduct from '../components/AddProducts';
 import AddPost from '../components/AddPost';
 import AddEvent from '../components/AddEvent';
 
@@ -54,7 +54,7 @@ export default function AddItem() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <ManageProduct />
+        <AddProduct />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <AddPost onAddRequest={
