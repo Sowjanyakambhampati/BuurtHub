@@ -21,7 +21,7 @@ function UserCityPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://community-forum-backend.adaptable.app/events");
+        const response = await axios.get("https://community-forum-backend.adaptable.app/event");
         setEvents(response.data.slice(-3)); // Displaying only the first three events
       } catch (error) {
         console.error("Failed to fetch events", error);
