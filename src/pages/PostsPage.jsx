@@ -18,16 +18,6 @@ function PostsPage() {
     fetchPosts();
   }, []);
 
-  const handleLike = async (id) => {
-    try {
-      await axios.patch(`https://community-forum-backend.adaptable.app/posts/${id}/like`);
-      // Refresh the list of posts after liking
-      fetchPosts();
-    } catch (error) {
-      console.error('Error liking post:', error);
-    }
-  };
-
   return (
     <div className="flex">
       <div className="w-1/4">
@@ -36,13 +26,16 @@ function PostsPage() {
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">Posts</h2>
         <ul className="space-y-4">
-          {posts.map((posts) => (
+          {posts.map((post) => (
             <li key={post._id} className="bg-white p-4 rounded-lg shadow-md">
-              <p className="text-lg font-semibold mb-2">{posts.title}</p>
-              <p className="text-gray-700 mb-2">{posts.content}</p>
-              <p className="text-gray-700 mb-2">{posts.author}</p>
-              <p className="text-gray-700 mb-2">{posts.createdAt}</p>
-              
+              <div className="flex items-center mb-2">
+                <img src={post.profilePicture} alt="Profile" className="w-8 h-8 rounded-full mr-2" />
+                <p className="text-lg font-semibold">{post.title}</p>
+              </div>
+              <p className="text-gray-700 mb-2">{post.content}</p>
+              <p className="text-gray-700 mb-2">{post.author}</p>
+              <p className="text-gray-700 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
+              <p className="text-gray-700 mb-2">{post.contactInfo}</p>
             </li>
           ))}
         </ul>
