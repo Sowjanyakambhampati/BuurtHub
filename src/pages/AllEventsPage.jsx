@@ -5,7 +5,7 @@ import SideNav from '../components/SideNav';
 function AllEventsPage() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [cityFilter, setCityFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -23,19 +23,16 @@ function AllEventsPage() {
 
   useEffect(() => {
     applyFilters();
-  }, [cityFilter, searchTerm]);
+  }, [categoryFilter, searchTerm]);
 
   const applyFilters = () => {
     let filtered = events.filter(event => {
-      if (cityFilter && event.city !== cityFilter) return false;
+      if (categoryFilter && event.category !== categoryFilter) return false;
       if (searchTerm && !event.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
       return true;
     });
     setFilteredEvents(filtered);
   };
-  const handleSubmit = () => {
-
-  }
 
   return (
     <div className="flex">
@@ -55,21 +52,18 @@ function AllEventsPage() {
         </div>
         <div className="flex mb-4">
           <select
-            value={cityFilter}
-            onChange={e => setCityFilter(e.target.value)}
+            value={categoryFilter}
+            onChange={e => setCategoryFilter(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           >
-            <option value="">All Cities</option>
-            <option value="Amsterdam">Amsterdam</option>
-            <option value="Rotterdam">Rotterdam</option>
-            <option value="Utrecht">Utrecht</option>
-            <option value="Den Haag">Den Haag</option>
-            <option value="Eindhoven">Eindhoven</option>
-            <option value="Groningen">Groningen</option>
-            <option value="Zwolle">Zwolle</option>
-            <option value="Leiden">Leiden</option>
-            <option value="Nijmegen">Nijmegen</option>
-            <option value="Hoofddorp">Hoofddorp</option>
+            <option value="">All Categories</option>
+            <option value="Art and Culture">Art and Culture</option>
+            <option value="Health and Wellness">Health and Wellness</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Sports">Sports</option>
+            <option value="Technology">Technology</option>
+            <option value="Education">Education</option>
+            <option value="Community & Environment">Community & Environment</option>
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -77,11 +71,10 @@ function AllEventsPage() {
             filteredEvents.map((event) => (
               <div key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                <p className="text-gray-600 mb-2">{event.description}</p>
-                <p className="text-gray-600 mb-2">Date: {new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-gray-600 mb-2">City: {event.city}</p>
-                <p className="text-gray-600 mb-2">Location: {event.location}</p>
-                <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
+                <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
+                <p className="text-gray-600 mb-2">{event.category}</p>
+                <p className="text-gray-600 mb-2">{event.location}</p>
+                <p className="text-gray-600 mb-2">{event.organiser}</p>
                 {event.image && (
                   <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
                 )}
@@ -94,9 +87,7 @@ function AllEventsPage() {
             ))
           ) : (
             <p>No events found.</p>
-          )
-          
-          }
+          )}
         </div>
       </div>
     </div>

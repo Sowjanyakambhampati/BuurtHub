@@ -6,23 +6,36 @@ const AddPost = ({ onAddPost }) => {
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
   const [createdAt, setCreatedAt] = useState('');
+  const [contactInfo, setContactInfo] = useState('');
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('author', author);
+    formData.append('createdAt', createdAt);
+    formData.append('contactInfo', contactInfo);
+    if (image) {
+      formData.append('image', image);
+    }
+
     try {
-      const response = await axios.post('https://community-forum-backend.adaptable.app/posts', {
-        title,
-        content,
-        author,
+      const response = await axios.post('https://community-forum-backend.adaptable.app/posts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
-      // Assuming the backend returns the newly created post
       onAddPost(response.data);
       setTitle('');
       setContent('');
       setAuthor('');
       setCreatedAt('');
+      setContactInfo('');
+      setImage(null);
     } catch (error) {
       console.error('Error creating post:', error);
     }
@@ -68,7 +81,7 @@ const AddPost = ({ onAddPost }) => {
           />
         </div>
         <div className="form-group">
-        <label htmlFor="createdAt" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="createdAt" className="block text-sm font-medium text-gray-700">
             Created on:
           </label>
           <input
@@ -76,6 +89,29 @@ const AddPost = ({ onAddPost }) => {
             type="text"
             value={createdAt}
             onChange={(e) => setCreatedAt(e.target.value)}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">
+            Contact Info (optional):
+          </label>
+          <input
+            id="contactInfo"
+            type="text"
+            value={contactInfo}
+            onChange={(e) => setContactInfo(e.target.value)}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            Upload Image:
+          </label>
+          <input
+            id="image"
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
