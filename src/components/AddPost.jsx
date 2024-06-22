@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { CityContext } from '../context/CityContext';
 
 const AddPost = ({ onAddPost }) => {
   const [title, setTitle] = useState('');
@@ -38,7 +39,7 @@ const AddPost = ({ onAddPost }) => {
       setCreatedAt('');
       setContactInfo('');
       setImage(null);
-      navigate('/posts'); // Navigate to the posts page after successful submission
+      navigate(`/posts/city/${selectedCity}`); 
     } catch (error) {
       console.error('Error creating post:', error);
     }
