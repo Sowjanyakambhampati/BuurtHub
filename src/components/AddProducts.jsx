@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { CityContext } from '../context/CityContext'; structure
+import { CityContext } from '../context/CityContext';
 
 function AddProduct() {
   const { selectedCity } = useContext(CityContext); // Access selectedCity from context
