@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNav from "../components/SideNav";
 
+
 function PostsPage() {
   const [posts, setPosts] = useState([]);
 

@@ -1,18 +1,22 @@
-import { NavLink } from "react-router-dom";
-import { BiHome } from "react-icons/bi";
-import { AiOutlineProduct } from "react-icons/ai";
-import { MdEvent } from "react-icons/md";
-import { IoChatboxEllipses } from "react-icons/io5";
-import { IoChatbubbles } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { BiHome } from 'react-icons/bi';
+import { AiOutlineProduct } from 'react-icons/ai';
+import { MdEvent } from 'react-icons/md';
+import { IoChatboxEllipses } from 'react-icons/io5';
+import { IoChatbubbles } from 'react-icons/io5';
+import { FaUserCircle } from 'react-icons/fa';
+import { CityContext } from '../context/CityContext'; 
 
 function MainNav() {
+    const { selectedCity } = useContext(CityContext);
+
     return (
         <nav>
             <ul className="flex flex-col gap-2">
                 <li>
                     <NavLink
-                        to="/"
+                        to={`/usercitypage/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
@@ -22,7 +26,7 @@ function MainNav() {
                 </li>
                 <li>
                     <NavLink
-                        to="/all-products"
+                        to={`/all-products/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
@@ -32,7 +36,7 @@ function MainNav() {
                 </li>
                 <li>
                     <NavLink
-                        to="/all-events"
+                        to={`/all-events/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
@@ -42,7 +46,7 @@ function MainNav() {
                 </li>
                 <li>
                     <NavLink
-                        to="/topic"
+                        to={`/topics/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
@@ -52,7 +56,7 @@ function MainNav() {
                 </li>
                 <li>
                     <NavLink
-                        to="/posts"
+                        to={`/posts/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddPost = ({ onAddPost }) => {
   const [title, setTitle] = useState('');
@@ -8,6 +9,7 @@ const AddPost = ({ onAddPost }) => {
   const [createdAt, setCreatedAt] = useState('');
   const [contactInfo, setContactInfo] = useState('');
   const [image, setImage] = useState(null);
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const AddPost = ({ onAddPost }) => {
     }
 
     try {
-      const response = await axios.post('https://community-forum-backend.adaptable.app/posts', formData, {
+      const response = await axios.post('http://localhost:5005/posts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -36,6 +38,7 @@ const AddPost = ({ onAddPost }) => {
       setCreatedAt('');
       setContactInfo('');
       setImage(null);
+      navigate('/posts'); // Navigate to the posts page after successful submission
     } catch (error) {
       console.error('Error creating post:', error);
     }
