@@ -69,7 +69,7 @@ function AddProduct() {
           category: ''
         });
         // Navigate to the /all-products route
-        navigate('/all-products');
+        navigate(`/all-products/city/${selectedCity}`);
       })
       .catch(error => {
         console.error('There was an error submitting the product!', error);
