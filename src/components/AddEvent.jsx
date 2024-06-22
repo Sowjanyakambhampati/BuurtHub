@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { CityContext } from "./CityContext";
+import { CityContext } from "../context/CityContext"
 
 function AddEvent() {
   const { selectedCity } = useContext(CityContext);
