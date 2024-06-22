@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { CityContext } from "../context/CityContext"
+import { useNavigate } from 'react-router-dom';
 
 function AddEvent() {
   const { selectedCity } = useContext(CityContext);
+  const navigate = useNavigate(); 
   const [event, setEvent] = useState({
     title: '',
     description: '',
@@ -63,6 +65,7 @@ function AddEvent() {
         category: '',
         image: null,
       });
+      navigate('/all-events/city/:city');
     } catch (error) {
       console.error("There was an error submitting the product!", error);
     }
@@ -118,7 +121,7 @@ function AddEvent() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label
             htmlFor="city"
             className="block text-sm font-medium text-gray-700"
@@ -133,7 +136,7 @@ function AddEvent() {
             readOnly
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-100"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label
             htmlFor="location"

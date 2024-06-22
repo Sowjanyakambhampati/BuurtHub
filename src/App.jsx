@@ -9,6 +9,7 @@ import AllProductsPage from './pages/AllProductsPage';
 import AllEventsPage from './pages/AllEventsPage';
 import Dashboard from './pages/Dashboard';
 import AddProductPage from './pages/AddProductPage';
+
 import Navbar from './components/Navbar';
 import IsAnon from './components/IsAnon';
 import Footer from './components/Footer';
