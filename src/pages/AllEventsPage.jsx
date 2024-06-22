@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
+import { CityContext } from '../context/CityContext'; // Ensure you import CityContext if not already
 
 function AllEventsPage() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const { selectedCity } = useContext(CityContext);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:5005/event');
+        const response = await axios.get(`http://localhost:5005/event/city/${selectedCity}`);
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {
@@ -19,7 +21,7 @@ function AllEventsPage() {
       }
     };
     fetchEvents();
-  }, []);
+  }, [selectedCity]);
 
   useEffect(() => {
     applyFilters();
@@ -40,21 +42,21 @@ function AllEventsPage() {
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
-        <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+        <h2 className="text-2xl font-bold mb-4">Upcoming Events in {selectedCity}</h2>
         <div className="flex mb-4">
           <input
             type="text"
             placeholder="Search event"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
+            className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
         </div>
         <div className="flex mb-4">
           <select
             value={categoryFilter}
             onChange={e => setCategoryFilter(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
+            className="w-w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           >
             <option value="">All Categories</option>
             <option value="Art and Culture">Art and Culture</option>

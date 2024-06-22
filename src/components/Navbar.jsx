@@ -71,7 +71,7 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/"> {/* Link to the home page */}
+        <Link to="/"> 
           <img src="/logo.png" alt="Logo" />
         </Link>
       </div>
