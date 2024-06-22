@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext'; 
-
+import { useParams } from 'react-router-dom';
 
 function AllProductsPage() {
   const { selectedCity } = useContext(CityContext); 
@@ -11,23 +11,24 @@ function AllProductsPage() {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [conditionFilter, setConditionFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const { city } = useParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/products/${selectedCity}`);
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
         setProducts(response.data);
-        setFilteredProducts(response.data); // Initialize filteredProducts with all products
+        setFilteredProducts(response.data); 
       } catch (error) {
         console.error('Failed to fetch products', error);
       }
     };
     fetchProducts();
-  }, [selectedCity]); // Fetch products whenever selectedCity changes
+  }, [city]); 
 
   useEffect(() => {
     applyFilters();
-  }, [categoryFilter, conditionFilter, searchTerm, products]); // Apply filters whenever any filter or products change
+  }, [categoryFilter, conditionFilter, searchTerm, products]); 
 
   const applyFilters = () => {
     let filtered = products.filter(product => {

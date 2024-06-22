@@ -1,45 +1,50 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import SideNav from "../components/SideNav";
+import { useEffect, useContext, useState } from 'react';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import SideNav from '../components/SideNav';
+import { CityContext } from '../context/CityContext'; 
 
 function UserCityPage() {
   const { city } = useParams();
   const [products, setProducts] = useState([]);
   const [events, setEvents] = useState([]);
   const [posts, setPosts] = useState([]);
+  const { selectedCity, setSelectedCity } = useContext(CityContext);
 
   useEffect(() => {
+    setSelectedCity(city);
+
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://community-forum-backend.adaptable.app/product");
-        setProducts(response.data.slice(-3)); // Displaying only the first three products
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
+        setProducts(response.data.slice(-3)); 
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
     };
-    fetchProducts();
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://community-forum-backend.adaptable.app/event");
-        setEvents(response.data.slice(-3)); // Displaying only the first three events
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${city}`);
+        setEvents(response.data.slice(-3)); 
       } catch (error) {
         console.error("Failed to fetch events", error);
       }
     };
-    fetchEvents();
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("https://community-forum-backend.adaptable.app/posts");
-        setPosts(response.data.slice(-3)); // Displaying only the first three posts
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
+        setPosts(response.data.slice(-3)); 
       } catch (error) {
         console.error("Failed to fetch posts", error);
       }
     };
+
+    fetchProducts();
+    fetchEvents();
     fetchPosts();
-  }, []);
+  }, [city, setSelectedCity]);
 
   return (
     <div className="flex">
@@ -53,7 +58,7 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2">Product Listing</h2>
-          <Link to="/all-products" className="text-blue-500 underline mb-2">See all products</Link>
+          <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all products</Link>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
               products.map((product) => (
@@ -75,7 +80,7 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events</h2>
-          <Link to="/all-events" className="text-blue-500 underline mb-2">See all events</Link>
+          <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
@@ -95,7 +100,7 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
-          <Link to="/posts" className="text-blue-500 underline">See all posts</Link>
+          <Link to={`/posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (
               posts.map((post) => (
