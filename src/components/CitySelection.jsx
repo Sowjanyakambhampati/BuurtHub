@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { CityContext } from './CityContext';
+import { CityContext } from '../context/CityContext';
 
 function CitySelection() {
   const { selectedCity, setSelectedCity } = useContext(CityContext);
