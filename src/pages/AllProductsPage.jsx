@@ -56,15 +56,16 @@ function AllProductsPage() {
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
-        <h2 className="text-2xl font-bold mb-4">Product Listing in {selectedCity}</h2>
+        <h2 className="text-2xl font-bold mb-4">All Items For Sale In {selectedCity}</h2>
         <div className="flex mb-4">
           <input
             type="text"
             placeholder="Search product"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
+            className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
+          <button></button>
         </div>
         <div className="flex mb-4">
           <select
@@ -94,33 +95,36 @@ function AllProductsPage() {
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div key={product._id} className="bg-white p-4 rounded-lg shadow-md relative">
-                <img
-                  className="w-full h-40 object-cover mb-2"
-                  src={product.image}
-                  alt={product.productName}
-                />
-                <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
-                <p className="text-gray-600 mb-2">{product.city}</p>
-                <p className="text-gray-600 mb-2">{product.price} €</p>
-                <p className="text-gray-600 mb-2">{product.productOwner}</p>
-                <p className="text-gray-600 mb-2">{product.category}</p>
-                <p className="text-gray-600 mb-2">{product.condition}</p>
-                <p className="text-gray-600">{product.description}</p>
-                <button
-                  className="absolute bottom-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  onClick={() => handleReserveClick(product._id)}
-                >
-                  Reserve
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No products found for {selectedCity}.</p>
-          )}
+  {filteredProducts.length > 0 ? (
+    filteredProducts.map((product) => (
+      <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+        <div>
+          <img
+            className="w-full h-40 object-cover mb-2"
+            src={product.image}
+            alt={product.productName}
+          />
+          <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
+          <p className="text-gray-600 mb-2">{product.city}</p>
+          <p className="text-gray-600 mb-2">{product.price} €</p>
+          <p className="text-gray-600 mb-2">{product.productOwner}</p>
+          <p className="text-gray-600 mb-2">{product.category}</p>
+          <p className="text-gray-600 mb-2">{product.condition}</p>
+          <p className="text-gray-600">{product.description}</p>
         </div>
+        <button
+          className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          onClick={() => handleReserveClick(product._id)}
+        >
+          Reserve
+        </button>
+      </div>
+    ))
+  ) : (
+    <p>No products found for {selectedCity}.</p>
+  )}
+</div>
+
       </div>
     </div>
   );
