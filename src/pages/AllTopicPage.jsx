@@ -1,7 +1,7 @@
 import React from 'react';
 import SideNav from "../components/SideNav";
 
-function TopicPage() {
+function AllTopicPage() {
   return (
     <div className="flex">
       <div className="w-1/4">
@@ -14,4 +14,4 @@ function TopicPage() {
   )
 }
 
-export default TopicPage
+export default AllTopicPage
