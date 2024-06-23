@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext'; 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function AllProductsPage() {
   const { selectedCity } = useContext(CityContext); 
@@ -57,7 +57,7 @@ function AllProductsPage() {
       </div>
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">All Items For Sale In {selectedCity}</h2>
-        <div className="flex mb-4">
+        <div className="flex mb-4 gap-2">
           <input
             type="text"
             placeholder="Search product"
@@ -65,7 +65,7 @@ function AllProductsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <button></button>
+          <Link to={'/usercitypage/:city/add-product'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
         </div>
         <div className="flex mb-4">
           <select

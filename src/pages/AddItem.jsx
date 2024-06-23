@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import AddProduct from '../components/AddProducts';
-import AddPost from '../components/AddPost';
-import AddEvent from '../components/AddEvent';
+import AddPost from './AddPostPage';
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +53,7 @@ export default function AddItem() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <AddProduct />
+       
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <AddPost onAddRequest={
@@ -63,7 +62,7 @@ export default function AddItem() {
             } />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      <AddEvent />
+    
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
         Discussions

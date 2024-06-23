@@ -9,7 +9,9 @@ import AllProductsPage from './pages/AllProductsPage';
 import AllEventsPage from './pages/AllEventsPage';
 import Dashboard from './pages/Dashboard';
 import AddProductPage from './pages/AddProductPage';
-
+import AddEventPage from './pages/AddEventPage';
+import AddPostPage from './pages/AddPostPage';
+import AddTopicPage from './pages/AddTopicPage';
 import Navbar from './components/Navbar';
 import IsAnon from './components/IsAnon';
 import Footer from './components/Footer';
@@ -30,6 +32,9 @@ function App() {
           <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/usercitypage/:city/add-product' element={<AddProductPage />} />
+          <Route path='/usercitypage/:city/add-event' element={<AddEventPage />} />
+          <Route path='/usercitypage/:city/add-post' element={<AddPostPage />} />
+          <Route path='/usercitypage/:city/add-topic' element={<AddTopicPage />} />
           <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
           <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
           <Route path='/topics/city/:city' element={<TopicPage />} />
