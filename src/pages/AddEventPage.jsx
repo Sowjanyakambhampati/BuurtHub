@@ -51,8 +51,9 @@ function AddEvent() {
     }
     formData.append("price", event.price);
 
-    try {
-      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
+    console.log("Form data: ", formData);
+
+   await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -72,8 +73,8 @@ function AddEvent() {
         price: '',
       });
       navigate(`/all-events/city/${selectedCity}`);
-    } ).
-    catch (error) {
+    })
+    .catch (error =>  {
       console.error("There was an error submitting the event!", error);
     });
   };
