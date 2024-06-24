@@ -57,8 +57,11 @@ function UserCityPage() {
           <img className="w-full h-auto mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
-          <h2 className="text-2xl font-bold mb-2">Product Listing</h2>
-          <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all products</Link>
+          
+            <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
+            <div className="flex justify-end">
+            <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2 ">See all products</Link>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
               products.map((product) => (
@@ -79,8 +82,10 @@ function UserCityPage() {
           </div>
         </div>
         <div>
-          <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events</h2>
+          <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events in the community</h2>
+          <div className="flex justify-end">
           <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
+         </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
@@ -100,7 +105,9 @@ function UserCityPage() {
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
-          <Link to={`/posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link>
+          <div className="flex justify-end">
+          <Link to={`/posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link> 
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (
               posts.map((post) => (

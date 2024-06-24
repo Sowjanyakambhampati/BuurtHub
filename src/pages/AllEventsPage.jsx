@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext'; // Ensure you import CityContext if not already
+import { CityContext } from '../context/CityContext'; 
+import { Link } from 'react-router-dom';
 
 function AllEventsPage() {
   const [events, setEvents] = useState([]);
@@ -43,7 +44,7 @@ function AllEventsPage() {
       </div>
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">Upcoming Events in {selectedCity}</h2>
-        <div className="flex mb-4">
+        <div className="flex mb-4 gap-2">
           <input
             type="text"
             placeholder="Search event"
@@ -51,6 +52,8 @@ function AllEventsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
+          <Link to={'/usercitypage/:city/add-event'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Event</Link>
+          
         </div>
         <div className="flex mb-4">
           <select
