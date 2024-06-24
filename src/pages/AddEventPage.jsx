@@ -11,12 +11,12 @@ function AddEvent() {
     description: '',
     date: '',
     time: '',
-    city: selectedCity || '',
+    city: selectedCity,
     location: '',
     organiser: '',
     category: '',
     image: null,
-    price: '' // Add price field
+    price: ''
   });
 
   const handleChange = (e) => {
@@ -49,21 +49,22 @@ function AddEvent() {
     if (event.image) {
       formData.append("image", event.image);
     }
-    formData.append("price", event.price); 
+    formData.append("price", event.price);
 
     try {
       const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });
+      })
+      .then(response => {
       console.log("Event submitted: ", response.data);
       setEvent({
         title: '',
         description: '',
         date: '',
         time: '',
-        city: selectedCity || '',
+        city: selectedCity,
         location: '',
         organiser: '',
         category: '',
@@ -71,9 +72,10 @@ function AddEvent() {
         price: '',
       });
       navigate(`/all-events/city/${selectedCity}`);
-    } catch (error) {
+    } ).
+    catch (error) {
       console.error("There was an error submitting the event!", error);
-    }
+    });
   };
 
   return (

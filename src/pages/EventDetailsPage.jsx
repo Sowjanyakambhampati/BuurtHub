@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import EventRegistrationForm from '../components/EventRegistrationForm';
+
 
 const EventDetailsPage = () => {
   const { eventId } = useParams();
@@ -32,7 +32,6 @@ const EventDetailsPage = () => {
       <p className="text-gray-600 mb-2">City: {event.city}</p>
       <p className="text-gray-600 mb-2">Location: {event.location}</p>
       <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
-      <EventRegistrationForm eventId={event._id} />
     </div>
   );
 };

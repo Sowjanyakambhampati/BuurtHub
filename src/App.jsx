@@ -18,6 +18,7 @@ import Footer from './components/Footer';
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
 import AllPostsPage from './pages/AllPostsPage';
+import EventDetailsPage from './pages/EventDetailsPage';
 import AboutUs from './pages/AboutUs';
 import { CityProvider } from './context/CityContext';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
           <Route path='/topics/city/:city' element={<AllTopicPage />} />
           <Route path='/all-events/city/:city' element={<AllEventsPage />} />
+          <Route path='/all-events/city/:city/:eventId' element={<EventDetailsPage />} />
           <Route path='/all-products/city/:city' element={<AllProductsPage />} />
           <Route path='/city-selection' element={<CitySelection />} />
           <Route path='/usercitypage/:city' element={<UserCityPage />} />
