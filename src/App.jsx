@@ -18,7 +18,6 @@ import Footer from './components/Footer';
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
 import AllPostsPage from './pages/AllPostsPage';
-import AddItem from './pages/AddItem';
 import AboutUs from './pages/AboutUs';
 import { CityProvider } from './context/CityContext';
 
@@ -42,7 +41,6 @@ function App() {
           <Route path='/all-products/city/:city' element={<AllProductsPage />} />
           <Route path='/city-selection' element={<CitySelection />} />
           <Route path='/usercitypage/:city' element={<UserCityPage />} />
-          <Route path='/manage-user' element={<AddItem />} />
           <Route path='/posts/city/:city' element={<AllPostsPage />} />
           <Route path='/about' element={<AboutUs />} />
           <Route path='*' element={<div>404 Page Not Found</div>} />
