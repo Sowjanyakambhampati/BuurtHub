@@ -68,7 +68,7 @@ function AddProductPage() {
           productOwner: '',
           category: ''
         });
-        // Navigate to the /all-products route
+      
         navigate(`/all-products/city/${selectedCity}`);
       })
       .catch(error => {
@@ -78,7 +78,7 @@ function AddProductPage() {
 
   return (
     <div>
-      {/* ADD PRODUCT */}
+      
       <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold mb-6">Add New Product Listing Here</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -144,6 +144,7 @@ function AddProductPage() {
               <option value="">Select a category</option>
               <option value="Furniture">Furniture</option>
               <option value="Electronics">Electronics</option>
+              <option value="Utensils">Utensils</option>
               <option value="Clothing">Clothing</option>
               <option value="Kids">Kids</option>
               <option value="Pet Care">Pet Care</option>
