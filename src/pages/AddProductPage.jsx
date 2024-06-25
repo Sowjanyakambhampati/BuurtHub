@@ -4,10 +4,10 @@ import axios from 'axios';
 import { CityContext } from '../context/CityContext';
 
 function AddProductPage() {
-  const { selectedCity } = useContext(CityContext); // Access selectedCity from context
+  const { selectedCity } = useContext(CityContext); 
   const [product, setProduct] = useState({
     id: '',
-    city: selectedCity, // Set initial city value from context
+    city: selectedCity, 
     productName: '',
     price: '',
     image: null,
@@ -59,7 +59,7 @@ function AddProductPage() {
         // Reset form fields
         setProduct({
           id: '',
-          city: selectedCity, // Reset to selectedCity from context after submission
+          city: selectedCity, 
           productName: '',
           price: '',
           image: null,
