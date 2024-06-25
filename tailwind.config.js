@@ -24,6 +24,9 @@ export default {
     fontFamily: {
         fontawesome: "FontAwesome",
         "fira-sans": "'Fira Sans'",
+      },
+      height: {
+        '300': '300px', // Adding custom height value
       }
     },
   },
