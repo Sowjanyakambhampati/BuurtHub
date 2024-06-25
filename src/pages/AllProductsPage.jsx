@@ -65,7 +65,7 @@ function AllProductsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={'/usercitypage/:city/add-product'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
+          <Link to={`/usercitypage/${selectedCity}/add-product`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
         </div>
         <div className="flex mb-4">
           <select

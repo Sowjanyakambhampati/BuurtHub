@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CityContext } from '../context/CityContext';
+import SideNav from '../components/SideNav';
 
 const AddPost = ({ onAddPost }) => {
   const [title, setTitle] = useState('');
@@ -11,6 +12,7 @@ const AddPost = ({ onAddPost }) => {
   const [contactInfo, setContactInfo] = useState('');
   const [image, setImage] = useState(null);
   const navigate = useNavigate(); 
+  const { selectedCity } = useContext(CityContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,86 +48,42 @@ const AddPost = ({ onAddPost }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="form-group">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-            Title:
-          </label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="content" className="block text-sm font-medium text-gray-700">
-            Content:
-          </label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="author" className="block text-sm font-medium text-gray-700">
-            Author:
-          </label>
-          <input
-            id="author"
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="createdAt" className="block text-sm font-medium text-gray-700">
-            Created on:
-          </label>
-          <input
-            id="createdAt"
-            type="text"
-            value={createdAt}
-            onChange={(e) => setCreatedAt(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">
-            Contact Info (optional):
-          </label>
-          <input
-            id="contactInfo"
-            type="text"
-            value={contactInfo}
-            onChange={(e) => setContactInfo(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
-            Upload Image:
-          </label>
-          <input
-            id="image"
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Submit Post
-        </button>
-      </form>
+    <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
+      <div className="w-1/4">
+        <SideNav />
+      </div>
+      <div className="w-3/4 p-4">
+        <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {[
+            { id: "title", type: "text", label: "Title", value: title, setValue: setTitle },
+            { id: "content", type: "textarea", label: "Content", value: content, setValue: setContent },
+            { id: "author", type: "text", label: "Author", value: author, setValue: setAuthor },
+            { id: "createdAt", type: "text", label: "Created on", value: createdAt, setValue: setCreatedAt },
+            { id: "contactInfo", type: "text", label: "Contact Info (optional)", value: contactInfo, setValue: setContactInfo },
+          ].map(({ id, type, label, value, setValue }) => (
+            <div key={id} className="form-group flex items-center">
+              <label htmlFor={id} className="w-1/4 text-sm font-medium text-gray-700">{label}:</label>
+              {type === "textarea" ? (
+                <textarea id={id} name={id} value={value} onChange={(e) => setValue(e.target.value)}
+                  className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+              ) : (
+                <input id={id} type={type} name={id} value={value} onChange={(e) => setValue(e.target.value)}
+                  className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+              )}
+            </div>
+          ))}
+          <div className="form-group flex items-center">
+            <label htmlFor="image" className="w-1/4 text-sm font-medium text-gray-700">Upload Image:</label>
+            <input id="image" type="file" onChange={(e) => setImage(e.target.files[0])}
+              className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+          </div>
+          <button type="submit"
+            className="w-1/4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
