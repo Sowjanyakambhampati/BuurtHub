@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext'; 
+import { CityContext } from '../context/CityContext';
 
 function UserCityPage() {
   const { city } = useParams();
@@ -16,8 +16,8 @@ function UserCityPage() {
 
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
-        setProducts(response.data.slice(-3)); 
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/${city}`);
+        setProducts(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
@@ -25,8 +25,8 @@ function UserCityPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${city}`);
-        setEvents(response.data.slice(-3)); 
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/${city}`);
+        setEvents(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch events", error);
       }
@@ -34,8 +34,8 @@ function UserCityPage() {
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
-        setPosts(response.data.slice(-3)); 
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/${city}`);
+        setPosts(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch posts", error);
       }
@@ -57,10 +57,10 @@ function UserCityPage() {
           <img className="w-full h-auto mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
-          
-            <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
-            <div className="flex justify-end">
-            <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2 ">See all products</Link>
+
+          <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
+          <div className="flex justify-end">
+            <Link to={`/all-products/${selectedCity}`} className="text-blue-500 underline mb-2 ">See all products</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
@@ -84,8 +84,8 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events in the community</h2>
           <div className="flex justify-end">
-          <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
-         </div>
+            <Link to={`/all-events/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
@@ -106,7 +106,7 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
           <div className="flex justify-end">
-          <Link to={`/posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link> 
+            <Link to={`/posts/${selectedCity}`} className="text-blue-500 underline">See all posts</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (

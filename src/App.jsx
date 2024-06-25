@@ -24,30 +24,30 @@ import { CityProvider } from './context/CityContext';
 
 function App() {
   return (
-    <CityProvider> 
+    <CityProvider>
       <div className={`app light`}>
         <Navbar />
 
         <Routes>
           <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/usercitypage/:city/add-product' element={<AddProductPage />} />
-          <Route path='/usercitypage/:city/add-event' element={<AddEventPage />} />
-          <Route path='/usercitypage/:city/add-post' element={<AddPostPage />} />
-          <Route path='/usercitypage/:city/add-topic' element={<AddTopicPage />} />
+          <Route path='/usercitypage/:add-product' element={<AddProductPage />} />
+          <Route path='/usercitypage/:add-event' element={<AddEventPage />} />
+          <Route path='/usercitypage/:add-post' element={<AddPostPage />} />
+          <Route path='/usercitypage/:add-topic' element={<AddTopicPage />} />
           <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
           <Route path='/signup' element={<IsAnon><SignUpPage /></IsAnon>} />
-          <Route path='/topics/city/:city' element={<AllTopicPage />} />
-          <Route path='/all-events/city/:city' element={<AllEventsPage />} />
-          <Route path='/all-events/city/:city/:eventId' element={<EventDetailsPage />} />
-          <Route path='/all-products/city/:city' element={<AllProductsPage />} />
+          <Route path='/topics/:city' element={<AllTopicPage />} />
+          <Route path='/all-events/:city' element={<AllEventsPage />} />
+          <Route path='/all-events/::eventId' element={<EventDetailsPage />} />
+          <Route path='/all-products/:city' element={<AllProductsPage />} />
           <Route path='/city-selection' element={<CitySelection />} />
           <Route path='/usercitypage/:city' element={<UserCityPage />} />
-          <Route path='/posts/city/:city' element={<AllPostsPage />} />
+          <Route path='/posts/:city' element={<AllPostsPage />} />
           <Route path='/about' element={<AboutUs />} />
           <Route path='*' element={<div>404 Page Not Found</div>} />
         </Routes>
-        
+
         <Footer />
       </div>
     </CityProvider>
