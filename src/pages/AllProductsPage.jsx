@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext';
+import { CityContext } from '../context/CityContext'; 
 import { Link, useParams } from 'react-router-dom';
 
 function AllProductsPage() {
-  const { selectedCity } = useContext(CityContext);
+  const { selectedCity } = useContext(CityContext); 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -16,19 +16,19 @@ function AllProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/${city}`);
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
         setProducts(response.data);
-        setFilteredProducts(response.data);
+        setFilteredProducts(response.data); 
       } catch (error) {
         console.error('Failed to fetch products', error);
       }
     };
     fetchProducts();
-  }, [city]);
+  }, [city]); 
 
   useEffect(() => {
     applyFilters();
-  }, [categoryFilter, conditionFilter, searchTerm, products]);
+  }, [categoryFilter, conditionFilter, searchTerm, products]); 
 
   const applyFilters = () => {
     let filtered = products.filter(product => {
@@ -65,7 +65,7 @@ function AllProductsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={'/usercitypage/:add-product'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link>
+          <Link to={'/usercitypage/:city/add-product'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
         </div>
         <div className="flex mb-4">
           <select
@@ -95,35 +95,35 @@ function AllProductsPage() {
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <div>
-                  <img
-                    className="w-full h-40 object-cover mb-2"
-                    src={product.image}
-                    alt={product.productName}
-                  />
-                  <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
-                  <p className="text-gray-600 mb-2">{product.city}</p>
-                  <p className="text-gray-600 mb-2">{product.price} €</p>
-                  <p className="text-gray-600 mb-2">{product.productOwner}</p>
-                  <p className="text-gray-600 mb-2">{product.category}</p>
-                  <p className="text-gray-600 mb-2">{product.condition}</p>
-                  <p className="text-gray-600">{product.description}</p>
-                </div>
-                <button
-                  className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  onClick={() => handleReserveClick(product._id)}
-                >
-                  Reserve
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No products found for {selectedCity}.</p>
-          )}
+  {filteredProducts.length > 0 ? (
+    filteredProducts.map((product) => (
+      <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+        <div>
+          <img
+            className="w-full h-40 object-cover mb-2"
+            src={product.image}
+            alt={product.productName}
+          />
+          <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
+          <p className="text-gray-600 mb-2">{product.city}</p>
+          <p className="text-gray-600 mb-2">{product.price} €</p>
+          <p className="text-gray-600 mb-2">{product.productOwner}</p>
+          <p className="text-gray-600 mb-2">{product.category}</p>
+          <p className="text-gray-600 mb-2">{product.condition}</p>
+          <p className="text-gray-600">{product.description}</p>
         </div>
+        <button
+          className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          onClick={() => handleReserveClick(product._id)}
+        >
+          Reserve
+        </button>
+      </div>
+    ))
+  ) : (
+    <p>No products found for {selectedCity}.</p>
+  )}
+</div>
 
       </div>
     </div>

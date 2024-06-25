@@ -36,19 +36,19 @@ function PostsPage() {
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
-
-        <h2 className="text-2xl font-bold">All Posts From The Community</h2>
-        <div className="flex justify-end items-center mb-4">
+        
+          <h2 className="text-2xl font-bold">All Posts From The Community</h2>
+          <div className="flex justify-end items-center mb-4">
           <div className="flex items-center">
             <input
               type="text"
               placeholder="Search posts..."
               value={searchQuery}
               onChange={handleSearchChange}
-              className="w-64 p-2 border border-gray-300 rounded mr-4"
+              className="w-64 p-2 border border-gray-300 rounded mr-4" 
             />
             <Link
-              to={'/usercitypage/:add-post'}
+              to={'/usercitypage/:city/add-post'}
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
               Add New Post
