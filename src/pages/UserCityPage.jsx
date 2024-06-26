@@ -54,7 +54,7 @@ function UserCityPage() {
       <div className="w-3/4 p-4">
         <div>
           <h1 className="text-3xl font-bold mb-4">Hi! Welcome to the {city} Community!</h1>
-          <img className="w-full h-auto mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
+          <img className="w-full h-300 object-cover mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
           
@@ -90,7 +90,7 @@ function UserCityPage() {
             {events.length > 0 ? (
               events.map((event) => (
                 <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-                  <img className="w-full h-40 object-cover mb-2" src="/events.jpg" alt="Event" />
+                  <img className="w-full h-40 object-cover mb-2" src={event.image} alt={event.title} />
                   <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                   <p className="text-gray-600 mb-2">{event.price}</p>
                   <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
