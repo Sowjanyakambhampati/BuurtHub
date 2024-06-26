@@ -75,12 +75,14 @@ function AllProductsPage() {
           >
             <option value="">All Categories</option>
             <option value="Furniture">Furniture</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Kids">Kids</option>
-            <option value="Pet Care">Pet Care</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Sports">Sports</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Utensils">Utensils</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Kids">Kids</option>
+              <option value="Pet Care">Pet Care</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Sports">Sports</option>
+              <option value="Appliances">Appliances</option>
           </select>
           <select
             value={conditionFilter}

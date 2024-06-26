@@ -112,14 +112,14 @@ function AddEvent() {
             <label htmlFor="category" className="w-1/4 text-sm font-medium text-gray-700">Category:</label>
             <select id="category" name="category" value={event.category} onChange={handleChange}
               className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-              <option value="">Select a category</option>
               <option value="Art and Culture">Art and Culture</option>
-              <option value="Health and Wellness">Health and Wellness</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Sports">Sports</option>
-              <option value="Technology">Technology</option>
-              <option value="Education">Education</option>
-              <option value="Community & Environment">Community & Environment</option>
+            <option value="Health and Wellness">Health and Wellness</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Sports">Sports</option>
+            <option value="Technology">Technology</option>
+            <option value="Education">Education</option>
+            <option value="Community & Environment">Community & Environment</option>
+            <option value="Career">Career</option>
             </select>
           </div>
           <div className="form-group flex items-center">
