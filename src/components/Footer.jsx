@@ -45,6 +45,7 @@ export default function Footer() {
                     <SocialIcon url="https://facebook.com" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://instagram.com" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://youtube.com" target="_blank" rel="noopener noreferrer" />
+                    <SocialIcon url="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" />
                 </div>
             </div>
 
