@@ -106,7 +106,7 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
           <div className="flex justify-end">
-          <Link to={`/posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link> 
+          <Link to={`/all-posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link> 
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (

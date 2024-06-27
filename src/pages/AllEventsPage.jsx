@@ -52,7 +52,7 @@ function AllEventsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={'/usercitypage/:city/add-event'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Event</Link>
+          <Link to={`/city/${selectedCity}/add-event`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Event</Link>
 
           
         </div>
