@@ -14,7 +14,7 @@ function AllEventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/event/city/${selectedCity}`);
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${selectedCity}`);
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {

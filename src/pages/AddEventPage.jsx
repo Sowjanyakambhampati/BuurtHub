@@ -60,7 +60,7 @@ function AddEvent() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5005/event", formData, {
+      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
