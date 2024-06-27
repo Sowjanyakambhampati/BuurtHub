@@ -65,7 +65,7 @@ function AllProductsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={'/usercitypage/:city/add-product'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
+          <Link to={`/usercitypage/${selectedCity}/add-product`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
         </div>
         <div className="flex mb-4">
           <select
@@ -75,12 +75,14 @@ function AllProductsPage() {
           >
             <option value="">All Categories</option>
             <option value="Furniture">Furniture</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Kids">Kids</option>
-            <option value="Pet Care">Pet Care</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Sports">Sports</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Utensils">Utensils</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Kids">Kids</option>
+              <option value="Pet Care">Pet Care</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Sports">Sports</option>
+              <option value="Appliances">Appliances</option>
           </select>
           <select
             value={conditionFilter}

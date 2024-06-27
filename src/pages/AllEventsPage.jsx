@@ -53,6 +53,7 @@ function AllEventsPage() {
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
           <Link to={'/usercitypage/:city/add-event'} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Event</Link>
+
           
         </div>
         <div className="flex mb-4">
@@ -69,6 +70,8 @@ function AllEventsPage() {
             <option value="Technology">Technology</option>
             <option value="Education">Education</option>
             <option value="Community & Environment">Community & Environment</option>
+            <option value="Career">Career</option>
+            
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

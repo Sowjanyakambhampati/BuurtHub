@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CityContext } from '../context/CityContext';
+import SideNav from '../components/SideNav';
 
 function AddProductPage() {
   const { selectedCity } = useContext(CityContext); 
@@ -77,9 +78,12 @@ function AddProductPage() {
   };
 
   return (
-    <div>
-      
-      <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
+      <div className="w-1/4">
+        <SideNav />
+      </div>
+      <div className="w-3/4 p-4 mx-auto p-6 bg-white shadow-md rounded-lg">
+      <div>
         <h2 className="text-2xl font-semibold mb-6">Add New Product Listing Here</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -150,6 +154,8 @@ function AddProductPage() {
               <option value="Pet Care">Pet Care</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Sports">Sports</option>
+              <option value="Appliances">Appliances</option>
+              
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -182,15 +188,16 @@ function AddProductPage() {
           </div>
           <button
             type="submit"
-            className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-1/4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Add Product
+            Submit
           </button>
         </form>
       </div>
       
       <div>
         
+      </div>
       </div>
     </div>
   );
