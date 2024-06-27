@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { supabase } from '../supabaseClient';
+import {useNavigate} from 'react-router-dom';
 
 function SignUpPage() {
     // States for registration 
@@ -6,11 +8,14 @@ function SignUpPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     // States for checking the errors 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+
+    const navigate = useNavigate();
 
     // Handling the name change 
     const handleName = (e) => {
@@ -94,6 +99,26 @@ function SignUpPage() {
         );
     };
 
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+        });
+
+        if (error) {
+            setError(error.message);
+        } else {
+            console.log('User:', data.user);
+            navigate('/login');
+        }
+
+        setLoading(false);
+    };
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
@@ -111,7 +136,7 @@ function SignUpPage() {
                     {successMessage()}
                 </div>
 
-                <form>
+                <form onSubmit={handleSignUp}>
                     {/* Labels and inputs for form data */}
                     <div className="mb-4">
                         <label className="block text-gray-700">Username</label>
@@ -154,7 +179,7 @@ function SignUpPage() {
                     </div>
 
                     <button
-                        onClick={handleSubmit}
+                        // onClick={handleSubmit}
                         className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         type="submit"
                     >
