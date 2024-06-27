@@ -17,7 +17,8 @@ function AddEvent() {
     organiser: '',
     category: '',
     image: null,
-    price: ''
+    price: '',
+    participants: []
   });
 
   const handleChange = (e) => {
@@ -47,15 +48,19 @@ function AddEvent() {
     formData.append("location", event.location);
     formData.append("organiser", event.organiser);
     formData.append("category", event.category);
+    formData.append("participants", JSON.stringify(event.participants));
     if (event.image) {
       formData.append("image", event.image);
     }
     formData.append("price", event.price);
 
-    console.log("Form data: ", formData);
+    // Log formData for debugging
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
 
     try {
-      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
+      const response = await axios.post("http://localhost:5005/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -73,8 +78,9 @@ function AddEvent() {
         category: '',
         image: null,
         price: '',
+        participants: []
       });
-      navigate(`/all-events/city/${selectedCity}`);
+      navigate(`/all-events/${selectedCity}`);
     } catch (error) {
       console.error("There was an error submitting the event!", error);
     }
@@ -120,6 +126,7 @@ function AddEvent() {
               <option value="Technology">Technology</option>
               <option value="Education">Education</option>
               <option value="Community & Environment">Community & Environment</option>
+              <option value="Career">Career</option>
             </select>
           </div>
           <div className="form-group flex items-center">

@@ -154,6 +154,8 @@ function AddProductPage() {
               <option value="Pet Care">Pet Care</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Sports">Sports</option>
+              <option value="Appliances">Appliances</option>
+              
             </select>
           </div>
           <div className="grid grid-cols-2 gap-4">
