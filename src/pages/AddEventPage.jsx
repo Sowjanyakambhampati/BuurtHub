@@ -80,7 +80,7 @@ function AddEvent() {
         price: '',
         participants: []
       });
-      navigate(`/all-events/${selectedCity}`);
+      navigate(`/all-events/city/${selectedCity}`);
     } catch (error) {
       console.error("There was an error submitting the event!", error);
     }
