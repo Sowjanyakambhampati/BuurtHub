@@ -23,7 +23,7 @@ function CitySelection() {
     const selectedCity = event.target.value;
     setSelectedCity(selectedCity);
     if (selectedCity) {
-      navigate(`/usercitypage/${selectedCity}`);
+      navigate(`/city/${selectedCity}`);
     }
   };
 

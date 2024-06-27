@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useParams  } from 'react-router-dom';
 import SideNav from "../components/SideNav";
+import { CityContext } from '../context/CityContext'; 
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const { selectedCity } = useContext(CityContext); 
+  const { city } = useParams();
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('https://community-forum-backend.adaptable.app/posts');
+      const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -18,7 +21,7 @@ function PostsPage() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [city]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -48,7 +51,7 @@ function PostsPage() {
               className="w-64 p-2 border border-gray-300 rounded mr-4" 
             />
             <Link
-              to={'/usercitypage/:city/add-post'}
+              to={`/city/${selectedCity}/add-post`}
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
               Add New Post
