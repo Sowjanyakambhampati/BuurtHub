@@ -54,7 +54,7 @@ const AddPost = ({ onAddPost }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5005/posts', formData, {
+      const response = await axios.post('https://community-forum-backend.adaptable.app/posts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
