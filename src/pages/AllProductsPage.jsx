@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext'; 
 import { Link, useParams } from 'react-router-dom';
@@ -45,13 +47,22 @@ function AllProductsPage() {
     setFilteredProducts(filtered);
   };
 
-  const handleReserveClick = (productId) => {
-    // Placeholder function for handling reserve button click
-    console.log(`Product ${productId} reserved!`);
+  const handleReserveClick = async (productId) => {
+    const confirmReservation = window.confirm("Do you want to reserve this product?");
+    if (confirmReservation) {
+      try {
+        await axios.post(`http://localhost:5005/user/reserve-product/${productId}`);
+        toast.success('An email has been sent to the product owner. You will receive pickup instructions soon.');
+      } catch (error) {
+        console.error('Failed to reserve product', error);
+        toast.error('Failed to reserve product.');
+      }
+    }
   };
 
   return (
     <div className="flex">
+      <ToastContainer />
       <div className="w-1/4">
         <SideNav />
       </div>
@@ -97,36 +108,35 @@ function AllProductsPage() {
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-  {filteredProducts.length > 0 ? (
-    filteredProducts.map((product) => (
-      <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-        <div>
-          <img
-            className="w-full h-40 object-cover mb-2"
-            src={product.image}
-            alt={product.productName}
-          />
-          <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
-          <p className="text-gray-600 mb-2">{product.city}</p>
-          <p className="text-gray-600 mb-2">{product.price} €</p>
-          <p className="text-gray-600 mb-2">{product.productOwner}</p>
-          <p className="text-gray-600 mb-2">{product.category}</p>
-          <p className="text-gray-600 mb-2">{product.condition}</p>
-          <p className="text-gray-600">{product.description}</p>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                <div>
+                  <img
+                    className="w-full h-40 object-cover mb-2"
+                    src={product.image}
+                    alt={product.productName}
+                  />
+                  <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
+                  <p className="text-gray-600 mb-2">{product.city}</p>
+                  <p className="text-gray-600 mb-2">{product.price} €</p>
+                  <p className="text-gray-600 mb-2">{product.productOwner}</p>
+                  <p className="text-gray-600 mb-2">{product.category}</p>
+                  <p className="text-gray-600 mb-2">{product.condition}</p>
+                  <p className="text-gray-600">{product.description}</p>
+                </div>
+                <button
+                  className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                  onClick={() => handleReserveClick(product._id)}
+                >
+                  Reserve
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No products found for {selectedCity}.</p>
+          )}
         </div>
-        <button
-          className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          onClick={() => handleReserveClick(product._id)}
-        >
-          Reserve
-        </button>
-      </div>
-    ))
-  ) : (
-    <p>No products found for {selectedCity}.</p>
-  )}
-</div>
-
       </div>
     </div>
   );
