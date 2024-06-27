@@ -16,7 +16,7 @@ function MainNav() {
             <ul className="flex flex-col gap-2">
                 <li>
                     <NavLink
-                        to={`/usercitypage/${selectedCity}`}
+                        to={`/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
