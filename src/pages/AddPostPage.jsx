@@ -37,12 +37,14 @@ function AddPostPage() {
     e.preventDefault();
     // Create a form data object to handle the image upload
     const formData = new FormData();
+
     formData.append('id', post.id);
     formData.append('city', post.city);
     formData.append('title', post.title);
     formData.append('content', post.content);
     if (post.image) {
       formData.append('image', post.image);
+
     }
     formData.append('author', post.author);
     formData.append('createdAt', post.createdAt);
@@ -66,11 +68,13 @@ function AddPostPage() {
             contactInfo: ''
           });
 
+
           navigate('/all-posts/city/${selectedCity}');
         })
         .catch(error => {
           console.error('There was an error submitting the Post!', error);
         });
+
   };
 
   return (
@@ -82,6 +86,7 @@ function AddPostPage() {
         <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
           <div className="grid grid-cols-2 gap-4">
             <label htmlFor="city" className="block text-sm font-medium text-gray-700 text-left">City:</label>
             <input
@@ -166,6 +171,7 @@ function AddPostPage() {
           <button
               type="submit"
               className="w-1/4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
           >
             Submit
           </button>
