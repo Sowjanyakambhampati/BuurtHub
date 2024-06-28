@@ -15,10 +15,10 @@ function UserDashboard() {
     const fetchData = async () => {
       try {
         const [productsRes, reservedRes, eventsRes, postsRes] = await Promise.all([
-          axios.get('http://localhost:5005/user/products'),
-          axios.get('http://localhost:5005/user/reserved-products'),
-          axios.get('http://localhost:5005/user/registered-events'),
-          axios.get('http://localhost:5005/user/posts'),
+          axios.get(`${process.env.API_URL_CLOUD}/user/products`),
+          axios.get(`${process.env.API_URL_CLOUD}/user/reserved-products`),
+          axios.get(`${process.env.API_URL_CLOUD}/user/registered-events`),
+          axios.get(`${process.env.API_URL_CLOUD}/user/posts`),
         ]);
 
         setUserProducts(productsRes.data);
@@ -29,8 +29,6 @@ function UserDashboard() {
         console.error('Failed to fetch data', error);
       }
     };
-
-    fetchData();
   }, []);
 
   const handleEditChange = (e) => {
@@ -44,7 +42,7 @@ function UserDashboard() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5005/product/${editProduct._id}`, editProduct);
+      const response = await axios.put(`${process.env.API_URL_CLOUD}/product/${editProduct._id}`, editProduct);
       setUserProducts(prevProducts => prevProducts.map(product => (product._id === editProduct._id ? response.data : product)));
       setEditProduct(null); // Close the edit form
       toast.success('Product successfully updated!');
@@ -56,7 +54,7 @@ function UserDashboard() {
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5005/product/${productId}`);
+      await axios.delete(`${process.env.API_URL_CLOUD}/product/${productId}`);
       setUserProducts(prevProducts => prevProducts.filter(product => product._id !== productId));
       toast.success('Product successfully deleted!');
     } catch (error) {

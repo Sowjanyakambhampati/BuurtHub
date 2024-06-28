@@ -14,14 +14,14 @@ function AllEventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/event/city/${selectedCity}`);
+        const response = await axios.get(`${process.env.API_URL_CLOUD}/event/city/${selectedCity}`);
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {
         console.error('Failed to fetch events', error);
       }
     };
-    fetchEvents();
+
   }, [selectedCity]);
 
   useEffect(() => {
