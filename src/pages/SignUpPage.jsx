@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 function SignUpPage() {
     // States for registration 
-    const [name, setName] = useState("");
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,7 +19,7 @@ function SignUpPage() {
 
     // Handling the name change 
     const handleName = (e) => {
-        setName(e.target.value);
+        setFullName(e.target.value);
         setSubmitted(false);
     };
 
@@ -107,6 +107,12 @@ function SignUpPage() {
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
+            options: {
+                data: {
+                    fullName,
+                    avatar: "",
+                },
+            },
         });
 
         if (error) {
@@ -143,7 +149,7 @@ function SignUpPage() {
                         <input
                             onChange={handleName}
                             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                            value={name}
+                            value={fullName}
                             type="text"
                         />
                     </div>

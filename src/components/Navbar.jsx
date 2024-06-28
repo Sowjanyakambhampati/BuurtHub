@@ -9,13 +9,24 @@ function NavBar() {
 
     useEffect(() => {
         const session = supabase.auth.getSession();
+
         const userData = supabase.auth.getUser();
+
+
         if (session && session.user) {
+            setUser(session.user);
             setUserName(session.user.user_metadata.fullName);
+
+            console.log("Session:: " + session);
+        }
+        if(userData && userData.user){
+
+            console.log("USER ID:: " + userData.user.fullName);
         }
 
         supabase.auth.onAuthStateChange((_event, session) => {
             if (session && session.user) {
+                setUser(session.user);
                 setUserName(session.user.user_metadata.fullName);
             } else {
                 setUser(null);
@@ -36,7 +47,7 @@ function NavBar() {
             <div className="navbar-buttons">
                 {user ? (
                     <>
-                        <p>Welcome,{userName} {user.email}</p>
+                        <p>Welcome,{userName}</p>
                         <Link to="/login" onClick={() => supabase.auth.signOut()}
                               className="navbar-button">Logout</Link>
                         {/*<button onClick={() => supabase.auth.signOut()}>Logout</button>*/}
