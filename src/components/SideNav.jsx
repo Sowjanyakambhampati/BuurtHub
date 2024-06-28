@@ -44,7 +44,7 @@ function MainNav() {
                         <span>Events</span>
                     </NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink
                         to={`/topics/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
@@ -53,10 +53,10 @@ function MainNav() {
                         <IoChatbubbles className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
                         <span>Topics</span>
                     </NavLink>
-                </li>
+                </li> */}
                 <li>
                     <NavLink
-                        to={`/posts/city/${selectedCity}`}
+                        to={`/all-posts/city/${selectedCity}`}
                         className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
                         activeclassname="text-gray-800 bg-gray-50 rounded-md"
                     >
