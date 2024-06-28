@@ -19,6 +19,7 @@ import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
 import AllPostsPage from './pages/AllPostsPage';
 import EventDetailsPage from './pages/EventDetailsPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutUs from './pages/AboutUs';
 import { CityProvider } from './context/CityContext';
 
@@ -27,7 +28,6 @@ function App() {
     <CityProvider> 
       <div className={`app light`}>
         <Navbar />
-
         <Routes>
           <Route path='/' element={<IsAnon><HomePage /></IsAnon>} />
           <Route path='/dashboard' element={<Dashboard />} />
@@ -40,6 +40,7 @@ function App() {
           <Route path='/topics/city/:city' element={<AllTopicPage />} />
           <Route path='/all-events/city/:city' element={<AllEventsPage />} />
           <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage />} />
+          <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage />} />
           <Route path='/all-products/city/:city' element={<AllProductsPage />} />
           <Route path='/city-selection' element={<CitySelection />} />
           <Route path='/city/:city' element={<UserCityPage />} />
@@ -47,7 +48,6 @@ function App() {
           <Route path='/about' element={<AboutUs />} />
           <Route path='*' element={<div>404 Page Not Found</div>} />
         </Routes>
-        
         <Footer />
       </div>
     </CityProvider>
