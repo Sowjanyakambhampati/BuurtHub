@@ -1,26 +1,25 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import { CityContext } from "../context/CityContext";
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { CityContext } from '../context/CityContext';
 import { useNavigate } from 'react-router-dom';
 import SideNav from '../components/SideNav';
-
-function AddEvent() {
+const AddEvent = () => {
   const { selectedCity } = useContext(CityContext);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [event, setEvent] = useState({
     title: '',
-    description: '',
     date: '',
-    time: '',
-    city: selectedCity,
-    location: '',
-    organiser: '',
-    category: '',
+    address: '',
+    location: { lat: 0, lng: 0 },
     image: null,
+    description: '',
+    organiser: '',
+    city: selectedCity,
+    participants: [],
+    time: '',
     price: '',
-    participants: []
+    category: ''
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent((prevEvent) => ({
@@ -28,64 +27,68 @@ function AddEvent() {
       [name]: value
     }));
   };
-
   const handleImageChange = (e) => {
     setEvent((prevEvent) => ({
       ...prevEvent,
-      image: e.target.files[0],
+      image: e.target.files[0]
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-    formData.append("title", event.title);
-    formData.append("description", event.description);
-    formData.append("date", event.date);
-    formData.append("time", event.time);
-    formData.append("city", event.city);
-    formData.append("location", event.location);
-    formData.append("organiser", event.organiser);
-    formData.append("category", event.category);
-    formData.append("participants", JSON.stringify(event.participants));
+    formData.append('title', event.title);
+    formData.append('date', event.date);
+    formData.append('description', event.description);
+    formData.append('organiser', event.organiser);
+    formData.append('city', event.city);
+    formData.append('time', event.time);
+    formData.append('price', event.price);
+    formData.append('category', event.category);
+    formData.append('participants', JSON.stringify(event.participants));
     if (event.image) {
-      formData.append("image", event.image);
+      formData.append('image', event.image);
     }
-    formData.append("price", event.price);
-
-    // Log formData for debugging
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     try {
-      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Event submitted: ", response.data);
-      setEvent({
-        title: '',
-        description: '',
-        date: '',
-        time: '',
-        city: selectedCity,
-        location: '',
-        organiser: '',
-        category: '',
-        image: null,
-        price: '',
-        participants: []
-      });
-      navigate(`/all-events/city/${selectedCity}`);
+      // Geocode the address
+      const geocodeResponse = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(event.address)}&key=YOUR_GOOGLE_MAPS_API_KEY`
+      );
+      if (geocodeResponse.data.status === 'OK') {
+        const location = geocodeResponse.data.results[0].geometry.location;
+        formData.append('location', JSON.stringify({ type: 'Point', latitude: location.lat, longitude: location.lng }));
+        // Log formData for debugging
+        for (let [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
+        // Submit the event
+        const response = await axios.post('http://localhost:5005/event', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        console.log('Event submitted:', response.data);
+        setEvent({
+          title: '',
+          date: '',
+          address: '',
+          location: { lat: 0, lng: 0 },
+          image: null,
+          description: '',
+          organiser: '',
+          city: selectedCity,
+          participants: [],
+          time: '',
+          price: '',
+          category: ''
+        });
+        navigate(`/all-events/${selectedCity}`);
+      } else {
+        throw new Error('Geocoding failed');
+      }
     } catch (error) {
-      console.error("There was an error submitting the event!", error);
+      console.error('There was an error submitting the event!', error);
     }
   };
-
   return (
     <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
       <div className="w-1/4">
@@ -95,17 +98,17 @@ function AddEvent() {
         <h2 className="text-2xl font-semibold mb-4">Add Event in {event.city}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {[
-            { id: "title", type: "text", label: "Title", value: event.title },
-            { id: "description", type: "textarea", label: "Description", value: event.description },
-            { id: "date", type: "date", label: "Date", value: event.date },
-            { id: "time", type: "time", label: "Time", value: event.time },
-            { id: "city", type: "text", label: "City", value: event.city, readOnly: true },
-            { id: "location", type: "text", label: "Location", value: event.location },
-            { id: "organiser", type: "text", label: "Organiser", value: event.organiser },
+            { id: 'title', type: 'text', label: 'Title', value: event.title },
+            { id: 'description', type: 'textarea', label: 'Description', value: event.description },
+            { id: 'date', type: 'date', label: 'Date', value: event.date },
+            { id: 'time', type: 'time', label: 'Time', value: event.time },
+            { id: 'city', type: 'text', label: 'City', value: event.city, readOnly: true },
+            { id: 'address', type: 'text', label: 'Address', value: event.address },
+            { id: 'organiser', type: 'text', label: 'Organiser', value: event.organiser },
           ].map(({ id, type, label, value, readOnly = false }) => (
             <div key={id} className="form-group flex items-center">
               <label htmlFor={id} className="w-1/4 text-sm font-medium text-gray-700">{label}:</label>
-              {type === "textarea" ? (
+              {type === 'textarea' ? (
                 <textarea id={id} name={id} value={value} onChange={handleChange} readOnly={readOnly}
                   className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
               ) : (
@@ -152,5 +155,5 @@ function AddEvent() {
     </div>
   );
 }
-
 export default AddEvent;
+

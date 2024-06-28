@@ -94,8 +94,7 @@ function AllProductsPage() {
                 <div>
                   <img className="w-full h-40 object-cover mb-2" src={product.image} alt={product.productName} />
                   <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
-                  <p className="text-gray-600 mb-2">{product.city}</p>
-                  <p className="text-gray-600 mb-2">{product.price} €</p>
+                  <p className="text-gray-600 mb-2">€{product.price}</p>
                   <p className="text-gray-600 mb-2">{product.productOwner}</p>
                   <p className="text-gray-600 mb-2">{product.category}</p>
                   <p className="text-gray-600 mb-2">{product.condition}</p>

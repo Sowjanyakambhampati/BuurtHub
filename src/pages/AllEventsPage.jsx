@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext'; 
+import { CityContext } from '../context/CityContext';
 import { Link } from 'react-router-dom';
 
 function AllEventsPage() {
@@ -52,9 +52,9 @@ function AllEventsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={`/city/${selectedCity}/add-event`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Event</Link>
-
-          
+          <Link to={`/city/${selectedCity}/add-event`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            Add New Event
+          </Link>
         </div>
         <div className="flex mb-4">
           <select
@@ -71,13 +71,12 @@ function AllEventsPage() {
             <option value="Education">Education</option>
             <option value="Community & Environment">Community & Environment</option>
             <option value="Career">Career</option>
-            
           </select>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
-              <div key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+              <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                 <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
                 <p className="text-gray-600 mb-2">{event.category}</p>
@@ -86,12 +85,7 @@ function AllEventsPage() {
                 {event.image && (
                   <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
                 )}
-                <button
-                  className="mt-4 w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  See Event
-                </button>
-              </div>
+              </Link>
             ))
           ) : (
             <p>No events found.</p>

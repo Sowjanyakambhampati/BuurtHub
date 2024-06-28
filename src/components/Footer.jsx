@@ -41,7 +41,7 @@ export default function Footer() {
                     <span>info@buurthub.nl</span>
                 </div>
                 <div className="space-x-5">
-                    <SocialIcon url="https://twitter.com" target="_blank" rel="noopener noreferrer" />
+                    <SocialIcon url="https://x.com" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://facebook.com" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://instagram.com" target="_blank" rel="noopener noreferrer" />
                     <SocialIcon url="https://youtube.com" target="_blank" rel="noopener noreferrer" />
