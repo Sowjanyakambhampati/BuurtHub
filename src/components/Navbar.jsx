@@ -9,17 +9,14 @@ function NavBar() {
 
     useEffect(() => {
         const session = supabase.auth.getSession();
-
+        const userData = supabase.auth.getUser();
         if (session && session.user) {
-            console.log('session', session.user);
-            setUser(session.user);
-            fetchUserName(session.user.id);
+            setUserName(session.user.user_metadata.fullName);
         }
 
         supabase.auth.onAuthStateChange((_event, session) => {
             if (session && session.user) {
-                setUser(session.user);
-                fetchUserName(session.user.id);
+                setUserName(session.user.user_metadata.fullName);
             } else {
                 setUser(null);
                 setUserName('');
@@ -27,21 +24,6 @@ function NavBar() {
         });
     }, []);
 
-    const fetchUserName = async (userId) => {
-        try {
-            const { data, error } = await supabase
-                .from('profiles')
-                .select('name')
-                .eq('id', userId)
-                .single();
-            console.log("data::", data);
-
-            if (error) throw error;
-            setUserName(data.name);
-        } catch (error) {
-            console.error('Error fetching user name:', error.message);
-        }
-    };
 
     return (
         <nav className="navbar">

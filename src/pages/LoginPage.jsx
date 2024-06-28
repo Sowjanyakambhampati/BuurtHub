@@ -22,8 +22,6 @@ function LogInPage() {
             setError(error.message);
         } else {
             navigate('/dashboard');
-            console.log('User:', data.user);
-            console.log('Session:', data.session);
         }
 
         setLoading(false);
