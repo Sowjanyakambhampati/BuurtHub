@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext'; 
 import { Link, useParams } from 'react-router-dom';
+import SideNav from '../components/SideNav';
+import { CityContext } from '../context/CityContext';
 
 function AllProductsPage() {
-  const { selectedCity } = useContext(CityContext); 
+  const { selectedCity } = useContext(CityContext);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -20,49 +18,31 @@ function AllProductsPage() {
       try {
         const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
         setProducts(response.data);
-        setFilteredProducts(response.data); 
+        setFilteredProducts(response.data);
       } catch (error) {
         console.error('Failed to fetch products', error);
       }
     };
     fetchProducts();
-  }, [city]); 
+  }, [city]);
 
   useEffect(() => {
     applyFilters();
-  }, [categoryFilter, conditionFilter, searchTerm, products]); 
+  }, [categoryFilter, conditionFilter, searchTerm, products]);
 
   const applyFilters = () => {
     let filtered = products.filter(product => {
-      // Apply city filter
       if (product.city !== selectedCity) return false;
-      // Apply category filter
       if (categoryFilter && product.category !== categoryFilter) return false;
-      // Apply condition filter
       if (conditionFilter && product.condition !== conditionFilter) return false;
-      // Apply search term filter
       if (searchTerm && !product.productName.toLowerCase().includes(searchTerm.toLowerCase())) return false;
       return true;
     });
     setFilteredProducts(filtered);
   };
 
-  const handleReserveClick = async (productId) => {
-    const confirmReservation = window.confirm("Do you want to reserve this product?");
-    if (confirmReservation) {
-      try {
-        await axios.post(`http://localhost:5005/user/reserve-product/${productId}`);
-        toast.success('An email has been sent to the product owner. You will receive pickup instructions soon.');
-      } catch (error) {
-        console.error('Failed to reserve product', error);
-        toast.error('Failed to reserve product.');
-      }
-    }
-  };
-
   return (
     <div className="flex">
-      <ToastContainer />
       <div className="w-1/4">
         <SideNav />
       </div>
@@ -76,7 +56,7 @@ function AllProductsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={`/city/${selectedCity}/add-product`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link> 
+          <Link to={`/city/${selectedCity}/add-product`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New Product</Link>
         </div>
         <div className="flex mb-4">
           <select
@@ -86,14 +66,14 @@ function AllProductsPage() {
           >
             <option value="">All Categories</option>
             <option value="Furniture">Furniture</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Utensils">Utensils</option>
-              <option value="Clothing">Clothing</option>
-              <option value="Kids">Kids</option>
-              <option value="Pet Care">Pet Care</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Sports">Sports</option>
-              <option value="Appliances">Appliances</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Utensils">Utensils</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Kids">Kids</option>
+            <option value="Pet Care">Pet Care</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Sports">Sports</option>
+            <option value="Appliances">Appliances</option>
           </select>
           <select
             value={conditionFilter}
@@ -110,13 +90,9 @@ function AllProductsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+              <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                 <div>
-                  <img
-                    className="w-full h-40 object-cover mb-2"
-                    src={product.image}
-                    alt={product.productName}
-                  />
+                  <img className="w-full h-40 object-cover mb-2" src={product.image} alt={product.productName} />
                   <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
                   <p className="text-gray-600 mb-2">{product.city}</p>
                   <p className="text-gray-600 mb-2">{product.price} €</p>
@@ -125,13 +101,7 @@ function AllProductsPage() {
                   <p className="text-gray-600 mb-2">{product.condition}</p>
                   <p className="text-gray-600">{product.description}</p>
                 </div>
-                <button
-                  className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  onClick={() => handleReserveClick(product._id)}
-                >
-                  Reserve
-                </button>
-              </div>
+              </Link>
             ))
           ) : (
             <p>No products found for {selectedCity}.</p>
