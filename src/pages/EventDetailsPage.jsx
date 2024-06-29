@@ -23,6 +23,9 @@ const EventDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
+  const { location } = event;
+  const hasLocation = location && location.lat && location.lng;
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-3xl font-bold mb-4">{event.title}</h2>
@@ -30,7 +33,7 @@ const EventDetailsPage = () => {
       <p className="text-gray-600 mb-2">Date: {new Date(event.date).toLocaleDateString()}</p>
       <p className="text-gray-600 mb-2">Time: {event.time}</p>
       <p className="text-gray-600 mb-2">City: {event.city}</p>
-      <p className="text-gray-600 mb-2">Location: {event.location}</p>
+      <p className="text-gray-600 mb-2">Location: {event.location.address}</p>
       <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
       <p className="text-gray-600 mb-2">Price: {event.price}</p>
       <p className="text-gray-600 mb-2">Category: {event.category}</p>
@@ -38,7 +41,11 @@ const EventDetailsPage = () => {
         <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
       )}
       <div className="mt-4">
-        <GoogleMap latitude={event.location.lat} longitude={event.location.lng} />
+        {hasLocation ? (
+          <GoogleMap latitude={location.lat} longitude={location.lng} />
+        ) : (
+          <p>Location information is not available.</p>
+        )}
       </div>
     </div>
   );

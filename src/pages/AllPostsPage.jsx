@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { Link,useParams  } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SideNav from "../components/SideNav";
-import { CityContext } from '../context/CityContext'; 
+import { CityContext } from '../context/CityContext';
 
-function PostsPage() {
+function AllPostsPage() {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const { selectedCity } = useContext(CityContext); 
+  const { selectedCity } = useContext(CityContext);
   const { city } = useParams();
 
   const fetchPosts = async () => {
@@ -39,46 +39,42 @@ function PostsPage() {
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
-        
-          <h2 className="text-2xl font-bold">All Posts From The Community</h2>
-          <div className="flex justify-end items-center mb-4">
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search posts..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="w-64 p-2 border border-gray-300 rounded mr-4" 
-            />
-            <Link
-              to={`/city/${selectedCity}/add-post`}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-            >
-              Add New Post
-            </Link>
-          </div>
+        <h2 className="text-2xl font-bold mb-4">All Posts From The Community in {selectedCity}</h2>
+        <div className="flex mb-4 gap-2">
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
+          />
+          <Link
+            to={`/city/${selectedCity}/add-post`}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            Add New Post
+          </Link>
         </div>
-        <ul className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
-              <li key={post._id} className="bg-white p-4 rounded-lg shadow-md">
-                <div className="flex items-center mb-2">
-                  <img src={post.profilePicture} alt="Profile" className="w-8 h-8 rounded-full mr-2" />
-                  <p className="text-lg font-semibold">{post.title}</p>
+              <div className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-2">{post.author}</p>
+                  <p className="text-gray-600 mb-2">{post.content}</p>
+                  
+                <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
+                  <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
+                  <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
                 </div>
-                <p className="text-gray-700 mb-2">{post.content}</p>
-                <p className="text-gray-700 mb-2">{post.author}</p>
-                <p className="text-gray-700 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
-                <p className="text-gray-700 mb-2">{post.contactInfo}</p>
-              </li>
             ))
           ) : (
-            <p>No posts found.</p>
+            <p>No posts found for {selectedCity}.</p>
           )}
-        </ul>
+        </div>
       </div>
     </div>
   );
 }
 
-export default PostsPage;
+export default AllPostsPage;
