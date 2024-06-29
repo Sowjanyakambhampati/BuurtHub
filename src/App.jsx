@@ -14,7 +14,6 @@ import AddPostPage from './pages/AddPostPage';
 import AddTopicPage from './pages/AddTopicPage';
 import Navbar from './components/Navbar';
 import IsAnon from './components/IsAnon';
-import IsPrivate from './components/IsPrivate';
 import Footer from './components/Footer';
 import CitySelection from './components/CitySelection';
 import UserCityPage from './pages/UserCityPage';
@@ -27,6 +26,7 @@ import {CityProvider} from './context/CityContext';
 import './App.css'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
+
 
 function App() {
 
@@ -48,20 +48,20 @@ function App() {
                     <Navbar/>
                     <Routes>
                         <Route path='/' element={<IsAnon><HomePage/></IsAnon>}/>
-                        <Route path='/login/dashboard' element = {<IsPrivate><Dashboard/></IsPrivate>}/>
-                        <Route path='/city/:city/add-product' element = {<IsPrivate><AddProductPage/></IsPrivate>}/>
-                        <Route path='/city/:city/add-event' element = {<IsPrivate><AddEventPage/></IsPrivate>}/>
-                        <Route path='/city/:city/add-post' element = {<IsPrivate><AddPostPage/></IsPrivate>}/>
-                        <Route path='/city/:city/add-topic' element = {<IsPrivate><AddTopicPage/></IsPrivate>}/>
+                        <Route path='/dashboard' element={<Dashboard/>}/>
+                        <Route path='/city/:city/add-product' element={<AddProductPage/>}/>
+                        <Route path='/city/:city/add-event' element={<AddEventPage/>}/>
+                        <Route path='/city/:city/add-post' element={<AddPostPage/>}/>
+                        <Route path='/city/:city/add-topic' element={<AddTopicPage/>}/>
                         <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
                         <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
-                        <Route path='/topics/city/:city' element = {<IsPrivate><AllTopicPage/></IsPrivate>}/>
-                        <Route path='/all-events/city/:city' element = {<IsPrivate><AllEventsPage/></IsPrivate>}/>
+                        <Route path='/topics/city/:city' element={<AllTopicPage/>}/>
+                        <Route path='/all-events/city/:city' element={<AllEventsPage/>}/>
                         <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage/>}/>
                         <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage/>}/>
                         <Route path='/all-products/city/:city' element={<AllProductsPage/>}/>
                         <Route path='/city-selection' element={<CitySelection/>}/>
-                        <Route path='/city/:city' element = {<IsPrivate><UserCityPage/></IsPrivate>}/>
+                        <Route path='/city/:city' element={<UserCityPage/>}/>
                         <Route path='/all-posts/city/:city' element={<AllPostsPage/>}/>
                         <Route path='/about' element={<AboutUs/>}/>
                         <Route path='*' element={<div>404 Page Not Found 😞</div>}/>
