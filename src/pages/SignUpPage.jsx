@@ -1,42 +1,47 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {supabase} from '../supabaseClient';
+import {useNavigate} from 'react-router-dom';
 
 function SignUpPage() {
-    // States for registration 
-    const [name, setName] = useState("");
+    // States for registration
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    // States for checking the errors 
+    // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
-    // Handling the name change 
+    const navigate = useNavigate();
+
+    // Handling the name change
     const handleName = (e) => {
-        setName(e.target.value);
+        setFullName(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the email change 
+    // Handling the email change
     const handleEmail = (e) => {
         setEmail(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the password change 
+    // Handling the password change
     const handlePassword = (e) => {
         setPassword(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the confirm password change 
+    // Handling the confirm password change
     const handleConfirmPassword = (e) => {
         setConfirmPassword(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the form submission 
+    // Handling the form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         if (name === "" || email === "" || password === "" || confirmPassword === "") {
@@ -52,7 +57,7 @@ function SignUpPage() {
         }
     };
 
-    // Showing success message 
+    // Showing success message
     const successMessage = () => {
         return (
             <div
@@ -66,7 +71,7 @@ function SignUpPage() {
         );
     };
 
-    // Showing error message if error is true 
+    // Showing error message if error is true
     const errorMessage = () => {
         return (
             <div
@@ -94,11 +99,37 @@ function SignUpPage() {
         );
     };
 
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const {data, error} = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    fullName,
+                    avatar: "",
+                },
+            },
+        });
+
+        if (error) {
+            setError(error.message);
+        } else {
+            console.log('User:', data.user);
+            navigate('/login');
+        }
+
+        setLoading(false);
+    };
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+                    <img src="/logo.png" alt="Logo" className="h-16 w-auto"/>
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-center">Sign Up Here</h1>
@@ -111,14 +142,14 @@ function SignUpPage() {
                     {successMessage()}
                 </div>
 
-                <form>
+                <form onSubmit={handleSignUp}>
                     {/* Labels and inputs for form data */}
                     <div className="mb-4">
                         <label className="block text-gray-700">Username</label>
                         <input
                             onChange={handleName}
                             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                            value={name}
+                            value={fullName}
                             type="text"
                         />
                     </div>
@@ -154,7 +185,7 @@ function SignUpPage() {
                     </div>
 
                     <button
-                        onClick={handleSubmit}
+                        // onClick={handleSubmit}
                         className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         type="submit"
                     >
