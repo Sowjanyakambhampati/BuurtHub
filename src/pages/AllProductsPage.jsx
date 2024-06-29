@@ -27,7 +27,7 @@ function AllProductsPage() {
             console.log("Session:: " + session);
         }
         if (userData && userData.user) {
-            console.log("USER ID Viswa:: " + userData.user.fullName);
+            console.log("USER ID Ama:: " + userData.user.fullName);
         }
         supabase.auth.onAuthStateChange((_event, session) => {
             if (session && session.user) {
