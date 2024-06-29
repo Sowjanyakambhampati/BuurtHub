@@ -21,7 +21,7 @@ function LogInPage() {
         if (error) {
             setError(error.message);
         } else {
-            navigate('dashboard');
+            navigate('/dashboard');
         }
         setLoading(false);
     };
