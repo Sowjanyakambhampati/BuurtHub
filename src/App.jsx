@@ -48,7 +48,7 @@ function App() {
                     <Navbar/>
                     <Routes>
                         <Route path='/' element={<IsAnon><HomePage/></IsAnon>}/>
-                        <Route path='/dashboard' element = {<IsPrivate><Dashboard/></IsPrivate>}/>
+                        <Route path='/login/dashboard' element = {<IsPrivate><Dashboard/></IsPrivate>}/>
                         <Route path='/city/:city/add-product' element = {<IsPrivate><AddProductPage/></IsPrivate>}/>
                         <Route path='/city/:city/add-event' element = {<IsPrivate><AddEventPage/></IsPrivate>}/>
                         <Route path='/city/:city/add-post' element = {<IsPrivate><AddPostPage/></IsPrivate>}/>
