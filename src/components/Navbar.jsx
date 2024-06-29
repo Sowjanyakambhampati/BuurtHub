@@ -1,97 +1,56 @@
-/*
-import React, { useContext } from 'react'
-import { AuthContext } from './../context/auth.context'
-import { Link } from 'react-router-dom'
-
-function NavBar() {
-
-    const {
-        isLoggedIn,
-        user,
-        logOutUser
-    } = useContext(AuthContext);
-
-    return (
-        <nav>
-            <div className='left'>
-
-                <Link to={`/`}>Dashboard</Link>
-                {/* <button onClick={logOutUser}>Log Out</button> 
-
-
-                <Link to={`/login`}>Login</Link>
-                <Link to={`/signup`}>Sign Up</Link>
-
-
-            </div>
-            <div className='right'>
-                {isLoggedIn && <h3>Hello, {user.name}</h3>}
-            </div>
-        </nav>
-    )
-}
-
-export default NavBar
-
-
-/*
-return (
-        <nav>
-            <div className='left'>
-                {isLoggedIn ? <>
-                    <Link to={`/`}>Dashboard</Link>
-                    <button onClick={logOutUser}>Log Out</button>
-                </>
-                    :
-                    <>
-                        <Link to={`/login`}>Login</Link>
-                        <Link to={`/signup`}>Sign Up</Link>
-                    </>
-                }
-            </div>
-            <div className='right'>
-                {isLoggedIn && <h3>Hello, {user.name}</h3>}
-            </div>
-        </nav>
-    )
-*/
-
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from './../context/auth.context';
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import '../Navbar.css';
+import {supabase} from '../supabaseClient';
 
 function NavBar() {
-  const {
-    isLoggedIn,
-    user,
-    logOutUser
-  } = useContext(AuthContext);
+    const [user, setUser] = useState(null);
+    const [userName, setUserName] = useState('');
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <Link to="/"> 
-          <img src="/logo.png" alt="Logo" />
-        </Link>
-      </div>
-    
-      <div className="navbar-buttons">
-        {isLoggedIn ? (
-          <>
-            <Link to={`/`}>Dashboard</Link>
-            <button onClick={logOutUser} className="navbar-button">Log Out</button>
-            <h3>Hello, {user.name}</h3>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="navbar-button">Login</Link>
-            <Link to="/signup" className="navbar-button">Signup</Link>
-          </>
-        )}
-      </div>
-    </nav>
-  );
+    useEffect(() => {
+        const session = supabase.auth.getSession();
+        const userData = supabase.auth.getUser();
+        if (session && session.user) {
+            setUser(session.user);
+            setUserName(session.user.user_metadata.fullName);
+            console.log("Session:: " + session);
+        }
+        if (userData && userData.user) {
+            console.log("USER ID:: " + userData.user.fullName);
+        }
+        supabase.auth.onAuthStateChange((_event, session) => {
+            if (session && session.user) {
+                setUser(session.user);
+                setUserName(session.user.user_metadata.fullName);
+            } else {
+                setUser(null);
+                setUserName('');
+            }
+        });
+    }, []);
+    return (
+        <nav className="navbar">
+            <div className="navbar-logo">
+                <Link to="/">
+                    <img src="/logo.png" alt="Logo"/>
+                </Link>
+            </div>
+
+            <div className="navbar-buttons">
+                {user ? (
+                    <>
+                        <p>Welcome,{userName}</p>
+                        <Link to="/login" onClick={() => supabase.auth.signOut()}
+                              className="navbar-button">Logout</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login" className="navbar-button">Login</Link>
+                        <Link to="/signup" className="navbar-button">Signup</Link>
+                    </>
+                )}
+            </div>
+        </nav>
+    );
 }
-
 export default NavBar;
