@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import SideNav from "../components/SideNav";
 import { CityContext } from '../context/CityContext';
 
+
 function AllPostsPage() {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
