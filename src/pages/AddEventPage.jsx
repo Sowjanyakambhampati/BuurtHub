@@ -1,26 +1,30 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import { CityContext } from "../context/CityContext";
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { CityContext } from '../context/CityContext';
 import { useNavigate } from 'react-router-dom';
 import SideNav from '../components/SideNav';
-
-function AddEvent() {
+function AddEventPage() {
   const { selectedCity } = useContext(CityContext);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [event, setEvent] = useState({
     title: '',
-    description: '',
     date: '',
     time: '',
     city: selectedCity,
-    location: '',
+    address: '',
+    location: {
+      coordinates: {
+        latitude: '',
+        longitude: ''
+      }
+    },
+    image: null,
+    description: '',
     organiser: '',
     category: '',
-    image: null,
     price: '',
     participants: []
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEvent((prevEvent) => ({
@@ -28,64 +32,61 @@ function AddEvent() {
       [name]: value
     }));
   };
-
   const handleImageChange = (e) => {
     setEvent((prevEvent) => ({
       ...prevEvent,
       image: e.target.files[0],
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("title", event.title);
-    formData.append("description", event.description);
-    formData.append("date", event.date);
-    formData.append("time", event.time);
-    formData.append("city", event.city);
-    formData.append("location", event.location);
-    formData.append("organiser", event.organiser);
-    formData.append("category", event.category);
-    formData.append("participants", JSON.stringify(event.participants));
-    if (event.image) {
-      formData.append("image", event.image);
-    }
-    formData.append("price", event.price);
-
-    // Log formData for debugging
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     try {
-      const response = await axios.post("https://community-forum-backend.adaptable.app/event", formData, {
+      // Get location coordinates from address
+      const geoResponse = await axios.post('http://localhost:5005/geoapi/geoData', { address: event.address });
+      const location = geoResponse.data;
+      const formData = new FormData();
+      formData.append("title", event.title);
+      formData.append("date", event.date);
+      formData.append("time", event.time);
+      formData.append("city", event.city);
+      formData.append("location[type]", "Point");
+      formData.append("location[coordinates][latitude]", location.lat);
+      formData.append("location[coordinates][longitude]", location.lng);
+      formData.append("image", event.image);
+      formData.append("description", event.description);
+      formData.append("organiser", event.organiser);
+      formData.append("category", event.category);
+      formData.append("price", event.price);
+      formData.append("participants", JSON.stringify(event.participants));
+      await axios.post('http://localhost:5005/events', formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log("Event submitted: ", response.data);
       setEvent({
         title: '',
-        description: '',
         date: '',
         time: '',
         city: selectedCity,
-        location: '',
+        address: '',
+        location: {
+          coordinates: {
+            latitude: '',
+            longitude: ''
+          }
+        },
+        image: null,
+        description: '',
         organiser: '',
         category: '',
-        image: null,
         price: '',
         participants: []
       });
-      navigate(`/all-events/city/${selectedCity}`);
+      navigate(`/all-events/${selectedCity}`);
     } catch (error) {
-      console.error("There was an error submitting the event!", error);
+      console.error('There was an error submitting the event!', error);
     }
   };
-
   return (
     <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
       <div className="w-1/4">
@@ -96,20 +97,19 @@ function AddEvent() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {[
             { id: "title", type: "text", label: "Title", value: event.title },
-            { id: "description", type: "textarea", label: "Description", value: event.description },
             { id: "date", type: "date", label: "Date", value: event.date },
             { id: "time", type: "time", label: "Time", value: event.time },
-            { id: "city", type: "text", label: "City", value: event.city, readOnly: true },
-            { id: "location", type: "text", label: "Location", value: event.location },
+            { id: "address", type: "text", label: "Address", value: event.address },
+            { id: "description", type: "textarea", label: "Description", value: event.description },
             { id: "organiser", type: "text", label: "Organiser", value: event.organiser },
-          ].map(({ id, type, label, value, readOnly = false }) => (
+          ].map(({ id, type, label, value }) => (
             <div key={id} className="form-group flex items-center">
               <label htmlFor={id} className="w-1/4 text-sm font-medium text-gray-700">{label}:</label>
               {type === "textarea" ? (
-                <textarea id={id} name={id} value={value} onChange={handleChange} readOnly={readOnly}
+                <textarea id={id} name={id} value={value} onChange={handleChange}
                   className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
               ) : (
-                <input id={id} type={type} name={id} value={value} onChange={handleChange} readOnly={readOnly}
+                <input id={id} type={type} name={id} value={value} onChange={handleChange}
                   className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
               )}
             </div>
@@ -152,5 +152,4 @@ function AddEvent() {
     </div>
   );
 }
-
-export default AddEvent;
+export default AddEventPage;

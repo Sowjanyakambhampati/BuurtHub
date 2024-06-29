@@ -4,7 +4,7 @@ import { BiHome } from 'react-icons/bi';
 import { AiOutlineProduct } from 'react-icons/ai';
 import { MdEvent } from 'react-icons/md';
 import { IoChatboxEllipses } from 'react-icons/io5';
-import { IoChatbubbles } from 'react-icons/io5';
+// import { IoChatbubbles } from 'react-icons/io5';
 import { FaUserCircle } from 'react-icons/fa';
 import { CityContext } from '../context/CityContext'; 
 

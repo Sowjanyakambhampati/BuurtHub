@@ -52,8 +52,7 @@ const ProductDetailsPage = () => {
           </div>
           <div className="w-2/3 pl-4">
             <p className="text-gray-600 mb-4">{product.description}</p>
-            <p className="text-gray-600 mb-2">City: {product.city}</p>
-            <p className="text-gray-600 mb-2">Price: {product.price} €</p>
+            <p className="text-gray-600 mb-2">Price: €{product.price}</p>
             <p className="text-gray-600 mb-2">Owner: {product.productOwner}</p>
             <p className="text-gray-600 mb-2">Category: {product.category}</p>
             <p className="text-gray-600 mb-2">Condition: {product.condition}</p>
