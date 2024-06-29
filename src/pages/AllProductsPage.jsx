@@ -98,7 +98,6 @@ function AllProductsPage() {
                   <p className="text-gray-600 mb-2">{product.productOwner}</p>
                   <p className="text-gray-600 mb-2">{product.category}</p>
                   <p className="text-gray-600 mb-2">{product.condition}</p>
-                  <p className="text-gray-600">{product.description}</p>
                 </div>
               </Link>
             ))

@@ -46,7 +46,7 @@ function App() {
           <Route path='/city/:city' element={<UserCityPage />} />
           <Route path='/all-posts/city/:city' element={<AllPostsPage />} />
           <Route path='/about' element={<AboutUs />} />
-          <Route path='*' element={<div>404 Page Not Found</div>} />
+          <Route path='*' element={<div>404 Page Not Found 😞</div>} />
         </Routes>
         <Footer />
       </div>
