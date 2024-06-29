@@ -3,6 +3,7 @@ import axios from 'axios';
 import { CityContext } from '../context/CityContext';
 import { useNavigate } from 'react-router-dom';
 import SideNav from '../components/SideNav';
+
 function AddEventPage() {
   const { selectedCity } = useContext(CityContext);
   const navigate = useNavigate();
@@ -25,40 +26,52 @@ function AddEventPage() {
     price: '',
     participants: []
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEvent((prevEvent) => ({
-      ...prevEvent,
-      [name]: value
-    }));
+    if (name === 'latitude' || name === 'longitude') {
+      setEvent((prevEvent) => ({
+        ...prevEvent,
+        location: {
+          coordinates: {
+            ...prevEvent.location.coordinates,
+            [name]: value
+          }
+        }
+      }));
+    } else {
+      setEvent((prevEvent) => ({
+        ...prevEvent,
+        [name]: value
+      }));
+    }
   };
+
   const handleImageChange = (e) => {
     setEvent((prevEvent) => ({
       ...prevEvent,
       image: e.target.files[0],
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Get location coordinates from address
-      const geoResponse = await axios.post('http://localhost:5005/geoapi/geoData', { address: event.address });
-      const location = geoResponse.data;
       const formData = new FormData();
       formData.append("title", event.title);
       formData.append("date", event.date);
       formData.append("time", event.time);
       formData.append("city", event.city);
       formData.append("location[type]", "Point");
-      formData.append("location[coordinates][latitude]", location.lat);
-      formData.append("location[coordinates][longitude]", location.lng);
+      formData.append("location[coordinates][latitude]", event.location.coordinates.latitude);
+      formData.append("location[coordinates][longitude]", event.location.coordinates.longitude);
       formData.append("image", event.image);
       formData.append("description", event.description);
       formData.append("organiser", event.organiser);
       formData.append("category", event.category);
       formData.append("price", event.price);
       formData.append("participants", JSON.stringify(event.participants));
-      await axios.post('http://localhost:5005/events', formData, {
+      await axios.post('http://localhost:5005/event', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -87,6 +100,7 @@ function AddEventPage() {
       console.error('There was an error submitting the event!', error);
     }
   };
+
   return (
     <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
       <div className="w-1/4">
@@ -114,6 +128,16 @@ function AddEventPage() {
               )}
             </div>
           ))}
+          <div className="form-group flex items-center">
+            <label htmlFor="latitude" className="w-1/4 text-sm font-medium text-gray-700">Latitude:</label>
+            <input id="latitude" type="text" name="latitude" value={event.location.coordinates.latitude} onChange={handleChange}
+              className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+          </div>
+          <div className="form-group flex items-center">
+            <label htmlFor="longitude" className="w-1/4 text-sm font-medium text-gray-700">Longitude:</label>
+            <input id="longitude" type="text" name="longitude" value={event.location.coordinates.longitude} onChange={handleChange}
+              className="w-3/4 mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+          </div>
           <div className="form-group flex items-center">
             <label htmlFor="category" className="w-1/4 text-sm font-medium text-gray-700">Category:</label>
             <select id="category" name="category" value={event.category} onChange={handleChange}
@@ -152,4 +176,5 @@ function AddEventPage() {
     </div>
   );
 }
+
 export default AddEventPage;
