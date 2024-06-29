@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {supabase} from '../supabaseClient';
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function LogInPage() {
     const [email, setEmail] = useState('');
@@ -60,12 +60,6 @@ function LogInPage() {
                         Submit
                     </button>
                 </form>
-                <p className="mt-4 text-center">
-                    Don't have an account yet?{' '}
-                    <Link to="/signup" className="text-blue-500 hover:underline">
-                        Sign up
-                    </Link>
-                </p>
             </div>
         </div>
     );
