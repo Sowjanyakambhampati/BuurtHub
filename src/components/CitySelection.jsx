@@ -1,17 +1,18 @@
-import { useEffect, useContext,useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CityContext } from '../context/CityContext';
+import { supabase } from '../supabaseClient';
 
 function CitySelection() {
   const { selectedCity, setSelectedCity } = useContext(CityContext);
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
+  const session = supabase.auth.getSession();
 
   useEffect(() => {
     axios.get('https://community-forum-backend.adaptable.app/city')
       .then(response => {
-        console.log("Cities List :: " + response.data);
         setCities(response.data);
       })
       .catch(error => {
@@ -23,7 +24,11 @@ function CitySelection() {
     const selectedCity = event.target.value;
     setSelectedCity(selectedCity);
     if (selectedCity) {
-      navigate(`/city/${selectedCity}`);
+      if (session) {
+        navigate(`/city/${selectedCity}`);
+      } else {
+        navigate('/login', { state: { from: `/city/${selectedCity}` } });
+      }
     }
   };
 

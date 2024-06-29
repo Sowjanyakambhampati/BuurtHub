@@ -60,7 +60,7 @@ function App() {
                         <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage/>}/>
                         <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage/>}/>
                         <Route path='/all-products/city/:city' element={<AllProductsPage/>}/>
-                        <Route path='/city-selection' element={<CitySelection/>}/>
+                        <Route path='/city' element={<CitySelection/>}/>
                         <Route path='/city/:city' element={<UserCityPage/>}/>
                         <Route path='/all-posts/city/:city' element={<AllPostsPage/>}/>
                         <Route path='/about' element={<AboutUs/>}/>
