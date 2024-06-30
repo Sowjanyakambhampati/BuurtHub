@@ -40,7 +40,7 @@ const ProductDetailsPage = () => {
         reservedById: user.id,
       };
       try {
-        await axios.put(`http://localhost:5005/product/${productId}`, updateData);
+        await axios.put(`https://community-forum-backend.adaptable.app/product/${productId}`, updateData);
         toast.success('An email has been sent to the product owner. You will receive pickup instructions soon.');
       } catch (error) {
         console.error('Failed to reserve product', error);

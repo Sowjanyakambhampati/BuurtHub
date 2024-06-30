@@ -30,7 +30,7 @@ function UserDashboard({session}) {
     useEffect(() => {
         const fetchUserReservedProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5005/product/reservedproducts/${user.id}`);
+                const response = await axios.get(`https://community-forum-backend.adaptable.app/product/reservedproducts/${user.id}`);
                 setReservedProducts(response.data);
             } catch (error) {
                 console.error('Failed to fetch products', error);
