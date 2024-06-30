@@ -1,11 +1,19 @@
 
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation,  useNavigate } from 'react-router-dom';
 import { CityContext } from '../context/CityContext';
 import SideNav from '../components/SideNav';
 
 function AddPostPage() {
+  const location = useLocation();
+  const session = location.state?.session;
+  
+  // if (!session) {
+  //   return <Navigate to="/login" />;
+  // }
+  const { user } = session;
+
   const { selectedCity } = useContext(CityContext);
   const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
@@ -15,7 +23,7 @@ function AddPostPage() {
     title: '',
     content: '',
     image: null,
-    author: '',
+    postAuthor: user.id,
     createdAt: today,
     contactInfo: ''
   });
@@ -41,14 +49,14 @@ function AddPostPage() {
     e.preventDefault();
     const formData = new FormData();
 
-    // formData.append('id', post.id);
+    formData.append('id', post.id);
     formData.append('city', post.city);
     formData.append('title', post.title);
     formData.append('content', post.content);
     if (post.image) {
       formData.append('image', post.image);
     }
-    formData.append('author', post.author);
+    formData.append('postAuthor', post.postAuthor);
     formData.append('createdAt', post.createdAt);
     formData.append('contactInfo', post.contactInfo);
 
@@ -60,12 +68,12 @@ function AddPostPage() {
       .then(response => {
         console.log('Post submitted: ', response.data);
         setPost({
-          // id: '',
+          id: user.id,
           city: selectedCity,
           title: '',
           content: '',
           image: null,
-          author: '',
+          postAuthor: '',
           createdAt: today,
           contactInfo: ''
         });
@@ -84,6 +92,7 @@ function AddPostPage() {
       </div>
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
+        <p>User ID: {user.id}</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* <div className="grid grid-cols-2 gap-4">
             <label htmlFor="id" className="block text-sm font-medium text-gray-700 text-left">ID:</label>
@@ -133,12 +142,12 @@ function AddPostPage() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <label htmlFor="author" className="block text-sm font-medium text-gray-700 text-left">Author:</label>
+            <label htmlFor="postAuthor" className="block text-sm font-medium text-gray-700 text-left">Author:</label>
             <input
               type="text"
-              id="author"
-              name="author"
-              value={post.author}
+              id="postAuthor"
+              name="postAuthor"
+              value={post.postAuthor}
               onChange={handleChange}
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

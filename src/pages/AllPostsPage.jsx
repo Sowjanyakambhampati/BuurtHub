@@ -30,7 +30,7 @@ function AllPostsPage() {
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.author.toLowerCase().includes(searchQuery.toLowerCase())
+    post.postAuthor.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -60,7 +60,7 @@ function AllPostsPage() {
             filteredPosts.map((post) => (
               <div className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-2">{post.author}</p>
+                  <p className="text-gray-600 mb-2">{post.postAuthor}</p>
                   <p className="text-gray-600 mb-2">{post.content}</p>
                   
                 <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>

@@ -115,7 +115,7 @@ function UserCityPage() {
                   <img className="w-8 h-8 rounded-full mb-2" src={post.image} alt="Profile" />
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                   <p className="text-gray-600 mb-2">{post.content}</p>
-                  <p className="text-gray-600 mb-2">By {post.author}</p>
+                  <p className="text-gray-600 mb-2">By {post.postAuthor}</p>
                   <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
                   {post.contactInfo && <p className="text-gray-600 mb-2">Contact: {post.contactInfo}</p>}
                 </div>
