@@ -1,11 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CityContext } from '../context/CityContext';
 import SideNav from '../components/SideNav';
+import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 
 function AddProductPage() {
-  const { selectedCity } = useContext(CityContext); 
+
+  const location = useLocation();
+  const session = location.state?.session;
+
+  if (!session) {
+    return <Navigate to="/login" />;
+  }
+  const { user } = session;
+  const { selectedCity } = useContext(CityContext);
   const [product, setProduct] = useState({
     id: '',
     city: selectedCity, 
@@ -14,9 +22,11 @@ function AddProductPage() {
     image: null,
     description: '',
     condition: '',
-    productOwner: '',
+    productOwner: user.id,
     category: ''
   });
+
+
 
   const navigate = useNavigate();
 
@@ -49,6 +59,7 @@ function AddProductPage() {
     formData.append('description', product.description);
     formData.append('condition', product.condition);
     formData.append('category', product.category);
+    formData.append('productOwner', product.productOwner);
 
     axios.post('https://community-forum-backend.adaptable.app/product', formData, {
       headers: {
@@ -59,14 +70,14 @@ function AddProductPage() {
         console.log('Product submitted: ', response.data);
         // Reset form fields
         setProduct({
-          id: '',
+          id: user.id,
           city: selectedCity, 
           productName: '',
           price: '',
           image: null,
           description: '',
           condition: '',
-          productOwner: '',
+          productOwner: user.id,
           category: ''
         });
       
@@ -77,6 +88,8 @@ function AddProductPage() {
       });
   };
 
+
+
   return (
     <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
       <div className="w-1/4">
@@ -85,6 +98,8 @@ function AddProductPage() {
       <div className="w-3/4 p-4 mx-auto p-6 bg-white shadow-md rounded-lg">
       <div>
         <h2 className="text-2xl font-semibold mb-6">Add New Product Listing Here</h2>
+
+        <p>User ID: {user.id}</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <label htmlFor="city" className="block text-sm font-medium text-gray-700 text-left">City:</label>
