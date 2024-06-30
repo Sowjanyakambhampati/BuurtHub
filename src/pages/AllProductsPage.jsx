@@ -1,11 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {Link, useParams} from 'react-router-dom';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import SideNav from '../components/SideNav';
 import {CityContext} from '../context/CityContext';
-import {supabase} from '../supabaseClient';
 
-function AllProductsPage() {
+function AllProductsPage({ session }) {
     const {selectedCity} = useContext(CityContext);
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -13,32 +12,6 @@ function AllProductsPage() {
     const [conditionFilter, setConditionFilter] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const {city} = useParams();
-
-
-    const [user, setUser] = useState(null);
-    const [userName, setUserName] = useState('');
-
-    useEffect(() => {
-        const session = supabase.auth.getSession();
-        const userData = supabase.auth.getUser();
-        if (session && session.user) {
-            setUser(session.user);
-            setUserName(session.user.user_metadata.fullName);
-            console.log("Session:: " + session);
-        }
-        if (userData && userData.user) {
-            console.log("USER ID Viswa:: " + userData.user.fullName);
-        }
-        supabase.auth.onAuthStateChange((_event, session) => {
-            if (session && session.user) {
-                setUser(session.user);
-                setUserName(session.user.user_metadata.fullName);
-            } else {
-                setUser(null);
-                setUserName('');
-            }
-        });
-    }, []);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -68,12 +41,18 @@ function AllProductsPage() {
         setFilteredProducts(filtered);
     };
 
+    if (!session) {
+        return <Navigate to="/login" />;
+    }
+    const { user } = session;
+
     return (
         <div className="flex">
             <div className="w-1/4">
                 <SideNav/>
             </div>
-            {console.log("USER ID Viswa:: " + user)}
+
+            <p>User ID: {user.id}</p>
             <div className="w-3/4 p-4">
                 <h2 className="text-2xl font-bold mb-4">All Items For Sale In {selectedCity}</h2>
                 <div className="flex mb-4 gap-2">
@@ -84,7 +63,8 @@ function AllProductsPage() {
                         onChange={e => setSearchTerm(e.target.value)}
                         className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
                     />
-                    <Link to={`/city/${selectedCity}/add-product`}
+
+                    <Link to={`/city/${selectedCity}/add-product`} state={{ session }}
                           className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New
                         Product</Link>
                 </div>
@@ -120,7 +100,7 @@ function AllProductsPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
-                            <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id}
+                            <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id} state={{ session }}
                                   className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                                 <div>
                                     <img className="w-full h-40 object-cover mb-2" src={product.image}

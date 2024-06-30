@@ -22,44 +22,41 @@ import EventDetailsPage from './pages/EventDetailsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutUs from './pages/AboutUs';
 import {CityProvider} from './context/CityContext';
-
 import './App.css'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
 
-
 function App() {
-
-
-    const [session, setSession] = useState(supabase.auth.getSession());
-
+    const [session, setSession] = useState(null)
     useEffect(() => {
-        const {data: authListener} = supabase.auth.onAuthStateChange(
-            async () => setSession(supabase.auth.getSession())
-        );
-        return () => {
-            authListener.unsubscribe();
-        };
-    }, []);
+        supabase.auth.getSession().then(({data: {session}}) => {
+            setSession(session)
+        })
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
     return (
         <CityProvider>
+            <Navbar/>
+            <Routes>
+                <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
+                <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
+                <Route path='/' element={<HomePage/>}/>
+            </Routes>
             {!session ? <LoginPage/> :
                 <div className={`app light`}>
-                    <Navbar/>
                     <Routes>
-                        <Route path='/' element={<IsAnon><HomePage/></IsAnon>}/>
-                        <Route path='/dashboard' element={<Dashboard/>}/>
-                        <Route path='/city/:city/add-product' element={<AddProductPage/>}/>
-                        <Route path='/city/:city/add-event' element={<AddEventPage/>}/>
-                        <Route path='/city/:city/add-post' element={<AddPostPage/>}/>
-                        <Route path='/city/:city/add-topic' element={<AddTopicPage/>}/>
-                        <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
-                        <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
+                        <Route path='/dashboard' element={<Dashboard key={session.user.id} session={session}/>}/>
+                        <Route path='/city/:city/add-product' element={<AddProductPage key={session.user.id} session={session}/>}/>
+                        <Route path='/city/:city/add-event' element={<AddEventPage key={session.user.id} session={session}/>}/>
+                        <Route path='/city/:city/add-post' element={<AddPostPage key={session.user.id} session={session}/>}/>
+                        <Route path='/city/:city/add-topic' element={<AddTopicPage key={session.user.id} session={session}/>}/>
                         <Route path='/topics/city/:city' element={<AllTopicPage/>}/>
                         <Route path='/all-events/city/:city' element={<AllEventsPage/>}/>
                         <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage/>}/>
                         <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage/>}/>
-                        <Route path='/all-products/city/:city' element={<AllProductsPage/>}/>
+                        <Route path='/all-products/city/:city' element={<AllProductsPage key={session.user.id} session={session}/>}/>
                         <Route path='/city' element={<CitySelection/>}/>
                         <Route path='/city/:city' element={<UserCityPage/>}/>
                         <Route path='/all-posts/city/:city' element={<AllPostsPage/>}/>
