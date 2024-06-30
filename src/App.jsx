@@ -22,11 +22,9 @@ import EventDetailsPage from './pages/EventDetailsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutUs from './pages/AboutUs';
 import {CityProvider} from './context/CityContext';
-
 import './App.css'
 import {useState, useEffect} from 'react'
 import {supabase} from './supabaseClient'
-
 
 function App() {
     const [session, setSession] = useState(null)
@@ -42,9 +40,13 @@ function App() {
     }, [])
     return (
         <CityProvider>
+            <Navbar/>
+            <Routes>
+                <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
+                <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
+            </Routes>
             {!session ? <LoginPage/> :
                 <div className={`app light`}>
-                    <Navbar/>
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>
                         <Route path='/dashboard' element={<Dashboard key={session.user.id} session={session}/>}/>
@@ -52,8 +54,6 @@ function App() {
                         <Route path='/city/:city/add-event' element={<AddEventPage key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-post' element={<AddPostPage key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-topic' element={<AddTopicPage key={session.user.id} session={session}/>}/>
-                        <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
-                        <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
                         <Route path='/topics/city/:city' element={<AllTopicPage/>}/>
                         <Route path='/all-events/city/:city' element={<AllEventsPage/>}/>
                         <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage/>}/>
