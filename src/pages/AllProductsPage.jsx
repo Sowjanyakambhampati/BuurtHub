@@ -100,7 +100,7 @@ function AllProductsPage({ session }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
-                            <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id}
+                            <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id} state={{ session }}
                                   className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                                 <div>
                                     <img className="w-full h-40 object-cover mb-2" src={product.image}
