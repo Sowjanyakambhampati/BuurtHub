@@ -44,11 +44,12 @@ function App() {
             <Routes>
                 <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
                 <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
+                <Route path='/' element={<HomePage/>}/>
             </Routes>
             {!session ? <LoginPage/> :
                 <div className={`app light`}>
                     <Routes>
-                        <Route path='/' element={<HomePage/>}/>
+
                         <Route path='/dashboard' element={<Dashboard key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-product' element={<AddProductPage key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-event' element={<AddEventPage key={session.user.id} session={session}/>}/>
