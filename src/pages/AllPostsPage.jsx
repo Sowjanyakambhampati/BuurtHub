@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import SideNav from "../components/SideNav";
 import { CityContext } from '../context/CityContext';
 
-function AllPostsPage() {
+function AllPostsPage({ session }) {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const { selectedCity } = useContext(CityContext);
@@ -32,12 +32,17 @@ function AllPostsPage() {
     post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
     post.postAuthor.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  if (!session) {
+    return <Navigate to="/login" />;
+}
+const { user } = session;
 
   return (
     <div className="flex">
       <div className="w-1/4">
         <SideNav />
       </div>
+      <p>User ID: {user.id}</p>
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">All Posts From The Community in {selectedCity}</h2>
         <div className="flex mb-4 gap-2">
@@ -49,7 +54,7 @@ function AllPostsPage() {
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
           <Link
-            to={`/city/${selectedCity}/add-post`}
+            to={`/city/${selectedCity}/add-post`} state={{ session }}
             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
           >
             Add New Post

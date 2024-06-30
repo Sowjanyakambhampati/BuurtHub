@@ -11,6 +11,7 @@ function UserDashboard({ session }) {
     const [registeredEvents, setRegisteredEvents] = useState([]);
     const [userPosts, setUserPosts] = useState([]);
     const [editProduct, setEditProduct] = useState(null);
+    const [editPost, setEditPost] = useState(null);
     const { selectedCity } = useContext(CityContext);
 
     const { user } = session;
@@ -39,9 +40,29 @@ function UserDashboard({ session }) {
         fetchUserReservedProducts();
     }, [user.id]);
 
+    useEffect(() => {
+        const fetchUserPosts = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5005/posts/postauthor/${user.id}`);
+                setUserPosts(response.data);
+            } catch (error) {
+                console.error('Failed to fetch posts', error);
+            }
+        };
+        fetchUserPosts();
+    }, [user.id]);
+
     const handleEditChange = (e) => {
         const { name, value } = e.target;
         setEditProduct(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handlePostEditChange = (e) => {
+        const { name, value } = e.target;
+        setEditPost(prevState => ({
             ...prevState,
             [name]: value
         }));
@@ -64,6 +85,23 @@ function UserDashboard({ session }) {
         }
     };
 
+    const handlePostEditSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.put(`http://localhost:5005/posts/postauthor/${editPost._id}`, editPost);
+            toast.success('Post updated successfully');
+            setUserPosts(prevPosts =>
+                prevPosts.map(post =>
+                    post._id === editPost._id ? response.data : post
+                )
+            );
+            setEditPost(null);
+        } catch (error) {
+            toast.error('Failed to update post');
+            console.error('Failed to update post', error);
+        }
+    };
+
     const handleDelete = async (productId) => {
         try {
             await axios.delete(`https://community-forum-backend.adaptable.app/product/${productId}`);
@@ -72,6 +110,17 @@ function UserDashboard({ session }) {
         } catch (error) {
             toast.error('Failed to delete product');
             console.error('Failed to delete product', error);
+        }
+    };
+
+    const handlePostDelete = async (postId) => {
+        try {
+            await axios.delete(`http://localhost:5005/posts/postauthor/${postId}`);
+            toast.success('Post deleted successfully');
+            setUserPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
+        } catch (error) {
+            toast.error('Failed to delete post');
+            console.error('Failed to delete post', error);
         }
     };
 
@@ -249,9 +298,61 @@ function UserDashboard({ session }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {userPosts.length > 0 ? (
                             userPosts.map(post => (
-                                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h4 className="text-lg font-semibold mb-2">{post.title}</h4>
-                                    <p className="text-gray-600 mb-2">{post.content}</p>
+                                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md relative">
+                                    {editPost && editPost._id === post._id ? (
+                                        <form onSubmit={handlePostEditSubmit} className="space-y-4">
+                                            <div className="form-group">
+                                                <label className="block text-sm font-medium text-gray-700">Title:</label>
+                                                <input
+                                                    name="title"
+                                                    value={editPost.title}
+                                                    onChange={handlePostEditChange}
+                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="block text-sm font-medium text-gray-700">Content:</label>
+                                                <textarea
+                                                    name="content"
+                                                    value={editPost.content}
+                                                    onChange={handlePostEditChange}
+                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
+                                            <button
+                                                type="submit"
+                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            >
+                                                Save
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setEditPost(null)}
+                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-2"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </form>
+                                    ) : (
+                                        <>
+                                            <h4 className="text-lg font-semibold mb-2">{post.title}</h4>
+                                            <p className="text-gray-600 mb-2">{post.content}</p>
+                                            <div className="absolute bottom-4 left-4 flex space-x-2">
+                                                <button
+                                                    onClick={() => setEditPost(post)}
+                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => handlePostDelete(post._id)}
+                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             ))
                         ) : (
