@@ -26,6 +26,21 @@ function UserDashboard({session}) {
         fetchUserProducts();
     }, [user.id]);
 
+
+    useEffect(() => {
+        const fetchUserReservedProducts = async () => {
+            try {
+                const response = await axios.get(`https://community-forum-backend.adaptable.app/product/reservedproducts/${user.id}`);
+                setReservedProducts(response.data);
+            } catch (error) {
+                console.error('Failed to fetch products', error);
+            }
+        };
+        fetchUserReservedProducts();
+    }, [user.id]);
+
+
+
     return (
         <div className="flex">
             <ToastContainer/>

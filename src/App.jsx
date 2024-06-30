@@ -28,12 +28,10 @@ import {supabase} from './supabaseClient'
 
 function App() {
     const [session, setSession] = useState(null)
-
     useEffect(() => {
         supabase.auth.getSession().then(({data: {session}}) => {
             setSession(session)
         })
-
         supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
         })
@@ -49,7 +47,6 @@ function App() {
             {!session ? <LoginPage/> :
                 <div className={`app light`}>
                     <Routes>
-
                         <Route path='/dashboard' element={<Dashboard key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-product' element={<AddProductPage key={session.user.id} session={session}/>}/>
                         <Route path='/city/:city/add-event' element={<AddEventPage key={session.user.id} session={session}/>}/>

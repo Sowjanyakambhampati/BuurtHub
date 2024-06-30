@@ -34,7 +34,7 @@ function UserCityPage() {
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/posts/city/${city}`);
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
         setPosts(response.data.slice(-3)); 
       } catch (error) {
         console.error("Failed to fetch posts", error);
