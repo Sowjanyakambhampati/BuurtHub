@@ -59,7 +59,7 @@ function App() {
                         <Route path='/all-products/city/:city' element={<AllProductsPage key={session.user.id} session={session}/>}/>
                         <Route path='/city' element={<CitySelection/>}/>
                         <Route path='/city/:city' element={<UserCityPage/>}/>
-                        <Route path='/all-posts/city/:city' element={<AllPostsPage/>}/>
+                        <Route path='/all-posts/city/:city' element={<AllPostsPage key={session.user.id} session={session}/>}/>
                         <Route path='/about' element={<AboutUs/>}/>
                         <Route path='*' element={<div>404 Page Not Found 😞</div>}/>
                     </Routes>
