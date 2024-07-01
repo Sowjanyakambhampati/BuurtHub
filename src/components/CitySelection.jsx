@@ -48,7 +48,7 @@ function CitySelection() {
           ))}
         </select>
       </div>
-      {selectedCity && <p className="text-lg">You selected: {selectedCity}</p>}
+      {/* {selectedCity && <p className="text-lg">You selected: {selectedCity}</p>} */}
     </div>
   );
 }
