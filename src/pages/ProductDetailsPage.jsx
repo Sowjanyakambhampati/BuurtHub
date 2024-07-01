@@ -59,7 +59,7 @@ const ProductDetailsPage = () => {
         <div className="w-1/4">
           <SideNav/>
         </div>
-        <p>User ID-productReserve: {user.id}</p>
+        {/* <p>User ID-productReserve: {user.id}</p> */}
         <div className="w-3/4 p-4">
           <h2 className="text-3xl font-bold mb-4">{product.productName}</h2>
           <div className="flex">

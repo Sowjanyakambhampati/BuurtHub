@@ -12,7 +12,7 @@ function AllPostsPage({ session }) {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
+      const response = await axios.get(`http://localhost:5005/posts/city/${city}`);
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -63,15 +63,14 @@ const { user } = session;
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
-              <div className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-2">{post.postAuthor}</p>
-                  <p className="text-gray-600 mb-2">{post.content}</p>
-                  
+              <div key={post.id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                <p className="text-gray-600 mb-2">{post.postAuthor}</p>
+                <p className="text-gray-600 mb-2">{post.content}</p>
                 <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
-                  <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
-                  <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
-                </div>
+                <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
+                <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
+              </div>
             ))
           ) : (
             <p>No posts found for {selectedCity}.</p>
