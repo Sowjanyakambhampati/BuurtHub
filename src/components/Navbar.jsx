@@ -40,7 +40,7 @@ function NavBar() {
                 {user ? (
                     <>
                         <p>Welcome,{userName}</p>
-                        <Link to="/login" onClick={() => supabase.auth.signOut()}
+                        <Link to="/" onClick={() => supabase.auth.signOut()}
                               className="navbar-button">Logout</Link>
                     </>
                 ) : (

@@ -40,8 +40,8 @@ function App() {
         <CityProvider>
             <Navbar/>
             <Routes>
-                <Route path='/login' element={<IsAnon><LoginPage/></IsAnon>}/>
-                <Route path='/signup' element={<IsAnon><SignUpPage/></IsAnon>}/>
+                <Route path='/login' element={<LoginPage/>}/>
+                <Route path='/signup' element={<SignUpPage/>}/>
                 <Route path='/' element={<HomePage/>}/>
             </Routes>
             {!session ? <LoginPage/> :
