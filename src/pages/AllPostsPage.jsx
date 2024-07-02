@@ -42,7 +42,7 @@ const { user } = session;
       <div className="w-1/4">
         <SideNav />
       </div>
-      <p>User ID: {user.id}</p>
+      {/* <p>User ID: {user.id}</p> */}
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-bold mb-4">All Posts From The Community in {selectedCity}</h2>
         <div className="flex mb-4 gap-2">
