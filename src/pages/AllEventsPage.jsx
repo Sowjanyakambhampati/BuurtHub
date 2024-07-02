@@ -1,21 +1,21 @@
-
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
-function AllEventsPage() {
+function AllEventsPage({ session }) {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const { selectedCity } = useContext(CityContext);
+  const { city } = useParams();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${selectedCity}`);
+        const response = await axios.get(`http://localhost:5005/event/city/${city}`);
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {
@@ -38,6 +38,12 @@ function AllEventsPage() {
     setFilteredEvents(filtered);
   };
 
+  if (!session) {
+    return <Navigate to="/login" />;
+  }
+
+  const { user } = session;
+
   return (
     <div className="flex">
       <div className="w-1/4">
@@ -53,7 +59,7 @@ function AllEventsPage() {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={`/city/${selectedCity}/add-event`} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          <Link to={`/city/${selectedCity}/add-event`} state={{ session }} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
             Add New Event
           </Link>
         </div>
@@ -77,7 +83,7 @@ function AllEventsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
-              <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+              <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} state={{ session }} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                 <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                 <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
                 <p className="text-gray-600 mb-2">{event.category}</p>
@@ -89,7 +95,7 @@ function AllEventsPage() {
               </Link>
             ))
           ) : (
-            <p>No events found.</p>
+            <p>No events found for {selectedCity}.</p>
           )}
         </div>
       </div>

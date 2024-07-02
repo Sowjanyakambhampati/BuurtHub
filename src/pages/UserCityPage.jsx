@@ -25,7 +25,7 @@ function UserCityPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${city}`);
+        const response = await axios.get(`http://localhost:5005/event/city/${city}`);
         setEvents(response.data.slice(-3)); 
       } catch (error) {
         console.error("Failed to fetch events", error);
@@ -57,10 +57,9 @@ function UserCityPage() {
           <img className="w-full h-300 object-cover mb-4" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
-          
-            <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
-            <div className="flex justify-end">
-            <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2 ">See all products</Link>
+          <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
+          <div className="flex justify-end">
+            <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all products</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
@@ -84,8 +83,8 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events in the community</h2>
           <div className="flex justify-end">
-          <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
-         </div>
+            <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500 underline mb-2">See all events</Link>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
@@ -106,22 +105,23 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
           <div className="flex justify-end">
-          <Link to={`/all-posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link> 
+            <Link to={`/all-posts/city/${selectedCity}`} className="text-blue-500 underline">See all posts</Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (
               posts.map((post) => (
-                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md">
-                  <img className="w-8 h-8 rounded-full mb-2" src={post.image} alt="Profile" />
+                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-2">{post.postAuthor}</p>
                   <p className="text-gray-600 mb-2">{post.content}</p>
-                  <p className="text-gray-600 mb-2">By {post.postAuthor}</p>
                   <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
-                  {post.contactInfo && <p className="text-gray-600 mb-2">Contact: {post.contactInfo}</p>}
+                  <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
+                  
                 </div>
               ))
             ) : (
-              <p>No posts found for this city.</p>
+              <p>No posts found for {selectedCity}.</p>
             )}
           </div>
         </div>

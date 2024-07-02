@@ -49,13 +49,13 @@ function App() {
                         <Route path='/city/:city/add-event' element={<AddEventPage key={session.user.id} session={session} />} />
                         <Route path='/city/:city/add-post' element={<AddPostPage key={session.user.id} session={session} />} />
                         <Route path='/city/:city/add-topic' element={<AddTopicPage key={session.user.id} session={session} />} />
-                        <Route path='/topics/city/:city' element={<AllTopicPage />} />
-                        <Route path='/all-events/city/:city' element={<AllEventsPage />} />
-                        <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage />} />
-                        <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage />} />
+                        <Route path='/topics/city/:city' element={<AllTopicPage session={session} />} />
+                        <Route path='/all-events/city/:city' element={<AllEventsPage session={session} />} />
+                        <Route path='/all-events/city/:city/event/:eventId' element={<EventDetailsPage key={session.user.id} session={session}/>} />
+                        <Route path='/all-products/city/:city/product/:productId' element={<ProductDetailsPage session={session} />} />
                         <Route path='/all-products/city/:city' element={<AllProductsPage key={session.user.id} session={session} />} />
                         <Route path='/city' element={<CitySelection />} />
-                        <Route path='/city/:city' element={<UserCityPage />} />
+                        <Route path='/city/:city' element={<UserCityPage key={session.user.id} session={session}/>} />
                         <Route path='/all-posts/city/:city' element={<AllPostsPage key={session.user.id} session={session} />} />
                         <Route path='/about' element={<AboutUs />} />
                         <Route path='*' element={<div>404 Page Not Found 😞</div>} />
