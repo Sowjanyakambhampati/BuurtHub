@@ -71,7 +71,7 @@ function AddEventPage() {
       formData.append("category", event.category);
       formData.append("price", event.price);
       formData.append("participants", JSON.stringify(event.participants));
-      await axios.post('http://localhost:5005/event', formData, {
+      await axios.post('https://community-forum-backend.adaptable.app/event', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
