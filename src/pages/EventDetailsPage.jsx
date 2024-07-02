@@ -18,7 +18,7 @@ const EventDetailsPage = () => {
     }
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/event/city/${eventId}`);
+        const response = await axios.get(`http://localhost:5005/event/${eventId}`);
         setEvent(response.data);
         setLoading(false);
       } catch (error) {
@@ -68,13 +68,6 @@ const EventDetailsPage = () => {
             <p className="text-gray-600 mb-2">Organiser: {organiser}</p>
             <p className="text-gray-600 mb-2">Price: {price}</p>
             <p className="text-gray-600 mb-2">Category: {category}</p>
-            <div className="mt-4">
-              {hasLocation ? (
-                <GoogleMap latitude={eventLocation.coordinates.latitude} longitude={eventLocation.coordinates.longitude} />
-              ) : (
-                <p>Location information is not available.</p>
-              )}
-            </div>
           </div>
         </div>
       </div>
