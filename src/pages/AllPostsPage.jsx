@@ -64,12 +64,13 @@ const { user } = session;
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <div key={post.id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+              <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
                 <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                 <p className="text-gray-600 mb-2">{post.postAuthor}</p>
                 <p className="text-gray-600 mb-2">{post.content}</p>
                 <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
                 <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
-                <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
+                
               </div>
             ))
           ) : (

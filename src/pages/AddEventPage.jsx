@@ -23,8 +23,7 @@ function AddEventPage() {
     description: '',
     organiser: '',
     category: '',
-    price: '',
-    participants: []
+    price: ''
   });
 
   const handleChange = (e) => {
@@ -70,7 +69,6 @@ function AddEventPage() {
       formData.append("organiser", event.organiser);
       formData.append("category", event.category);
       formData.append("price", event.price);
-      formData.append("participants", JSON.stringify(event.participants));
       await axios.post('https://community-forum-backend.adaptable.app/event', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -93,9 +91,8 @@ function AddEventPage() {
         organiser: '',
         category: '',
         price: '',
-        participants: []
       });
-      navigate(`/all-events/${selectedCity}`);
+      navigate(`/all-events/city/${selectedCity}`);
     } catch (error) {
       console.error('There was an error submitting the event!', error);
     }
