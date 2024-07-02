@@ -335,8 +335,13 @@ function UserDashboard({ session }) {
                                         </form>
                                     ) : (
                                         <>
-                                            <h4 className="text-lg font-semibold mb-2">{post.title}</h4>
-                                            <p className="text-gray-600 mb-2">{post.content}</p>
+                                            <h4 className="text-lg font-semibold mb-2">Title:{post.title}</h4>
+                                            <p className="text-gray-600 mb-2">Content: {post.content}</p>
+                                            <p className="text-gray-600 mb-2">{post.contactInfo}</p>
+                                            {post.image && (
+                                                <img src={post.image} alt={post.title} className="mt-4 rounded-md"
+                                                    style={{ maxWidth: '100%', height: 'auto' }} />
+                                            )}
                                             <div className="absolute bottom-4 left-4 flex space-x-2">
                                                 <button
                                                     onClick={() => setEditPost(post)}
