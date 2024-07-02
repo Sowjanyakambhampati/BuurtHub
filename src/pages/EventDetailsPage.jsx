@@ -33,20 +33,20 @@ const EventDetailsPage = () => {
       <p className="text-gray-600 mb-2">Date: {new Date(event.date).toLocaleDateString()}</p>
       <p className="text-gray-600 mb-2">Time: {event.time}</p>
       <p className="text-gray-600 mb-2">City: {event.city}</p>
-      <p className="text-gray-600 mb-2">Location: {event.location.address}</p>
+      <p className="text-gray-600 mb-2">Location: {event.locationUrl}</p>
       <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
       <p className="text-gray-600 mb-2">Price: {event.price}</p>
       <p className="text-gray-600 mb-2">Category: {event.category}</p>
       {event.image && (
         <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
       )}
-      <div className="mt-4">
-        {hasLocation ? (
-          <GoogleMap latitude={location.lat} longitude={location.lng} />
-        ) : (
-          <p>Location information is not available.</p>
-        )}
-      </div>
+      {/*<div className="mt-4">*/}
+      {/*  {hasLocation ? (*/}
+      {/*    <GoogleMap latitude={location.lat} longitude={location.lng} />*/}
+      {/*  ) : (*/}
+      {/*    <p>Location information is not available.</p>*/}
+      {/*  )}*/}
+      {/*</div>*/}
     </div>
   );
 };

@@ -95,7 +95,7 @@ function UserCityPage() {
                   <p className="text-gray-600 mb-2">{event.price}</p>
                   <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
                   <p className="text-gray-600 mb-2">{new Date(event.time).toLocaleTimeString()}</p>
-                  <p className="text-gray-600 mb-2">{event.location}</p>
+                  <p className="text-gray-600 mb-2">{event.locationUrl}</p>
                 </div>
               ))
             ) : (
