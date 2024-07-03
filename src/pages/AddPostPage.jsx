@@ -63,7 +63,7 @@ function AddPostPage() {
     formData.append('createdAt', post.createdAt);
     formData.append('contactInfo', post.contactInfo);
 
-    axios.post(`${API_URL}/posts`, formData, {
+    axios.post(`https://community-forum-backend.adaptable.app/posts`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
