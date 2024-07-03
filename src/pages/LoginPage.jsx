@@ -13,7 +13,8 @@ function LogInPage() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const redirectTo = location.state?.from || '/';
+    //const redirectTo = location.state?.from || '/';
+    //const redirectTo = ${process.env.HOME_URL};
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ function LogInPage() {
         if (error) {
             setError(error.message);
         } else {
-            navigate(redirectTo);
+            navigate(`${process.env.HOME_URL}`);
         }
         setLoading(false);
     };
@@ -41,7 +42,7 @@ function LogInPage() {
             console.error('Error signing in with Google:', error.message);
             setError(error.message);
         } else {
-            navigate(redirectTo); // Navigate to your dashboard or desired route
+            navigate(`${process.env.HOME_URL}`); // Navigate to your dashboard or desired route
         }
     };
     return (
