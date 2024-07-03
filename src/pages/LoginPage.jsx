@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import {supabase} from '../supabaseClient';
+import {useNavigate, useLocation, Link} from 'react-router-dom';
+import {Auth} from "@supabase/auth-ui-react";
+
+import GoogleButton from 'react-google-button'
+
 
 function LogInPage() {
     const [email, setEmail] = useState('');
@@ -15,7 +19,7 @@ function LogInPage() {
         e.preventDefault();
         setLoading(true);
 
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const {data, error} = await supabase.auth.signInWithPassword({
             email,
             password,
         });
@@ -30,21 +34,21 @@ function LogInPage() {
 
 
     const handleGoogleSignIn = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
-          provider: 'google',
+        const {error} = await supabase.auth.signInWithOAuth({
+            provider: 'google',
         });
         if (error) {
-          console.error('Error signing in with Google:', error.message);
+            console.error('Error signing in with Google:', error.message);
+            setError(error.message);
         } else {
-          navigate('/dashboard'); // Navigate to your dashboard or desired route
+            navigate('/dashboard'); // Navigate to your dashboard or desired route
         }
-      };
-
+    };
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+                    <img src="/logo.png" alt="Logo" className="h-16 w-auto"/>
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-center">Log In Here</h1>
@@ -78,29 +82,46 @@ function LogInPage() {
                     </button>
                 </form>
                 <p className="text-center mt-4 text-gray-600">
-                    Don't have an account yet? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up here</Link>
+                    Don't have an account yet? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up
+                    here</Link>
                 </p>
+
+                <div className="flex justify-center w-full mt-4">
+                    <GoogleButton
+                        className="text-center mr-4"
+                        onClick={handleGoogleSignIn}
+                    />
+                </div>
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             </div>
-
-            <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      {/* <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="flex justify-center mb-4">
-          <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold mb-4 text-center">Log In</h1>
-        </div>
-        <button
-          onClick={handleGoogleSignIn}
-          className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        >
-          Sign In with Google
-        </button>
-      </div> */}
-    </div>
         </div>
     );
 }
 
+
+// function  LogInPage(){
+//     const navigate = useNavigate();
+//     supabase.auth.onAuthStateChange(async (event) => {
+//         if (event !== 'SIGNED_OUT') {
+//             navigate('/dashboard');
+//         } else {
+//             navigate('/login');
+//         }
+//     });
+//
+//     return(
+//       <div className="App">
+//           <header className={"App-header"}>
+//               <Auth
+//                   supabaseClient={supabase}
+//                   providers={['google']}
+//                   />
+//
+//           </header>
+//
+//       </div>
+//     );
+//
+// }
+//
 export default LogInPage;

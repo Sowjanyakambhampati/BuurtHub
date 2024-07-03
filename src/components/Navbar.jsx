@@ -2,29 +2,25 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import '../Navbar.css';
 import {supabase} from '../supabaseClient';
-import { FaUserCircle } from 'react-icons/fa';
+import {FaUserCircle} from 'react-icons/fa';
 
 function NavBar() {
     const [user, setUser] = useState(null);
     const [userName, setUserName] = useState('');
     const [userPicture, setUserPicture] = useState('');
 
+
     useEffect(() => {
         const session = supabase.auth.getSession();
-        const userData = supabase.auth.getUser();
         if (session && session.user) {
             setUser(session.user);
-            setUserName(session.user.user_metadata.fullName);
+            setUserName(session.user.user_metadata.fullName || session.user.user_metadata.name);
             setUserPicture(session.user.user_metadata.picture)
-            console.log("Session:: " + session);
-        }
-        if (userData && userData.user) {
-            console.log("USER ID:: " + userData.user.fullName);
         }
         supabase.auth.onAuthStateChange((_event, session) => {
             if (session && session.user) {
                 setUser(session.user);
-                setUserName(session.user.user_metadata.fullName);
+                setUserName(session.user.user_metadata.fullName || session.user.user_metadata.name);
                 setUserPicture(session.user.user_metadata.picture);
             } else {
                 setUser(null);
@@ -44,11 +40,13 @@ function NavBar() {
             <div className="navbar-buttons">
                 {user ? (
                     <>
-                    {userPicture && (
-                            <img src={userPicture} alt="User" className="navbar-user-picture" />
+
+                        <p>Hello!  {userName} </p>
+                        {userPicture && (
+                            <img src={userPicture} alt="User" className="w-6 h-6 transition-all duration-300 group-hover:text-brand-600 " />
                         )}
-                        <p>Hello {userName}</p>
-                        <Link to="/dashboard" className="navbar-button"><FaUserCircle className="w-6 h-6 transition-all duration-300 group-hover:text-brand-600 " /></Link>
+                        <Link to="/dashboard" className="navbar-button"><FaUserCircle
+                            className="w-6 h-6 transition-all duration-300 group-hover:text-brand-600 "/></Link>
                         <Link to="/" onClick={() => supabase.auth.signOut()}
                               className="navbar-button">Logout</Link>
                     </>
@@ -62,4 +60,5 @@ function NavBar() {
         </nav>
     );
 }
+
 export default NavBar;
