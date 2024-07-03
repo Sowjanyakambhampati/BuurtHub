@@ -5,6 +5,9 @@ import { useLocation,  useNavigate, Navigate } from 'react-router-dom';
 import { CityContext } from '../context/CityContext';
 import SideNav from '../components/SideNav';
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 function AddPostPage() {
   const location = useLocation();
   const session = location.state?.session;
@@ -60,7 +63,7 @@ function AddPostPage() {
     formData.append('createdAt', post.createdAt);
     formData.append('contactInfo', post.contactInfo);
 
-    axios.post(process.env.REACT_APP_API_URL`/posts`, formData, {
+    axios.post(`${API_URL}/posts`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
