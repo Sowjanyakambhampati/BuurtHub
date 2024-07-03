@@ -60,7 +60,7 @@ function AddPostPage() {
     formData.append('createdAt', post.createdAt);
     formData.append('contactInfo', post.contactInfo);
 
-    axios.post(`${process.env.REACT_APP_API_URL}/posts`, formData, {
+    axios.post(process.env.REACT_APP_API_URL`/posts`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
