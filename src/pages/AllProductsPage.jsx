@@ -3,6 +3,9 @@ import axios from 'axios';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import SideNav from '../components/SideNav';
 import {CityContext} from '../context/CityContext';
+import { IoIosPricetags } from "react-icons/io";
+import { TbBox } from "react-icons/tb";
+import { MdCategory } from "react-icons/md";
 
 function AllProductsPage({ session }) {
     const {selectedCity} = useContext(CityContext);
@@ -52,7 +55,6 @@ function AllProductsPage({ session }) {
                 <SideNav/>
             </div>
 
-            {/* <p>User ID: {user.id}</p> */}
             <div className="w-3/4 p-4">
                 <h2 className="text-2xl font-bold mb-4">All Items For Sale In {selectedCity}</h2>
                 <div className="flex mb-4 gap-2">
@@ -101,15 +103,16 @@ function AllProductsPage({ session }) {
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
                             <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} key={product._id} state={{ session }}
-                                  className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                                  className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between text-black">
                                 <div>
-                                    <img className="w-full h-40 object-cover mb-2" src={product.image}
+                                    <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image}
                                          alt={product.productName}/>
-                                    <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
-                                    <p className="text-gray-600 mb-2">€{product.price}</p>
-                                    <p className="text-gray-600 mb-2">{product.productOwner}</p>
-                                    <p className="text-gray-600 mb-2">{product.category}</p>
-                                    <p className="text-gray-600 mb-2">{product.condition}</p>
+                                    <h3 className="text-xl font-semibold mb-2 text-left">{product.productName}</h3>
+                                    <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
+                                    {/* <p className="text-gray-600 mb-2">{product.productOwner}</p> */}
+                                    <p className="flex text-gray-600 mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
+                                    
                                 </div>
                             </Link>
                         ))

@@ -4,6 +4,11 @@ import { useParams, useLocation, Navigate, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SideNav from '../components/SideNav';
+import { IoIosPricetags } from "react-icons/io";
+import { TbBox } from "react-icons/tb";
+import { MdCategory } from "react-icons/md";
+import { BsFillInfoCircleFill } from "react-icons/bs";
+import { FaUserPlus } from "react-icons/fa";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -64,14 +69,15 @@ const ProductDetailsPage = () => {
           <h2 className="text-3xl font-bold mb-4">{product.productName}</h2>
           <div className="flex">
             <div className="w-1/3">
-              <img className="w-full h-100 object-cover mb-4" src={product.image} alt={product.productName}/>
+              <img className="w-full h-100 object-cover mb-8 rounded-lg -4" src={product.image} alt={product.productName}/>
             </div>
-            <div className="w-2/3 pl-4">
-              <p className="text-gray-600 mb-4">{product.description}</p>
-              <p className="text-gray-600 mb-2">Price: €{product.price}</p>
-              <p className="text-gray-600 mb-2">Owner: {product.productOwner}</p>
-              <p className="text-gray-600 mb-2">Category: {product.category}</p>
-              <p className="text-gray-600 mb-2">Condition: {product.condition}</p>
+            <div className="w-2/3 pl-4 m-8">
+              <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
+              <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
+              <p className=" flex text-gray-600 mb-2 text-left"><FaUserPlus className = "m-1"/>Owner: {product.productOwner}</p>
+              <p className="flex text-gray-600 mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
+              <p className="flex text-gray-600 mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
+              
               <button
                   className={`mt-4 px-4 py-2 rounded-md ${product.reservedById ? 'bg-gray-500' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
                   onClick={handleReserveClick}

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import '../Navbar.css';
 import {supabase} from '../supabaseClient';
+import { FaUserCircle } from 'react-icons/fa';
 
 function NavBar() {
     const [user, setUser] = useState(null);
@@ -46,8 +47,8 @@ function NavBar() {
                     {userPicture && (
                             <img src={userPicture} alt="User" className="navbar-user-picture" />
                         )}
-                        <p>Welcome,{userName}</p>
-                        <Link to="/dashboard" className="navbar-button">Dashboard</Link>
+                        <p>Hello {userName}</p>
+                        <Link to="/dashboard" className="navbar-button"><FaUserCircle className="w-6 h-6 transition-all duration-300 group-hover:text-brand-600 " /></Link>
                         <Link to="/" onClick={() => supabase.auth.signOut()}
                               className="navbar-button">Logout</Link>
                     </>
