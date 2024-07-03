@@ -48,7 +48,7 @@ function UserDashboard({ session }) {
     useEffect(() => {
         const fetchUserPosts = async () => {
             try {
-                const response = await axios.get(`http://localhost:5005/posts/postauthor/${user.id}`);
+                const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/postauthor/${user.id}`);
                 setUserPosts(response.data);
             } catch (error) {
                 console.error('Failed to fetch posts', error);
@@ -93,7 +93,7 @@ function UserDashboard({ session }) {
     const handlePostEditSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:5005/posts/postauthor/${editPost._id}`, editPost);
+            const response = await axios.put(`hhttps://community-forum-backend.adaptable.app/posts/postauthor/${editPost._id}`, editPost);
             toast.success('Post updated successfully');
             setUserPosts(prevPosts =>
                 prevPosts.map(post =>
@@ -120,7 +120,7 @@ function UserDashboard({ session }) {
 
     const handlePostDelete = async (postId) => {
         try {
-            await axios.delete(`http://localhost:5005/posts/postauthor/${postId}`);
+            await axios.delete(`https://community-forum-backend.adaptable.app/posts/postauthor/${postId}`);
             toast.success('Post deleted successfully');
             setUserPosts(prevPosts => prevPosts.filter(post => post._id !== postId));
         } catch (error) {
