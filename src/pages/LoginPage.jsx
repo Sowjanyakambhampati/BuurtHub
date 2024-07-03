@@ -41,7 +41,7 @@ function LogInPage() {
             console.error('Error signing in with Google:', error.message);
             setError(error.message);
         } else {
-            navigate('/dashboard'); // Navigate to your dashboard or desired route
+            navigate(redirectTo); // Navigate to your dashboard or desired route
         }
     };
     return (
