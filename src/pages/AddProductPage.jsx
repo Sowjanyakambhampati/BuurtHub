@@ -99,7 +99,7 @@ function AddProductPage() {
       <div>
         <h2 className="text-2xl font-semibold mb-6">Add New Product Listing Here</h2>
 
-        <p>User ID: {user.id}</p>
+        {/* <p>User ID: {user.id}</p> */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <label htmlFor="city" className="block text-sm font-medium text-gray-700 text-left">City:</label>

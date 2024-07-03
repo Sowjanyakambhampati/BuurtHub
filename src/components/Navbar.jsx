@@ -6,6 +6,7 @@ import {supabase} from '../supabaseClient';
 function NavBar() {
     const [user, setUser] = useState(null);
     const [userName, setUserName] = useState('');
+    const [userPicture, setUserPicture] = useState('');
 
     useEffect(() => {
         const session = supabase.auth.getSession();
@@ -13,6 +14,7 @@ function NavBar() {
         if (session && session.user) {
             setUser(session.user);
             setUserName(session.user.user_metadata.fullName);
+            setUserPicture(session.user.user_metadata.picture)
             console.log("Session:: " + session);
         }
         if (userData && userData.user) {
@@ -22,9 +24,11 @@ function NavBar() {
             if (session && session.user) {
                 setUser(session.user);
                 setUserName(session.user.user_metadata.fullName);
+                setUserPicture(session.user.user_metadata.picture);
             } else {
                 setUser(null);
                 setUserName('');
+                setUserPicture('');
             }
         });
     }, []);
@@ -39,8 +43,12 @@ function NavBar() {
             <div className="navbar-buttons">
                 {user ? (
                     <>
+                    {userPicture && (
+                            <img src={userPicture} alt="User" className="navbar-user-picture" />
+                        )}
                         <p>Welcome,{userName}</p>
-                        <Link to="/login" onClick={() => supabase.auth.signOut()}
+                        <Link to="/dashboard" className="navbar-button">Dashboard</Link>
+                        <Link to="/" onClick={() => supabase.auth.signOut()}
                               className="navbar-button">Logout</Link>
                     </>
                 ) : (

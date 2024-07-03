@@ -92,7 +92,7 @@ function AddPostPage() {
       </div>
       <div className="w-3/4 p-4">
         <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
-        <p>User ID: {user.id}</p>
+        {/* <p>User ID: {user.id}</p> */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* <div className="grid grid-cols-2 gap-4">
             <label htmlFor="id" className="block text-sm font-medium text-gray-700 text-left">ID:</label>
