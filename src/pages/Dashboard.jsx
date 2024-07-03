@@ -4,6 +4,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext';
+import { IoIosPricetags } from "react-icons/io";
+import { TbBox } from "react-icons/tb";
+import { MdCategory } from "react-icons/md";
+import { BsFillInfoCircleFill } from "react-icons/bs";
+import { FaUserPlus } from "react-icons/fa";
 
 function UserDashboard({ session }) {
     const [userProducts, setUserProducts] = useState([]);
@@ -219,26 +224,26 @@ function UserDashboard({ session }) {
                                             </button>
                                         </form>
                                     ) : (
-                                        <>
-                                            <h4 className="text-lg font-semibold mb-2">{product.productName}</h4>
-                                            <p className="text-gray-600 mb-2">Price: €{product.price}</p>
-                                            <p className="text-gray-600 mb-2">Description: {product.description}</p>
-                                            <p className="text-gray-600 mb-2">Category: {product.category}</p>
-                                            <p className="text-gray-600 mb-2">Condition: {product.condition}</p>
-                                            {product.image && (
-                                                <img src={product.image} alt={product.productName} className="mt-4 rounded-md"
+                                        <>{product.image && (
+                                                <img src={product.image} alt={product.productName} className="mt-4 rounded-lg "
                                                     style={{ maxWidth: '100%', height: 'auto' }} />
                                             )}
-                                            <div className="absolute bottom-4 left-4 flex space-x-2">
+                                            <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
+                                            <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
+                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+                                            
+                                            <div className="bottom-4 left-4 flex space-x-2">
                                                 <button
                                                     onClick={() => setEditProduct(product)}
-                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(product._id)}
-                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                                 >
                                                     Delete
                                                 </button>
@@ -259,15 +264,16 @@ function UserDashboard({ session }) {
                         {reservedProducts.length > 0 ? (
                             reservedProducts.map(product => (
                                 <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h4 className="text-lg font-semibold mb-2">{product.productName}</h4>
-                                    <p className="text-gray-600 mb-2">Price: €{product.price}</p>
-                                    <p className="text-gray-600 mb-2">Description: {product.description}</p>
-                                    <p className="text-gray-600 mb-2">Category: {product.category}</p>
-                                    <p className="text-gray-600 mb-2">Condition: {product.condition}</p>
-                                    {product.image && (
+                                {product.image && (
                                         <img src={product.image} alt={product.productName} className="mt-4 rounded-md"
                                             style={{ maxWidth: '100%', height: 'auto' }} />
                                     )}
+                                    <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
+                                    <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
+                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+                                    
                                 </div>
                             ))
                         ) : (
