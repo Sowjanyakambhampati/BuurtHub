@@ -20,6 +20,19 @@ function UserDashboard({ session }) {
     const { selectedCity } = useContext(CityContext);
 
     const { user } = session;
+    useEffect(() => {
+        const fetchRegisteredEvents = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5005/event/registeredevents/${user.id}`);
+                setRegisteredEvents(response.data);
+            } catch (error) {
+                console.error('Failed to fetch events', error);
+            }
+        };
+        fetchRegisteredEvents();
+    }, [user.id]);
+    
+
 
     useEffect(() => {
         const fetchUserProducts = async () => {
@@ -287,11 +300,16 @@ function UserDashboard({ session }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {registeredEvents.length > 0 ? (
                             registeredEvents.map(event => (
-                                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h4 className="text-lg font-semibold mb-2">{event.name}</h4>
-                                    <p className="text-gray-600 mb-2">{event.date}</p>
-                                    <p className="text-gray-600 mb-2">{event.location}</p>
-                                </div>
+                                <div key={event._id} className="border p-4 rounded">
+              <h3 className="text-xl font-bold">{event.title}</h3>
+              <p className="text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
+              <p className="text-gray-600">{event.description}</p>
+              <p className="text-gray-600">{event.city}</p>
+              <p className="text-gray-600">{event.address}</p>
+              <p className="text-gray-600">{event.category}</p>
+              <p className="text-gray-600">{event.price}</p>
+              <a href={event.locationUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500">View Location</a>
+            </div>
                             ))
                         ) : (
                             <p>No registered events.</p>
