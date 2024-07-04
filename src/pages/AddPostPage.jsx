@@ -6,7 +6,7 @@ import { CityContext } from '../context/CityContext';
 import SideNav from '../components/SideNav';
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+// const API_URL = process.env.REACT_APP_API_URL;
 
 function AddPostPage() {
   const location = useLocation();
