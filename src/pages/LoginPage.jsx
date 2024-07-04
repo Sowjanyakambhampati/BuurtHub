@@ -13,7 +13,7 @@ function LogInPage() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    //const redirectTo = location.state?.from || '/';
+    const redirectTo = location.state?.from || '/';
     //const redirectTo = ${process.env.HOME_URL};
 
     const handleLogin = async (e) => {
@@ -28,7 +28,8 @@ function LogInPage() {
         if (error) {
             setError(error.message);
         } else {
-            navigate(`${process.env.HOME_URL}`);
+            navigate(redirectTo);
+            navigate(redirectTo);
         }
         setLoading(false);
     };

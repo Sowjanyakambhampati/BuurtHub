@@ -64,12 +64,13 @@ function AddEventPage() {
       formData.append("location[type]", "Point");
       formData.append("location[coordinates][latitude]", event.location.coordinates.latitude);
       formData.append("location[coordinates][longitude]", event.location.coordinates.longitude);
+      formData.append("address", event.address);
       formData.append("image", event.image);
       formData.append("description", event.description);
       formData.append("organiser", event.organiser);
       formData.append("category", event.category);
       formData.append("price", event.price);
-      await axios.post('https://community-forum-backend.adaptable.app/event', formData, {
+      await axios.post('http://localhost:5005/event', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

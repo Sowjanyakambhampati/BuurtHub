@@ -29,6 +29,19 @@ const EventDetailsPage = () => {
     };
     fetchEventDetails();
   }, [eventId, session]);
+
+  const handleRegister = async () => {
+    try {
+      await axios.post('http://localhost:5005/event/register', {
+        userId: session.userId,
+        eventId
+      });
+      toast.success('Successfully registered for the event');
+    } catch (error) {
+      console.error('Failed to register for event', error);
+      toast.error('Failed to register for event');
+    }
+  };
   if (!session) {
     return <Navigate to="/login" />;
   }
@@ -51,23 +64,24 @@ const EventDetailsPage = () => {
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
-        <h2 className="text-3xl font-bold mb-4">{title}</h2>
+        <h2 className="text-3xl font-bold mb-4">{event.title}</h2>
         <div className="flex">
           <div className="w-1/3">
-            {image && (
-              <img className="w-full h-100 object-cover mb-4" src={image} alt={title} />
+            {event.image && (
+              <img className="w-full h-100 object-cover mb-4" src={event.image} alt={event.title} />
             )}
           </div>
           <div className="w-2/3 pl-4">
-            <p className="text-gray-600 mb-4">{description}</p>
-            <p className="text-gray-600 mb-2">Date: {new Date(date).toLocaleDateString()}</p>
-            <p className="text-gray-600 mb-2">Time: {time}</p>
-            <p className="text-gray-600 mb-2">City: {city}</p>
-            <p className="text-gray-600 mb-2">Address: {address}</p>
-            <p className="text-gray-600 mb-2">Location: <a href={locationUrl} target="_blank" rel="noopener noreferrer">{locationUrl}</a></p>
-            <p className="text-gray-600 mb-2">Organiser: {organiser}</p>
-            <p className="text-gray-600 mb-2">Price: {price}</p>
-            <p className="text-gray-600 mb-2">Category: {category}</p>
+            <p className="text-gray-600 mb-4">{event.description}</p>
+            <p className="text-gray-600 mb-2">Date: {new Date(event.date).toLocaleDateString()}</p>
+            <p className="text-gray-600 mb-2">Time: {event.time}</p>
+            <p className="text-gray-600 mb-2">City: {event.city}</p>
+            <p className="text-gray-600 mb-2">Address: {event.address}</p>
+            <p className="text-gray-600 mb-2">Location: <a href={event.locationUrl} target="_blank" rel="noopener noreferrer">{event.locationUrl}</a></p>
+            <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
+            <p className="text-gray-600 mb-2">Price: {event.price}</p>
+            <p className="text-gray-600 mb-2">Category: {event.category}</p>
+            <button onClick={handleRegister} className="bg-blue-500 text-white p-2 rounded-md">Register</button>
           </div>
         </div>
       </div>
