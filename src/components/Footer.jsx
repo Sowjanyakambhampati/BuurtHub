@@ -4,11 +4,11 @@ import { SocialIcon } from 'react-social-icons';
 
 export default function Footer() {
     return (
-        <footer className="w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 bg-black w p-6  md:p-8 lg:p-10 text-white font-body">
+        <footer className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 bg-firstcolor p-6 md:p-8 lg:p-10 text-white font-body">
             
-            <div className=" p-3 md:p-0  ">
+            <div className="p-3">
                 <div className="text-mini">
-                    <p className="font-bold mb-3  flex items-center">
+                    <p className="font-bold mb-3 flex items-center">
                         <span className="mr-2 w-5 h-5">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +21,9 @@ export default function Footer() {
                         </span>
                         Address
                     </p>
-                    <p className="mb-1 text-left">AB Crescent 4,</p>
-                    <p className="mb-1 text-left">9852 AB,</p>
-                    <p className="mb-1 text-left">Amsterdam</p>
+                    <p className="mb-1 text-left">AB Lincolnstraat 4</p>
+                    <p className="mb-1 text-left">6852 AB, Amsterdam</p>
+                    
                 </div>
             </div>
 
@@ -55,7 +55,7 @@ export default function Footer() {
                     </span>
                     <span>info@buurthub.nl</span>
                 </div>
-                <div className=" md:col-span-2 lg:col-span-1  mt-8  items-center  space-x-5  ">
+                <div className="mt- flex items-center space-x-3">
                     <SocialIcon url="https://x.com" target="_blank" rel="noopener noreferrer" fgColor="#ffffff" />
                     <SocialIcon url="https://facebook.com" target="_blank" rel="noopener noreferrer" fgColor="#ffffff" />
                     <SocialIcon url="https://instagram.com" target="_blank" rel="noopener noreferrer" fgColor="#ffffff" />
@@ -64,17 +64,22 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="md:col-span-2 lg:col-span-1 flex justify-end items-right mt-5 lg:mt-0">
-                <div className="flex space-x-6">
-                <ul className="list-none space-y-2">
+            <div className="md:col-span-2 lg:col-span-1 flex flex-col space-y-2">
+                <h3 className="font-bold mb-3 text-left">Useful Links</h3>
+                <ul className="list-none space-y-2 text-left">
                     <li><Link to="/about" className="text-white hover:text-indigo-400">About Us</Link></li>
                     <li><Link to="/signup" className="text-white hover:text-indigo-400">Sign Up</Link></li>
                     <li><Link to="/login" className="text-white hover:text-indigo-400">Log In</Link></li>
-                    <li><Link to="/terms-of-service" className="text-white hover:text-indigo-400">Terms of Service</Link></li>
-                    <li><Link to="/help" className="text-white hover:text-indigo-400">Help</Link></li>
-                    <li><Link to="/privacy-policy" className="text-white hover:text-indigo-400">Privacy Policy</Link></li>
                 </ul>
             </div>
+
+            <div className="md:col-span-2 lg:col-span-1 flex flex-col space-y-2">
+                <h3 className="font-bold mb-3 text-left">Legal</h3>
+                <ul className="list-none space-y-2 text-left">
+                    <li><Link to="/terms-of-service" className="text-white hover:text-indigo-400">Terms of Service</Link></li>
+                    <li><Link to="/FAQ" className="text-white hover:text-indigo-400">FAQ</Link></li>
+                    <li><Link to="/privacy-policy" className="text-white hover:text-indigo-400">Privacy Policy</Link></li>
+                </ul>
             </div>
         </footer>
     );

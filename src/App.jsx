@@ -20,6 +20,9 @@ import AllPostsPage from './pages/AllPostsPage';
 import EventDetailsPage from './pages/EventDetailsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import AboutUs from './pages/AboutUs';
+import TermsOfService from './pages/Terms';
+import FAQPage from './pages/FAQ';
+import PrivacyPolicyPage from './pages/Privacy';
 import { CityProvider } from './context/CityContext';
 import { supabase } from './supabaseClient';
 
@@ -42,6 +45,12 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/signup' element={<SignUpPage />} />
+                <Route path='/about' element={<AboutUs />} />
+                <Route path='/terms-of-service' element={<TermsOfService />} />
+                <Route path='/FAQ' element={<FAQPage />} />
+                <Route path='/privacy-policy' element={<PrivacyPolicyPage />} />
+                
+                
                 {session ? (
                     <>
                         <Route path='/dashboard' element={<Dashboard key={session.user.id} session={session} />} />
@@ -57,7 +66,7 @@ function App() {
                         <Route path='/city' element={<CitySelection />} />
                         <Route path='/city/:city' element={<UserCityPage key={session.user.id} session={session}/>} />
                         <Route path='/all-posts/city/:city' element={<AllPostsPage key={session.user.id} session={session} />} />
-                        <Route path='/about' element={<AboutUs />} />
+                        
                         <Route path='*' element={<div>404 Page Not Found 😞</div>} />
                     </>
                 ) : (

@@ -21,7 +21,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <div className="bg-gray-100 py-8">
+    <div className="text-firstcolor py-8">
       <div className="text-center py-4">
         <h1 className="text-3xl font-bold mb-4">What Users Say About BuurtHub</h1>
       </div>
