@@ -7,11 +7,11 @@ export default {
         darkslategray: "#353331",
         black: "#000",
         gainsboro: "#d9d9d9",
-        firstcolor: "#ffaaaa",
-        secondcolor: "#52373a",
-        thirdcolor: "#c7004c",
-        fourthcolor: "#ae7279",
-        fifthcolor: "#a790ac"
+        firstcolor: "#024959",
+        secondcolor: "#D9851E",
+        thirdcolor: "#F27830",
+        fourthcolor: "#F20505",
+        fifthcolor: "#C4B7AE"
 
       },
       fontSize: {

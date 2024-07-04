@@ -1,10 +1,7 @@
-import React, {useState} from 'react';
-import {supabase} from '../supabaseClient';
-import {useNavigate, useLocation, Link} from 'react-router-dom';
-import {Auth} from "@supabase/auth-ui-react";
-
-import GoogleButton from 'react-google-button'
-
+import React, { useState } from 'react';
+import { supabase } from '../supabaseClient';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
 
 function LogInPage() {
     const [email, setEmail] = useState('');
@@ -13,14 +10,13 @@ function LogInPage() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    //const redirectTo = location.state?.from || '/';
-    //const redirectTo = ${process.env.HOME_URL};
+    const redirectTo = location.state?.from || '/';
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const {data, error} = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
         });
@@ -28,28 +24,32 @@ function LogInPage() {
         if (error) {
             setError(error.message);
         } else {
-            navigate(`${process.env.HOME_URL}`);
+            navigate(redirectTo);
         }
         setLoading(false);
     };
 
-
     const handleGoogleSignIn = async () => {
-        const {error} = await supabase.auth.signInWithOAuth({
+        const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
         });
         if (error) {
             console.error('Error signing in with Google:', error.message);
             setError(error.message);
         } else {
-            navigate(`${process.env.HOME_URL}`); // Navigate to your dashboard or desired route
+            navigate(redirectTo); // Navigate to your dashboard or desired route
         }
     };
+
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="relative flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="absolute inset-0">
+                <div className="h-full w-full bg-center bg-cover" style={{ backgroundImage: 'url(/bg-pic.jpg)', filter: 'blur(3px)' }}></div>
+                <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Optional overlay for better contrast */}
+            </div>
+            <div className="relative bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="h-16 w-auto"/>
+                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-center">Log In Here</h1>
@@ -83,10 +83,8 @@ function LogInPage() {
                     </button>
                 </form>
                 <p className="text-center mt-4 text-gray-600">
-                    Don't have an account yet? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up
-                    here</Link>
+                    Don't have an account yet? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up here</Link>
                 </p>
-
                 <div className="flex justify-center w-full mt-4">
                     <GoogleButton
                         className="text-center mr-4"
@@ -99,30 +97,4 @@ function LogInPage() {
     );
 }
 
-
-// function  LogInPage(){
-//     const navigate = useNavigate();
-//     supabase.auth.onAuthStateChange(async (event) => {
-//         if (event !== 'SIGNED_OUT') {
-//             navigate('/dashboard');
-//         } else {
-//             navigate('/login');
-//         }
-//     });
-//
-//     return(
-//       <div className="App">
-//           <header className={"App-header"}>
-//               <Auth
-//                   supabaseClient={supabase}
-//                   providers={['google']}
-//                   />
-//
-//           </header>
-//
-//       </div>
-//     );
-//
-// }
-//
 export default LogInPage;
