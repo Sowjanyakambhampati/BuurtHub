@@ -4,7 +4,7 @@
   padding: 0;
   color: #024959;
   text-align: center;
-  background-image: url('public/main-bg.png');
+  background-image: url('main-bg.png');
   background-size: cover; /* Ensures the image covers the entire element */
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Ensures the image does not repeat */
