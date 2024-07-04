@@ -102,7 +102,7 @@ const EventDetailsPage = () => {
             <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
             <p className="text-gray-600 mb-2">Price: {event.price}</p>
             <p className="text-gray-600 mb-2">Category: {event.category}</p>
-            <button onClick={handleRegister} className="bg-blue-500 text-white p-2 rounded-md">Register
+            <button onClick={handleRegister} className="bg-secondcolor hover:bg-thirdcolor text-white p-2 rounded-md w-1/4">Register
             </button>
           </div>
         </div>

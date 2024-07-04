@@ -92,26 +92,15 @@ function AddPostPage() {
   };
 
   return (
-    <div className="mx-auto p-6 bg-white shadow-md rounded-lg flex">
-      <div className="w-1/4">
+    <div className="mx-auto p-6  shadow-md rounded-lg flex">
+      <div className="w-1/8">
         <SideNav />
       </div>
-      <div className="w-3/4 p-4">
+      <div className="w-3/4 p-4 mx-auto p-6 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
-        {/* <p>User ID: {user.id}</p> */}
+       
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* <div className="grid grid-cols-2 gap-4">
-            <label htmlFor="id" className="block text-sm font-medium text-gray-700 text-left">ID:</label>
-            <input
-              type="text"
-              id="id"
-              name="id"
-              value={post.id}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div> */}
+          
           <div className="grid grid-cols-2 gap-4">
             <label htmlFor="city" className="block text-sm font-medium text-gray-700 text-left">City:</label>
             <input
@@ -147,18 +136,7 @@ function AddPostPage() {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
           </div>
-          {/* <div className="grid grid-cols-2 gap-4">
-            <label htmlFor="postAuthor" className="block text-sm font-medium text-gray-700 text-left">Author:</label>
-            <input
-              type="text"
-              id="postAuthor"
-              name="postAuthor"
-              value={post.postAuthor}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div> */}
+          
           <div className="grid grid-cols-2 gap-4">
             <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700 text-left">Contact Info:</label>
             <input
@@ -190,12 +168,12 @@ function AddPostPage() {
               name="image"
               onChange={handleImageChange}
               accept="image/*"
-              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:text-firstcolor file:text-firstcolor hover:file:bg-sixthcolor" 
             />
           </div>
           <button
             type="submit"
-            className="w-1/4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className = "w-1/4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-secondcolor hover:bg-thirdcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fifthcolor"
           >
             Submit
           </button>

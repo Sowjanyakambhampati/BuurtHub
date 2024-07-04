@@ -297,10 +297,10 @@ function UserDashboard({ session }) {
 
                 <section className="mb-8">
                     <h3 className="text-xl font-semibold mb-2">Registered Events</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
                         {registeredEvents.length > 0 ? (
                             registeredEvents.map(event => (
-                                <div key={event._id} className="border p-4 rounded">
+                                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
                                     <h3 className="text-xl font-bold">{event.title}</h3>
                                     <p className="text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
                                     <p className="text-gray-600">{event.description}</p>

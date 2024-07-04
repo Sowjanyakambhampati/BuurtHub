@@ -40,7 +40,7 @@ const SideNav= () => {
         </button>
       </nav>
       <ul
-        className={`fixed top-0 left-0 h-full bg-white  transition-transform duration-300 z-10 ${
+        className={`fixed top-0 left-0 h-full  transition-transform duration-300 z-10 ${
           sidenavOpen ? 'translate-x-0' : '-translate-x-full'
         } md:relative md:translate-x-0 md:flex md:flex-col md:gap-2 md:p-4 md:w-1/4`}
       >
@@ -48,7 +48,7 @@ const SideNav= () => {
           <NavLink
             to={`/city/${selectedCity}`}
             onClick={() => setsidenavOpen(false)}
-            className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
+            className="flex items-center gap-3 text-firstcolor text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
             activeClassName="text-gray-800 bg-gray-50 rounded-md"
           >
             <BiHome className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
@@ -59,7 +59,7 @@ const SideNav= () => {
           <NavLink
             to={`/all-products/city/${selectedCity}`}
             onClick={() => setsidenavOpen(false)}
-            className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
+            className="flex items-center gap-3 text-firstcolor text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
             activeClassName="text-gray-800 bg-gray-50 rounded-md"
           >
             <AiOutlineProduct className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
@@ -70,7 +70,7 @@ const SideNav= () => {
           <NavLink
             to={`/all-events/city/${selectedCity}`}
             onClick={() => setsidenavOpen(false)}
-            className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
+            className="flex items-center gap-3 text-firstcolor text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
             activeClassName="text-gray-800 bg-gray-50 rounded-md"
           >
             <MdEvent className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
@@ -81,7 +81,7 @@ const SideNav= () => {
           <NavLink
             to={`/all-posts/city/${selectedCity}`}
             onClick={() => setsidenavOpen(false)}
-            className="flex items-center gap-3 text-gray-600 text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
+            className="flex items-center gap-3 text-firstcolor text-lg font-medium p-3 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:rounded-md active:text-gray-800 active:bg-gray-50 active:rounded-md"
             activeClassName="text-gray-800 bg-gray-50 rounded-md"
           >
             <IoChatboxEllipses className="w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-brand-600 group-active:text-brand-600" />
