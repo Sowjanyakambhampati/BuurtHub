@@ -3,6 +3,10 @@ import axios from 'axios';
 import SideNav from '../components/SideNav';
 import { CityContext } from '../context/CityContext';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { IoTicket } from "react-icons/io5";
+import { MdCategory } from "react-icons/md";
+import { IoIosTime } from "react-icons/io";
+import { BsCalendar2DateFill } from "react-icons/bs";
 
 function AllEventsPage({ session }) {
   const [events, setEvents] = useState([]);
@@ -84,14 +88,17 @@ function AllEventsPage({ session }) {
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} state={{ session }} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
-                <p className="text-gray-600 mb-2">{event.category}</p>
-                <p className="text-gray-600 mb-2">{event.locationUrl}</p>
-                <p className="text-gray-600 mb-2">{event.organiser}</p>
+              <p className="text-gray-600 mb-2">{event.organiser}</p>
                 {event.image && (
                   <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
                 )}
+                <h3 className="text-xl font-semibold mb-2 text-left">{event.title}</h3>
+                <span className="flex text-gray-600 mb-2 text-left"><BsCalendar2DateFill className='m-1'/>{new Date(event.date).toLocaleDateString()}</span>
+                <span className="flex text-gray-600 mb-2 text-left"><IoIosTime className="m-1"/>{event.time}</span>
+                <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{event.category}</p>
+                <p className="flex text-gray-600 mb-2 text-left"><IoTicket className='m-1'/>{event.price}</p>
+              
+                
               </Link>
             ))
           ) : (

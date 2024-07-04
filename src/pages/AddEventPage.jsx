@@ -68,6 +68,7 @@ function AddEventPage() {
       formData.append("description", event.description);
       formData.append("organiser", event.organiser);
       formData.append("category", event.category);
+      formData.append("address", event.address);
       formData.append("price", event.price);
       await axios.post('http://localhost:5005/event', formData, {
         headers: {
