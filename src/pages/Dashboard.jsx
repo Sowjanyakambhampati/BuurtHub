@@ -106,7 +106,7 @@ function UserDashboard({ session }) {
     const handlePostEditSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`hhttps://community-forum-backend.adaptable.app/posts/postauthor/${editPost._id}`, editPost);
+            const response = await axios.put(`https://community-forum-backend.adaptable.app/posts/postauthor/${editPost._id}`, editPost);
             toast.success('Post updated successfully');
             setUserPosts(prevPosts =>
                 prevPosts.map(post =>
