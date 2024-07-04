@@ -1,50 +1,43 @@
-import React, {useState} from 'react';
-import {supabase} from '../supabaseClient';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { supabase } from '../supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
-    // States for registration
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // States for checking the errors
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
     const navigate = useNavigate();
 
-    // Handling the name change
     const handleName = (e) => {
         setFullName(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the email change
     const handleEmail = (e) => {
         setEmail(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the password change
     const handlePassword = (e) => {
         setPassword(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the confirm password change
     const handleConfirmPassword = (e) => {
         setConfirmPassword(e.target.value);
         setSubmitted(false);
     };
 
-    // Handling the form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (name === "" || email === "" || password === "" || confirmPassword === "") {
+        if (fullName === "" || email === "" || password === "" || confirmPassword === "") {
             setError(true);
             setPasswordError(false);
         } else if (password !== confirmPassword) {
@@ -57,7 +50,6 @@ function SignUpPage() {
         }
     };
 
-    // Showing success message
     const successMessage = () => {
         return (
             <div
@@ -66,12 +58,11 @@ function SignUpPage() {
                     display: submitted ? "" : "none",
                 }}
             >
-                <h1>User {name} successfully registered!!</h1>
+                <h1>User {fullName} successfully registered!!</h1>
             </div>
         );
     };
 
-    // Showing error message if error is true
     const errorMessage = () => {
         return (
             <div
@@ -85,7 +76,6 @@ function SignUpPage() {
         );
     };
 
-    // Showing password error message if passwords do not match
     const passwordErrorMessage = () => {
         return (
             <div
@@ -99,12 +89,11 @@ function SignUpPage() {
         );
     };
 
-
     const handleSignUp = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const {data, error} = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
@@ -126,16 +115,19 @@ function SignUpPage() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="relative flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="absolute inset-0">
+                <div className="h-full w-full bg-center bg-cover" style={{ backgroundImage: 'url(/bg-pic.jpg)', filter: 'blur(3px)' }}></div>
+                <div className="absolute inset-0 bg-gray-900 opacity-50"></div> {/* Optional overlay for better contrast */}
+            </div>
+            <div className="relative bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="h-16 w-auto"/>
+                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-center">Sign Up Here</h1>
                 </div>
 
-                {/* Calling to the methods */}
                 <div className="messages">
                     {errorMessage()}
                     {passwordErrorMessage()}
@@ -143,7 +135,6 @@ function SignUpPage() {
                 </div>
 
                 <form onSubmit={handleSignUp}>
-                    {/* Labels and inputs for form data */}
                     <div className="mb-4">
                         <label className="block text-gray-700">Username</label>
                         <input
@@ -185,7 +176,6 @@ function SignUpPage() {
                     </div>
 
                     <button
-                        // onClick={handleSubmit}
                         className="w-full px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
                         type="submit"
                     >
