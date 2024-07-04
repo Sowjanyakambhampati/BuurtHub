@@ -1,5 +1,7 @@
+// HomePage.js
 import React from 'react';
 import CitySelection from '../components/CitySelection';
+import Testimonials from '../components/Testimonials';
 
 function HomePage() {
   return (
@@ -32,6 +34,7 @@ function HomePage() {
           <p className="mt-2"><b>BuurtHub</b> provides a convenient marketplace to buy, sell, give away items, and offer or request services, fostering recycling, savings, and local economic support.</p>
         </section>
       </div>
+      <Testimonials />
       <div className="text-center py-8">
         <h1 className="text-3xl font-bold mb-4">How BuurtHub Works</h1>
       </div>
