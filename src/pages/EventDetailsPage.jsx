@@ -4,7 +4,8 @@ import { useParams, useLocation, Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SideNav from '../components/SideNav';
-import GoogleMap from '../components/GoogleMap'; // Assuming you have a GoogleMap component
+
+
 const EventDetailsPage = () => {
   const { eventId } = useParams();
   const location = useLocation();
@@ -63,13 +64,13 @@ const EventDetailsPage = () => {
             <p className="text-gray-600 mb-2">Date: {new Date(date).toLocaleDateString()}</p>
             <p className="text-gray-600 mb-2">Time: {time}</p>
             <p className="text-gray-600 mb-2">City: {city}</p>
-            <p className="text-gray-600 mb-2">Address: {address}</p>
-            <p className="text-gray-600 mb-2">Location: <a href={locationUrl} target="_blank" rel="noopener noreferrer">{locationUrl}</a></p>
+            <p className="text-gray-600 mb-2">Location: <a href={locationUrl} target="_blank" rel="noopener noreferrer">{address}</a></p>
             <p className="text-gray-600 mb-2">Organiser: {organiser}</p>
             <p className="text-gray-600 mb-2">Price: {price}</p>
             <p className="text-gray-600 mb-2">Category: {category}</p>
           </div>
         </div>
+        <button> Register</button>
       </div>
     </div>
   );
