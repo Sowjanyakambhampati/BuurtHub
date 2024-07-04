@@ -63,7 +63,7 @@ function AllEventsPage({ session }) {
             onChange={e => setSearchTerm(e.target.value)}
             className="w-3/4 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
           />
-          <Link to={`/city/${selectedCity}/add-event`} state={{ session }} className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          <Link to={`/city/${selectedCity}/add-event`} state={{ session }} className="mt-auto bg-secondcolor hover:bg-thirdcolor text-white px-4 py-2 rounded-md">
             Add New Event
           </Link>
         </div>
@@ -88,15 +88,15 @@ function AllEventsPage({ session }) {
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} state={{ session }} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <p className="text-gray-600 mb-2">{event.organiser}</p>
+                <p className="text-firstcolor mb-2">{event.organiser}</p>
                 {event.image && (
                   <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
                 )}
                 <h3 className="text-xl font-semibold mb-2 text-left">{event.title}</h3>
-                <span className="flex text-gray-600 mb-2 text-left"><BsCalendar2DateFill className='m-1' />{new Date(event.date).toLocaleDateString()}</span>
-                <span className="flex text-gray-600 mb-2 text-left"><IoIosTime className="m-1" />{event.time}</span>
-                <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{event.category}</p>
-                <p className="flex text-gray-600 mb-2 text-left"><IoTicket className='m-1' />{event.price}</p>
+                <span className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className='m-1' />{new Date(event.date).toLocaleDateString()}</span>
+                <span className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1" />{event.time}</span>
+                <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1" />{event.category}</p>
+                <p className="flex text-firstcolor mb-2 text-left"><IoTicket className='m-1' />{event.price}</p>
 
 
               </Link>

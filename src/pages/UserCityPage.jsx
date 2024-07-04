@@ -52,13 +52,13 @@ function UserCityPage() {
 
   return (
     <div className="flex">
-      <div className="w-1/4">
+      <div className="w-1/8">
         <SideNav />
       </div>
       <div className="w-3/4 p-4">
         <div>
           <h1 className="text-3xl font-bold mb-4">Hi! Welcome to the {city} Community!</h1>
-          <img className="w-full h-300 object-cover mb-4 " src={`/cities/${city}.jpg`} alt={`${city}`} />
+          <img className="w-full h-300 object-cover mb-4 shadow-md rounded-lg" src={`/cities/${city}.jpg`} alt={`${city}`} />
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>

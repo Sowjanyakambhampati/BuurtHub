@@ -67,7 +67,7 @@ function AllProductsPage({ session }) {
                     />
 
                     <Link to={`/city/${selectedCity}/add-product`} state={{ session }}
-                        className="mt-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add New
+                        className="mt-auto bg-secondcolor hover:bg-thirdcolor text-white px-4 py-2 rounded-md ">Add New
                         Product</Link>
                 </div>
                 <div className="flex mb-4">

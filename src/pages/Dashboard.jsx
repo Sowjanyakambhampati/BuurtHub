@@ -106,7 +106,7 @@ function UserDashboard({ session }) {
     const handlePostEditSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`hhttps://community-forum-backend.adaptable.app/posts/postauthor/${editPost._id}`, editPost);
+            const response = await axios.put(`https://community-forum-backend.adaptable.app/posts/postauthor/${editPost._id}`, editPost);
             toast.success('Post updated successfully');
             setUserPosts(prevPosts =>
                 prevPosts.map(post =>
@@ -297,10 +297,10 @@ function UserDashboard({ session }) {
 
                 <section className="mb-8">
                     <h3 className="text-xl font-semibold mb-2">Registered Events</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
                         {registeredEvents.length > 0 ? (
                             registeredEvents.map(event => (
-                                <div key={event._id} className="border p-4 rounded">
+                                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
                                     <h3 className="text-xl font-bold">{event.title}</h3>
                                     <p className="text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
                                     <p className="text-gray-600">{event.description}</p>

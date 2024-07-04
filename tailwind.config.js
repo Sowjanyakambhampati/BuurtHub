@@ -11,7 +11,8 @@ export default {
         secondcolor: "#D9851E",
         thirdcolor: "#F27830",
         fourthcolor: "#F20505",
-        fifthcolor: "#C4B7AE"
+        fifthcolor: "#C4B7AE",
+        sixthcolor: "#B6A89D"
 
       },
       fontSize: {

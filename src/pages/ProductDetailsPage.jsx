@@ -79,7 +79,7 @@ const ProductDetailsPage = () => {
               <p className="flex text-gray-600 mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
               
               <button
-                  className={`mt-4 px-4 py-2 rounded-md ${product.reservedById ? 'bg-gray-500' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                  className={`mt-4 px-4 py-2 rounded-md ${product.reservedById ? 'bg-gray-500' : 'bg-secondcolor hover:bg-thirdcolor text-white w-1/4'}`}
                   onClick={handleReserveClick}
                   disabled={!!product.reservedById}
               >
