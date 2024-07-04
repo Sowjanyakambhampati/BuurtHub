@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import SideNav from '../components/SideNav';
-import { CityContext } from '../context/CityContext'; 
+import { CityContext } from '../context/CityContext';
 import { IoIosPricetags } from "react-icons/io";
 import { TbBox } from "react-icons/tb";
 import { MdCategory } from "react-icons/md";
@@ -21,7 +21,7 @@ function UserCityPage() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`https://community-forum-backend.adaptable.app/product/city/${city}`);
-        setProducts(response.data.slice(-3)); 
+        setProducts(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
@@ -29,8 +29,8 @@ function UserCityPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/event/city/${city}`);
-        setEvents(response.data.slice(-3)); 
+        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${city}`);
+        setEvents(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch events", error);
       }
@@ -39,7 +39,7 @@ function UserCityPage() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`https://community-forum-backend.adaptable.app/posts/city/${city}`);
-        setPosts(response.data.slice(-3)); 
+        setPosts(response.data.slice(-3));
       } catch (error) {
         console.error("Failed to fetch posts", error);
       }
@@ -71,10 +71,10 @@ function UserCityPage() {
                 <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
                   <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image} alt={product.productName} />
                   <h3 className="text-xl font-semibold mb-2 text-left">{product.productName}</h3>
-                  <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
-                  <p className="flex text-gray-600 mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
-                  <p className="flex text-gray-600 mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
-                  
+                  <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
+                  <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+                  <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+
                 </div>
               ))
             ) : (
@@ -113,13 +113,13 @@ function UserCityPage() {
             {posts.length > 0 ? (
               posts.map((post) => (
                 <div key={post._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
+                  <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                   <p className="text-gray-600 mb-2">{post.postAuthor}</p>
                   <p className="text-gray-600 mb-2">{post.content}</p>
                   <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
                   <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
-                  
+
                 </div>
               ))
             ) : (

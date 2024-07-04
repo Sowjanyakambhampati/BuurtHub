@@ -20,6 +20,19 @@ function UserDashboard({ session }) {
     const { selectedCity } = useContext(CityContext);
 
     const { user } = session;
+    useEffect(() => {
+        const fetchRegisteredEvents = async () => {
+            try {
+                const response = await axios.get(`https://community-forum-backend.adaptable.app/event/registeredevents/${user.id}`);
+                setRegisteredEvents(response.data);
+            } catch (error) {
+                console.error('Failed to fetch events', error);
+            }
+        };
+        fetchRegisteredEvents();
+    }, [user.id]);
+
+
 
     useEffect(() => {
         const fetchUserProducts = async () => {
@@ -225,15 +238,15 @@ function UserDashboard({ session }) {
                                         </form>
                                     ) : (
                                         <>{product.image && (
-                                                <img src={product.image} alt={product.productName} className="mt-4 rounded-lg "
-                                                    style={{ maxWidth: '100%', height: 'auto' }} />
-                                            )}
+                                            <img src={product.image} alt={product.productName} className="mt-4 rounded-lg "
+                                                style={{ maxWidth: '100%', height: 'auto' }} />
+                                        )}
                                             <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
                                             <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
+                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1" />{product.description}</p>
                                             <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
                                             <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
-                                            
+
                                             <div className="bottom-4 left-4 flex space-x-2">
                                                 <button
                                                     onClick={() => setEditProduct(product)}
@@ -264,16 +277,16 @@ function UserDashboard({ session }) {
                         {reservedProducts.length > 0 ? (
                             reservedProducts.map(product => (
                                 <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
-                                {product.image && (
+                                    {product.image && (
                                         <img src={product.image} alt={product.productName} className="mt-4 rounded-md"
                                             style={{ maxWidth: '100%', height: 'auto' }} />
                                     )}
                                     <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
                                     <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
-                                    
+                                    <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1" />{product.description}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+
                                 </div>
                             ))
                         ) : (
@@ -287,10 +300,15 @@ function UserDashboard({ session }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {registeredEvents.length > 0 ? (
                             registeredEvents.map(event => (
-                                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h4 className="text-lg font-semibold mb-2">{event.name}</h4>
-                                    <p className="text-gray-600 mb-2">{event.date}</p>
-                                    <p className="text-gray-600 mb-2">{event.location}</p>
+                                <div key={event._id} className="border p-4 rounded">
+                                    <h3 className="text-xl font-bold">{event.title}</h3>
+                                    <p className="text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
+                                    <p className="text-gray-600">{event.description}</p>
+                                    <p className="text-gray-600">{event.city}</p>
+                                    <p className="text-gray-600">{event.address}</p>
+                                    <p className="text-gray-600">{event.category}</p>
+                                    <p className="text-gray-600">{event.price}</p>
+                                    <a href={event.locationUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500">View Location</a>
                                 </div>
                             ))
                         ) : (
