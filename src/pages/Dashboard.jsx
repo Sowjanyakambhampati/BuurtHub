@@ -242,10 +242,10 @@ function UserDashboard({ session }) {
                                                 style={{ maxWidth: '100%', height: 'auto' }} />
                                         )}
                                             <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
-                                            <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1" />{product.description}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
+                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
 
                                             <div className="bottom-4 left-4 flex space-x-2">
                                                 <button
@@ -282,10 +282,10 @@ function UserDashboard({ session }) {
                                             style={{ maxWidth: '100%', height: 'auto' }} />
                                     )}
                                     <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
-                                    <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                                    <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1" />{product.description}</p>
-                                    <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
-                                    <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                                    <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
+                                    <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
 
                                 </div>
                             ))

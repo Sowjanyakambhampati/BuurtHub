@@ -7,6 +7,8 @@ import { IoTicket } from "react-icons/io5";
 import { MdCategory } from "react-icons/md";
 import { IoIosTime } from "react-icons/io";
 import { BsCalendar2DateFill } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
+
 
 function AllEventsPage({ session }) {
   const [events, setEvents] = useState([]);
@@ -88,15 +90,18 @@ function AllEventsPage({ session }) {
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} state={{ session }} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                <p className="text-firstcolor mb-2">{event.organiser}</p>
+
                 {event.image && (
                   <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
                 )}
-                <h3 className="text-xl font-semibold mb-2 text-left">{event.title}</h3>
-                <span className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className='m-1' />{new Date(event.date).toLocaleDateString()}</span>
-                <span className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1" />{event.time}</span>
-                <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1" />{event.category}</p>
-                <p className="flex text-firstcolor mb-2 text-left"><IoTicket className='m-1' />{event.price}</p>
+                <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{event.title}</h3>
+                <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
+                <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
+                <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
+                <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
+                <p className="flex text-firstcolor mb-2 text-left"><FaLocationDot className="m-1 text-thirdcolor" />{event.address}</p>
+                <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">Hosted by:  {event.organiser}</p>
+                
 
 
               </Link>
