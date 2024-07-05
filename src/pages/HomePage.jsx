@@ -56,27 +56,26 @@ function HomePage() {
       <div className="text-center py-8">
         <h1 className="text-3xl font-bold mb-4">How BuurtHub Works</h1>
       </div>
-      <div className="flex flex-col md:flex-row items-center px-4">
-        <div className="md:w-1/2 mb-4 md:mb-0">
+      <div className="flex flex-col md:flex-row items-center justify-center px-4">
+        {/* <div className="md:w-1/2 mb-4 md:mb-0">
           <img src="/How_it_works.gif" alt="How it works" className="w-full h-auto rounded-lg shadow-lg" />
-        </div>
+        </div> */}
         <div className="md:w-1/2 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300" id="buurthub-steps" style={{ height: '550px' }}>
-          <h3 className="text-3xl font-bold mb-4 text-center">How BuurtHub Works</h3>
           <div className="flex flex-col space-y-4">
             <div className="step border-b border-gray-200 pb-4 hidden">
-              <h4 className="text-2xl font-semibold mb-2">1. Create an account using your email address or connect with your existing Google account</h4>
+              <h4 className="text-base font-semibold mb-2">1. Create an account using your email address or connect with your existing Google account</h4>
             </div>
             <div className="step border-b border-gray-200 pb-4 hidden">
-              <h4 className="text-2xl font-semibold mb-2">2. Browse through a wide range of products from various categories listed by your neighbours and add your own products for sale or give away</h4>
+              <h4 className="text-base font-semibold mb-2">2. Browse through a wide range of products from various categories listed by your neighbours and add your own products for sale or give away</h4>
             </div>
             <div className="step border-b border-gray-200 pb-4 hidden">
-              <h4 className="text-2xl font-semibold mb-2">3. Reserve and pick up items that you reserve</h4>
+              <h4 className="text-base font-semibold mb-2">3. Reserve and pick up items that you reserve</h4>
             </div>
             <div className="step border-b border-gray-200 pb-4 hidden">
-              <h4 className="text-2xl font-semibold mb-2">4. Register for an event or also add event</h4>
+              <h4 className="text-base font-semibold mb-2">4. Register for an event or also add event</h4>
             </div>
             <div className="step pb-4 hidden">
-              <h4 className="text-2xl font-semibold mb-2">5. Use the platform to share important announcements, news, or requests with your community</h4>
+              <h4 className="text-base font-semibold mb-2">5. Use the platform to share important announcements, news, or requests with your community</h4>
             </div>
           </div>
         </div>
