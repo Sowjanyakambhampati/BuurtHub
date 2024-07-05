@@ -82,7 +82,7 @@ At BuurtHub, we aim to foster stronger, more connected communities by providing 
 
 - [@Sowjanya Kambhampati](https://github.com/sowjanyakambhampati)
 
-- [@Ama WilliamsTetsewa](https://github.com/Tetsewa)
+- [@Ama Tetsewa Williams](https://github.com/Tetsewa)
 
 ## Demo link
 
