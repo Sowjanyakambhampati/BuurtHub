@@ -52,8 +52,8 @@ const EventDetailsPage = () => {
       };
       try {
         await axios.put(`https://community-forum-backend.adaptable.app/event/register/${eventId}`, updateData);
-        await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail`, userEmail);
         toast.success('Successfully registered for the event');
+        await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail`, userEmail);
       } catch (error) {
         console.error('Failed to register for event', error);
         toast.error('Failed to register for event');
