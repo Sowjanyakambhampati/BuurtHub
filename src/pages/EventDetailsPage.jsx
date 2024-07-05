@@ -47,6 +47,9 @@ const EventDetailsPage = () => {
       const updateData = {
         participants: Array.isArray(currentParticipants) ? [...currentParticipants, user.id] : [user.id],
       };
+      const userEmail ={
+        email: user.email,
+      };
       try {
         await axios.put(`https://community-forum-backend.adaptable.app/event/register/${eventId}`, updateData);
         await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail`, userEmail);
