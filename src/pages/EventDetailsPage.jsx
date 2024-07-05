@@ -4,7 +4,14 @@ import { useParams, useLocation, Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SideNav from '../components/SideNav';
-import GoogleMap from '../components/GoogleMap'; // Assuming you have a GoogleMap component
+import { IoTicket } from "react-icons/io5";
+import { MdCategory } from "react-icons/md";
+import { IoIosTime } from "react-icons/io";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
+import { BsFillInfoCircleFill } from "react-icons/bs";
+
+
 const EventDetailsPage = () => {
   const { eventId } = useParams();
   const location = useLocation();
@@ -92,16 +99,17 @@ const EventDetailsPage = () => {
             )}
           </div>
           <div className="w-2/3 pl-4">
-            <p className="text-gray-600 mb-4">{event.description}</p>
-            <p className="text-gray-600 mb-2">Date: {new Date(event.date).toLocaleDateString()}</p>
-            <p className="text-gray-600 mb-2">Time: {event.time}</p>
-            <p className="text-gray-600 mb-2">City: {event.city}</p>
-            <p className="text-gray-600 mb-2">Location: <a href={event.locationUrl} target="_blank"
+            <p className="flex text-firstcolor mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{event.description}</p>
+            <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
+            <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
+
+            <p className="flex text-firstcolor mb-2 text-left hover:underline"><FaLocationDot className="m-1 text-thirdcolor" /><a href={event.locationUrl} target="_blank"
               rel="noopener noreferrer">{address}</a>
             </p>
-            <p className="text-gray-600 mb-2">Organiser: {event.organiser}</p>
-            <p className="text-gray-600 mb-2">Price: {event.price}</p>
-            <p className="text-gray-600 mb-2">Category: {event.category}</p>
+
+            <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
+            <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
+            <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-1/3">Hosted by:  {event.organiser}</p>
             <button onClick={handleRegister} className="bg-secondcolor hover:bg-thirdcolor text-white p-2 rounded-md w-1/4">Register
             </button>
           </div>

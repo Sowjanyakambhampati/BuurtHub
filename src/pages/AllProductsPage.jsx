@@ -108,13 +108,13 @@ function AllProductsPage({ session }) {
                                     <div>
                                         <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image}
                                             alt={product.productName} />
-                                        <h3 className="text-xl font-semibold mb-2 text-left">{product.productName}</h3>
-                                        <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                                        <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
-                                        <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+                                        <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{product.productName}</h3>
+                                        <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                                        <p className="flex text-firstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+                                        <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
                                     </div>
                                     {product.reservedById && (
-                                        <span className="absolute top-0 left-0 bg-gray-200 text-gray-500 px-2 py-1 rounded-br-lg">Reserved</span>
+                                        <span className="absolute top-0 left-0 bg-gray-200 text-firstcolor px-2 py-1 rounded-br-lg">Reserved</span>
                                     )}
                                 </Link>
                             </div>

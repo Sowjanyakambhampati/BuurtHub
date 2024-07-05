@@ -66,17 +66,17 @@ const ProductDetailsPage = () => {
         </div>
         {/* <p>User ID-productReserve: {user.id}</p> */}
         <div className="w-3/4 p-4">
-          <h2 className="text-3xl font-bold mb-4">{product.productName}</h2>
+          <h2 className="text-3xl text-firstcolor font-bold mb-4">{product.productName}</h2>
           <div className="flex">
             <div className="w-1/3">
               <img className="w-full h-100 object-cover mb-8 rounded-lg -4" src={product.image} alt={product.productName}/>
             </div>
             <div className="w-2/3 pl-4 m-8">
-              <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
-              <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
-              <p className=" flex text-gray-600 mb-2 text-left"><FaUserPlus className = "m-1"/>Owner: {product.productOwner}</p>
-              <p className="flex text-gray-600 mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
-              <p className="flex text-gray-600 mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
+              <p className="flex text-firstcolor mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
+              <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
+              <p className=" flex text-firstcolor mb-2 text-left"><FaUserPlus className = "m-1"/>Owner: {product.productOwner}</p>
+              <p className="flex text-firstcolor mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
+              <p className="flex text-firstcolor mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
               
               <button
                   className={`mt-4 px-4 py-2 rounded-md ${product.reservedById ? 'bg-gray-500' : 'bg-secondcolor hover:bg-thirdcolor text-white w-1/4'}`}

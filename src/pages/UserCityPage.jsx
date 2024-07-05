@@ -6,6 +6,12 @@ import { CityContext } from '../context/CityContext';
 import { IoIosPricetags } from "react-icons/io";
 import { TbBox } from "react-icons/tb";
 import { MdCategory } from "react-icons/md";
+import { IoTicket } from "react-icons/io5";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { IoIosTime } from "react-icons/io";
+import { FaLocationDot } from "react-icons/fa6";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { BsFillSendExclamationFill } from "react-icons/bs";
 
 
 function UserCityPage() {
@@ -63,7 +69,7 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
           <div className="flex justify-end">
-            <Link to={`/all-products/city/${selectedCity}`} className="text-blue-500  mb-2">See all products</Link>
+            <Link to={`/all-products/city/${selectedCity}`} className="text-firstcolor mb-2">See all products</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
@@ -71,9 +77,9 @@ function UserCityPage() {
                 <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
                   <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image} alt={product.productName} />
                   <h3 className="text-xl font-semibold mb-2 text-left">{product.productName}</h3>
-                  <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1" /> € {product.price}.00</p>
-                  <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1" />{product.condition}</p>
-                  <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1" />{product.category}</p>
+                  <p className="flex text-firtstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                  <p className="flex text-firtstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+                  <p className="flex text-firtstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
 
                 </div>
               ))
@@ -85,7 +91,7 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events in the community</h2>
           <div className="flex justify-end">
-            <Link to={`/all-events/city/${selectedCity}`} className="text-blue-500  mb-2">See all events</Link>
+            <Link to={`/all-events/city/${selectedCity}`} className="text-firstcolor mb-2">See all events</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
@@ -93,10 +99,11 @@ function UserCityPage() {
                 <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
                   <img className="w-full h-40 object-cover mb-2" src={event.image} alt={event.title} />
                   <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                  <p className="text-gray-600 mb-2">{event.price}</p>
-                  <p className="text-gray-600 mb-2">{new Date(event.date).toLocaleDateString()}</p>
-                  <p className="text-gray-600 mb-2">{new Date(event.time).toLocaleTimeString()}</p>
-                  <p className="text-gray-600 mb-2">{event.locationUrl}</p>
+                  <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
+                  <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
+                  <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
+                  <p className="flex text-firstcolor mb-2 text-left"><FaLocationDot className="m-1 text-thirdcolor" />{event.address}</p>
+                  <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">Hosted by:  {event.organiser}</p>
                 </div>
               ))
             ) : (
@@ -107,7 +114,7 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
           <div className="flex justify-end">
-            <Link to={`/all-posts/city/${selectedCity}`} className="text-blue-500 ">See all posts</Link>
+            <Link to={`/all-posts/city/${selectedCity}`} className="text-firstcolor mb-2">See all posts</Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (
@@ -115,10 +122,10 @@ function UserCityPage() {
                 <div key={post._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                   <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-2">{post.postAuthor}</p>
-                  <p className="text-gray-600 mb-2">{post.content}</p>
-                  <p className="text-gray-600 mb-2">{new Date(post.createdAt).toLocaleDateString()}</p>
-                  <p className="text-gray-600 mb-2">Contact me on {post.contactInfo}</p>
+                  
+                  <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
+                  <p className="flex text-gray-600 mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>
+                  <p className="flex text-firstcolor mb-2 "><BsFillSendExclamationFill className="m-1 text-thirdcolor"/>{post.contactInfo}</p>
 
                 </div>
               ))
