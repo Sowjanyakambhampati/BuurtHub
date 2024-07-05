@@ -8,7 +8,12 @@ import { IoIosPricetags } from "react-icons/io";
 import { TbBox } from "react-icons/tb";
 import { MdCategory } from "react-icons/md";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { FaUserPlus } from "react-icons/fa";
+import { IoIosTime } from "react-icons/io";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoTicket } from "react-icons/io5";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { BsFillSendExclamationFill } from "react-icons/bs";
 
 function UserDashboard({ session }) {
     const [userProducts, setUserProducts] = useState([]);
@@ -145,11 +150,11 @@ function UserDashboard({ session }) {
     return (
         <div className="flex">
             <ToastContainer />
-            <div className="w-1/4">
+            <div className="w-1/8">
                 <SideNav />
             </div>
             <div className="w-3/4 p-4">
-                <h2 className="text-2xl font-bold mb-4">User Dashboard</h2>
+                <h2 className="text-4xl font-bold mb-4">User Dashboard</h2>
 
                 <section className="mb-8">
                     <h3 className="text-xl font-semibold mb-2">My Products</h3>
@@ -160,7 +165,7 @@ function UserDashboard({ session }) {
                                     {editProduct && editProduct._id === product._id ? (
                                         <form onSubmit={handleEditSubmit} className="space-y-4">
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Name:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Name:</label>
                                                 <input
                                                     name="productName"
                                                     value={editProduct.productName}
@@ -169,7 +174,7 @@ function UserDashboard({ session }) {
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Description:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Description:</label>
                                                 <textarea
                                                     name="description"
                                                     value={editProduct.description}
@@ -178,7 +183,7 @@ function UserDashboard({ session }) {
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Price:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Price:</label>
                                                 <input
                                                     name="price"
                                                     type="number"
@@ -188,7 +193,7 @@ function UserDashboard({ session }) {
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Category:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Category:</label>
                                                 <select
                                                     name="category"
                                                     value={editProduct.category}
@@ -208,7 +213,7 @@ function UserDashboard({ session }) {
                                                 </select>
                                             </div>
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Condition:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Condition:</label>
                                                 <select
                                                     name="condition"
                                                     value={editProduct.condition}
@@ -224,7 +229,7 @@ function UserDashboard({ session }) {
                                             </div>
                                             <button
                                                 type="submit"
-                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 Save
                                             </button>
@@ -242,15 +247,15 @@ function UserDashboard({ session }) {
                                                 style={{ maxWidth: '100%', height: 'auto' }} />
                                         )}
                                             <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
-                                            <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
-                                            <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
-                                            <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+                                            <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                                            <p className="flex text-firstcolor text-left mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
+                                            <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
+                                            <p className="flex text-firstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
 
                                             <div className="bottom-4 left-4 flex space-x-2">
                                                 <button
                                                     onClick={() => setEditProduct(product)}
-                                                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    className="py-1 px-3 w-1/2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 >
                                                     Edit
                                                 </button>
@@ -272,7 +277,7 @@ function UserDashboard({ session }) {
                 </section>
 
                 <section className="mb-8">
-                    <h3 className="text-xl font-semibold mb-2">Reserved Products</h3>
+                    <h3 className="text-xl font-semibold mb-2">My Reserved Products</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {reservedProducts.length > 0 ? (
                             reservedProducts.map(product => (
@@ -282,10 +287,10 @@ function UserDashboard({ session }) {
                                             style={{ maxWidth: '100%', height: 'auto' }} />
                                     )}
                                     <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
-                                    <p className="flex text-gray-600 mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
-                                    <p className="flex text-gray-600 mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
-                                    <p className="flex text-gray-600 mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
-                                    <p className="flex text-gray-600 mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+                                    <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+                                    <p className="flex text-firstcolor mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
+                                    <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
+                                    <p className="flex text-firstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
 
                                 </div>
                             ))
@@ -296,19 +301,19 @@ function UserDashboard({ session }) {
                 </section>
 
                 <section className="mb-8">
-                    <h3 className="text-xl font-semibold mb-2">Registered Events</h3>
+                    <h3 className="text-xl font-semibold mb-2">My Registered Events</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
                         {registeredEvents.length > 0 ? (
                             registeredEvents.map(event => (
                                 <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h3 className="text-xl font-bold">{event.title}</h3>
-                                    <p className="text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
-                                    <p className="text-gray-600">{event.description}</p>
-                                    <p className="text-gray-600">{event.city}</p>
-                                    <p className="text-gray-600">{event.address}</p>
-                                    <p className="text-gray-600">{event.category}</p>
-                                    <p className="text-gray-600">{event.price}</p>
-                                    <a href={event.locationUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500">View Location</a>
+                                <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{event.title}</h3>
+                                <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
+                                <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
+                                <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
+                                <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
+                                <p className="flex text-firstcolor mb-2 text-left"><FaLocationDot className="m-1 text-thirdcolor" />{event.address}</p>
+                                <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">Hosted by:  {event.organiser}</p>
+                                    
                                 </div>
                             ))
                         ) : (
@@ -318,15 +323,15 @@ function UserDashboard({ session }) {
                 </section>
 
                 <section className="mb-8">
-                    <h3 className="text-xl font-semibold mb-2">Your Posts</h3>
+                    <h3 className="text-xl font-semibold mb-2">My Posts</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {userPosts.length > 0 ? (
                             userPosts.map(post => (
-                                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md relative">
+                                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md relative ">
                                     {editPost && editPost._id === post._id ? (
                                         <form onSubmit={handlePostEditSubmit} className="space-y-4">
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Title:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Title:</label>
                                                 <input
                                                     name="title"
                                                     value={editPost.title}
@@ -335,7 +340,7 @@ function UserDashboard({ session }) {
                                                 />
                                             </div>
                                             <div className="form-group">
-                                                <label className="block text-sm font-medium text-gray-700">Content:</label>
+                                                <label className="block text-sm font-medium text-firstcolor">Content:</label>
                                                 <textarea
                                                     name="content"
                                                     value={editPost.content}
@@ -345,7 +350,7 @@ function UserDashboard({ session }) {
                                             </div>
                                             <button
                                                 type="submit"
-                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 Save
                                             </button>
@@ -359,23 +364,25 @@ function UserDashboard({ session }) {
                                         </form>
                                     ) : (
                                         <>
-                                            <h4 className="text-lg font-semibold mb-2">Title:{post.title}</h4>
-                                            <p className="text-gray-600 mb-2">Content: {post.content}</p>
-                                            <p className="text-gray-600 mb-2">{post.contactInfo}</p>
-                                            {post.image && (
+                                        {post.image && (
                                                 <img src={post.image} alt={post.title} className="mt-4 rounded-md"
                                                     style={{ maxWidth: '100%', height: 'auto' }} />
                                             )}
-                                            <div className="absolute bottom-4 left-4 flex space-x-2">
+                                        <h3 className="text-xl font-semibold mb-2 text-left">{post.title}</h3>
+                <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
+                <p className="flex text-firstcolor mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>
+                <p className="flex text-firstcolor mb-2"><BsFillSendExclamationFill className="m-1 text-thirdcolor"/> {post.contactInfo}</p>
+                                            
+                                            <div className="bottom-4 left-4 flex space-x-2">
                                                 <button
                                                     onClick={() => setEditPost(post)}
-                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    className="py-1 px-3 w-1/2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     onClick={() => handlePostDelete(post._id)}
-                                                    className="py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                                 >
                                                     Delete
                                                 </button>
