@@ -69,7 +69,6 @@ const { user } = session;
               <div key={post.id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
               <img className="w-full h-40 object-cover mb-2 rounded-lg" src={post.image} alt={post.title} />
                 <h3 className="text-xl font-semibold mb-2 text-left">{post.title}</h3>
-                {/* <p className="text-gray-600 mb-2">{post.postAuthor}</p> */}
                 <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
                 <p className="flex text-firstcolor mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>
                 <p className="flex text-firstcolor mb-2"><BsFillSendExclamationFill className="m-1 text-thirdcolor"/> {post.contactInfo}</p>
