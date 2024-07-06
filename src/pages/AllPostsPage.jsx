@@ -67,7 +67,7 @@ const { user } = session;
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <div key={post.id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-              <img className="w-full h-40 object-cover mb-2 rounded-lg" src={post.image} alt={post.title} />
+              <img className="w-full h-50 object-cover mb-2 rounded-lg" src={post.image} alt={post.title} />
                 <h3 className="text-xl font-semibold mb-2 text-left">{post.title}</h3>
                 <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
                 <p className="flex text-firstcolor mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>

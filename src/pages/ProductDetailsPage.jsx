@@ -74,7 +74,7 @@ const ProductDetailsPage = () => {
             <div className="w-2/3 pl-4 m-8">
               <p className="flex text-firstcolor mb-4"><BsFillInfoCircleFill className = "m-1"/>{product.description}</p>
               <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className = "m-1"/> € {product.price}.00</p>
-              <p className=" flex text-firstcolor mb-2 text-left"><FaUserPlus className = "m-1"/>Owner: {product.productOwner}</p>
+              {/* <p className=" flex text-firstcolor mb-2 text-left"><FaUserPlus className = "m-1"/>Owner: {product.productOwner}</p> */}
               <p className="flex text-firstcolor mb-2 text-left"><TbBox className = "m-1"/>{product.condition}</p>
               <p className="flex text-firstcolor mb-2 text-left"><MdCategory className = "m-1"/>{product.category}</p>
               
