@@ -56,7 +56,7 @@ const EventDetailsPage = () => {
         await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail`, userEmail);
       } catch (error) {
         console.error('Failed to register for event', error);
-        toast.error('Failed to register for event');
+        // toast.error('Failed to register for event');
       }
     }
   };
@@ -113,7 +113,7 @@ const EventDetailsPage = () => {
 
             <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
             <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
-            <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-1/3">Hosted by:  {event.organiser}</p>
+            <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-1/2">Hosted by:  {event.organiser}</p>
             <button onClick={handleRegister} className="bg-secondcolor hover:bg-thirdcolor text-white p-2 rounded-md w-1/4">Register
             </button>
           </div>

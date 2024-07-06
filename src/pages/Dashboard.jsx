@@ -311,7 +311,9 @@ function UserDashboard({ session }) {
                                 <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
                                 <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
                                 <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
-                                <p className="flex text-firstcolor mb-2 text-left"><FaLocationDot className="m-1 text-thirdcolor" />{event.address}</p>
+                                <p className="flex text-firstcolor mb-2 text-left hover:underline"><FaLocationDot className="m-1 text-thirdcolor" /><a href={event.locationUrl} target="_blank"
+              rel="noopener noreferrer">{event.address}</a>
+            </p>
                                 <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">Hosted by:  {event.organiser}</p>
                                     
                                 </div>

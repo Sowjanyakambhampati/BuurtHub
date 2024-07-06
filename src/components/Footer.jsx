@@ -53,7 +53,7 @@ export default function Footer() {
                             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                         </svg>
                     </span>
-                    <span>info@buurthub.nl</span>
+                    <span>info.buurthub@gmail.com</span>
                 </div>
                 <div className="mt- flex items-center space-x-3">
                     <SocialIcon url="https://x.com" target="_blank" rel="noopener noreferrer" fgColor="#ffffff" />
