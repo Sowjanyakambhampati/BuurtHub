@@ -106,7 +106,7 @@ function AllProductsPage({ session }) {
                                 <Link to={`/all-products/city/${selectedCity}/product/${product._id}`} state={{ session }}
                                     className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between text-black">
                                     <div>
-                                        <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image}
+                                        <img className="w-full h-50 object-cover mb-2 rounded-lg" src={product.image}
                                             alt={product.productName} />
                                         <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{product.productName}</h3>
                                         <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>

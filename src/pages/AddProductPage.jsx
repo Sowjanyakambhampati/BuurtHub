@@ -31,7 +31,7 @@ function AddProductPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'price' && value < 0) {
-      return; // Do not update state if the price is negative
+      return; 
     }
     setProduct((prevProduct) => ({
       ...prevProduct,
@@ -48,7 +48,6 @@ function AddProductPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create a form data object to handle the image upload
     const formData = new FormData();
     formData.append('id', product.id);
     formData.append('city', product.city);

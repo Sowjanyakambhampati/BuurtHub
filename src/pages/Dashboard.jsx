@@ -242,17 +242,30 @@ function UserDashboard({ session }) {
                                             </button>
                                         </form>
                                     ) : (
-                                        <>{product.image && (
-                                            <img src={product.image} alt={product.productName} className="mt-4 rounded-lg "
-                                                style={{ maxWidth: '100%', height: 'auto' }} />
-                                        )}
+                                        <div className="flex flex-col h-full">
+                                            {product.image && (
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.productName}
+                                                    className="mt-2 rounded-lg "
+                                                    style={{ maxWidth: '100%', height: 'auto' }}
+                                                />
+                                            )}
                                             <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
-                                            <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
-                                            <p className="flex text-firstcolor text-left mb-4"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
-                                            <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
-                                            <p className="flex text-firstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+                                            <p className="flex text-firstcolor mb-2 text-left">
+                                                <IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00
+                                            </p>
+                                            <p className="flex text-firstcolor text-left mb-4">
+                                                <BsFillInfoCircleFill className="m-1 text-thirdcolor" /> {product.description}
+                                            </p>
+                                            <p className="flex text-firstcolor mb-2 text-left">
+                                                <MdCategory className="m-1 text-thirdcolor" /> {product.category}
+                                            </p>
+                                            <p className="flex text-firstcolor mb-2 text-left">
+                                                <TbBox className="m-1 text-thirdcolor" /> {product.condition}
+                                            </p>
 
-                                            <div className="bottom-4 left-4 flex space-x-2">
+                                            <div className="mt-auto flex space-x-2">
                                                 <button
                                                     onClick={() => setEditProduct(product)}
                                                     className="py-1 px-3 w-1/2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -266,7 +279,8 @@ function UserDashboard({ session }) {
                                                     Delete
                                                 </button>
                                             </div>
-                                        </>
+                                        </div>
+
                                     )}
                                 </div>
                             ))
@@ -301,101 +315,147 @@ function UserDashboard({ session }) {
                 </section>
 
                 <section className="mb-8">
-                    <h3 className="text-xl font-semibold mb-2">My Registered Events</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
-                        {registeredEvents.length > 0 ? (
-                            registeredEvents.map(event => (
-                                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
-                                <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{event.title}</h3>
-                                <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
-                                <p className="flex text-firstcolor mb-2 text-left"><IoIosTime className="m-1 text-thirdcolor" />{event.time}</p>
-                                <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{event.category}</p>
-                                <p className="flex text-firstcolor mb-2 text-left"><IoTicket className="m-1 text-thirdcolor" />{event.price}</p>
-                                <p className="flex text-firstcolor mb-2 text-left"><FaLocationDot className="m-1 text-thirdcolor" />{event.address}</p>
-                                <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">Hosted by:  {event.organiser}</p>
-                                    
-                                </div>
-                            ))
-                        ) : (
-                            <p>No registered events.</p>
-                        )}
-                    </div>
-                </section>
+  <h3 className="text-xl font-semibold mb-2">My Registered Events</h3>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+    {registeredEvents.length > 0 ? (
+      registeredEvents.map(event => (
+        <div key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col h-full">
+          {event.image && (
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-48 object-cover rounded-t-lg mb-4"
+            />
+          )}
+          <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{event.title}</h3>
+          <p className="flex text-firstcolor mb-2 text-left">
+            <BsCalendar2DateFill className="m-1 text-thirdcolor" />
+            {new Date(event.date).toLocaleDateString()}
+          </p>
+          <p className="flex text-firstcolor mb-2 text-left">
+            <IoIosTime className="m-1 text-thirdcolor" />
+            {event.time}
+          </p>
+          <p className="flex text-firstcolor mb-2 text-left">
+            <MdCategory className="m-1 text-thirdcolor" />
+            {event.category}
+          </p>
+          <p className="flex text-firstcolor mb-2 text-left">
+            <IoTicket className="m-1 text-thirdcolor" />
+            {event.price}
+          </p>
+          <p className="flex text-firstcolor mb-2 text-left hover:underline">
+            <FaLocationDot className="m-1 text-thirdcolor" />
+            <a href={event.locationUrl} target="_blank" rel="noopener noreferrer">
+              {event.address}
+            </a>
+          </p>
+          <p className="text-white font-bold mb-2 text-left bg-firstcolor px-4 py-2 rounded-md w-full">
+            Hosted by: {event.organiser}
+          </p>
+        </div>
+      ))
+    ) : (
+      <p>No registered events.</p>
+    )}
+  </div>
+</section>
 
-                <section className="mb-8">
-                    <h3 className="text-xl font-semibold mb-2">My Posts</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {userPosts.length > 0 ? (
-                            userPosts.map(post => (
-                                <div key={post._id} className="bg-white p-4 rounded-lg shadow-md relative ">
-                                    {editPost && editPost._id === post._id ? (
-                                        <form onSubmit={handlePostEditSubmit} className="space-y-4">
-                                            <div className="form-group">
-                                                <label className="block text-sm font-medium text-firstcolor">Title:</label>
-                                                <input
-                                                    name="title"
-                                                    value={editPost.title}
-                                                    onChange={handlePostEditChange}
-                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className="block text-sm font-medium text-firstcolor">Content:</label>
-                                                <textarea
-                                                    name="content"
-                                                    value={editPost.content}
-                                                    onChange={handlePostEditChange}
-                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                />
-                                            </div>
-                                            <button
-                                                type="submit"
-                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                            >
-                                                Save
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => setEditPost(null)}
-                                                className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-2"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </form>
-                                    ) : (
-                                        <>
-                                        {post.image && (
-                                                <img src={post.image} alt={post.title} className="mt-4 rounded-md"
-                                                    style={{ maxWidth: '100%', height: 'auto' }} />
-                                            )}
-                                        <h3 className="text-xl font-semibold mb-2 text-left">{post.title}</h3>
-                <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
-                <p className="flex text-firstcolor mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>
-                <p className="flex text-firstcolor mb-2"><BsFillSendExclamationFill className="m-1 text-thirdcolor"/> {post.contactInfo}</p>
-                                            
-                                            <div className="bottom-4 left-4 flex space-x-2">
-                                                <button
-                                                    onClick={() => setEditPost(post)}
-                                                    className="py-1 px-3 w-1/2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                >
-                                                    Edit
-                                                </button>
-                                                <button
-                                                    onClick={() => handlePostDelete(post._id)}
-                                                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                                                >
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <p>No posts added by you.</p>
-                        )}
-                    </div>
-                </section>
+
+<section className="mb-8">
+  <h3 className="text-xl font-semibold mb-2">My Posts</h3>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    {userPosts.length > 0 ? (
+      userPosts.map(post => (
+        <div key={post._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col h-full relative">
+          {editPost && editPost._id === post._id ? (
+            <form onSubmit={handlePostEditSubmit} className="space-y-4 flex-grow">
+              <div className="form-group">
+                <label className="block text-sm font-medium text-firstcolor">Title:</label>
+                <input
+                  name="title"
+                  value={editPost.title}
+                  onChange={handlePostEditChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div className="form-group">
+                <label className="block text-sm font-medium text-firstcolor">Content:</label>
+                <textarea
+                  name="content"
+                  value={editPost.content}
+                  onChange={handlePostEditChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+              <div className="flex-grow"></div>
+              <div className="flex flex-col space-y-2">
+                <button
+                  type="submit"
+                  className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditPost(null)}
+                  className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <div className="flex-grow">
+                {post.image && (
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="mt-4 rounded-md"
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                  />
+                )}
+                <h3 className="text-xl font-semibold mb-2 text-left">{post.title}</h3>
+                <p className="flex text-firstcolor mb-2">
+                  <BsFillChatSquareTextFill className="m-1 text-thirdcolor" />
+                  {post.content}
+                </p>
+                <p className="flex text-firstcolor mb-2">
+                  <BsCalendar2DateFill className="m-1 text-thirdcolor" />
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </p>
+                <p className="flex text-firstcolor mb-2">
+                  <BsFillSendExclamationFill className="m-1 text-thirdcolor" />
+                  {post.contactInfo}
+                </p>
+              </div>
+              <div className="flex-shrink-0 mt-4">
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => setEditPost(post)}
+                    className="py-1 px-3 w-1/2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-firstcolor hover:bg-fifthcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handlePostDelete(post._id)}
+                    className="py-1 px-3 w-1/2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      ))
+    ) : (
+      <p>No posts added by you.</p>
+    )}
+  </div>
+</section>
+
             </div>
         </div>
     );

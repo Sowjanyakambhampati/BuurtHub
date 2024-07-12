@@ -75,7 +75,7 @@ function UserCityPage() {
             {products.length > 0 ? (
               products.map((product) => (
                 <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
-                  <img className="w-full h-40 object-cover mb-2 rounded-lg" src={product.image} alt={product.productName} />
+                  <img className="w-full h-50 object-cover mb-2 rounded-lg" src={product.image} alt={product.productName} />
                   <h3 className="text-xl font-semibold mb-2 text-left">{product.productName}</h3>
                   <p className="flex text-firtstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
                   <p className="flex text-firtstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
@@ -120,7 +120,7 @@ function UserCityPage() {
             {posts.length > 0 ? (
               posts.map((post) => (
                 <div key={post._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
-                  <img className="w-full h-40 object-cover mb-2" src={post.image} alt={post.title} />
+                  <img className="w-full h-50 object-cover mb-2" src={post.image} alt={post.title} />
                   <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                   
                   <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
