@@ -1,13 +1,14 @@
 #root {
-  width: 1500px;
+  width: 100vw; 
+  height: 100vh; 
   margin: 0 auto;
   padding: 0;
   color: #024959;
   text-align: center;
   background-image: url('/main-bg.png');
-  background-size: cover; /* Ensures the image covers the entire element */
-  background-position: center; /* Centers the background image */
-  background-repeat: no-repeat; /* Ensures the image does not repeat */
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
 }
 
 .logo:hover {
