@@ -122,7 +122,7 @@ function SignUpPage() {
             </div>
             <div className="relative bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="flex justify-center mb-4">
-                    <img src="/logo.png" alt="Logo" className="h-16 w-auto" />
+                    <img src="/b-logo.png" alt="Logo" className="h-16 w-auto" />
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold mb-4 text-center">Sign Up Here</h1>
