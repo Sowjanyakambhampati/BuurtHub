@@ -12,7 +12,9 @@ export default {
         thirdcolor: "#F27830",
         fourthcolor: "#F20505",
         fifthcolor: "#037893",
-        sixthcolor: "#B6A89D"
+        sixthcolor: "#B6A89D",
+        customTeal: '#4FD1C5',
+        customTealDark: '#00FFCB',
 
       },
       fontSize: {
@@ -27,9 +29,22 @@ export default {
         "fira-sans": "'Fira Sans'",
       },
       height: {
-        '300': '300px', // Adding custom height value
+        '300': '300px', 
       }
     },
+    boxShadow: {
+        'custom': '12px 12px 24px rgba(79,209,197,.64)',
+        'glow': '0 0 60px rgba(0,255,203,.64)',
+      },
+      animation: {
+        'ring': 'ring 1.5s infinite',
+      },
+      keyframes: {
+        ring: {
+          '0%': { width: '30px', height: '30px', opacity: '1' },
+          '100%': { width: '300px', height: '300px', opacity: '0' },
+        },
+      },
   },
   plugins: [],
 }
