@@ -8,7 +8,7 @@ import { FiMenu } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 import { CityContext } from '../context/CityContext';
 
-const SideNav= () => {
+const SideNav = () => {
   const { selectedCity } = useContext(CityContext);
   const [sidenavOpen, setsidenavOpen] = useState(false);
   const ref = useRef();
@@ -27,7 +27,7 @@ const SideNav= () => {
 
   return (
     <div ref={ref}>
-      <nav className="md:hidden fixed left-7 top-800 z-10">
+      <nav className="md:hidden fixed left-4 top-800 z-10">
         <button
           className="text-xl p-2"
           onClick={() => setsidenavOpen((prev) => !prev)}
@@ -40,8 +40,8 @@ const SideNav= () => {
         </button>
       </nav>
       <ul
-        className={`fixed top-0 left-0 h-full  transition-transform duration-300 z-10 ${
-          sidenavOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed top-0 left-0 h-full transition-transform duration-300 z-10 ${
+          sidenavOpen ? 'translate-x-0 bg-white' : '-translate-x-full'
         } md:relative md:translate-x-0 md:flex md:flex-col md:gap-2 md:p-4 md:w-1/4`}
       >
         <li className="p-4 border-b md:border-none">
