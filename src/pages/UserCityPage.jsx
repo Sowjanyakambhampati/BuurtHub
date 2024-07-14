@@ -13,7 +13,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import { BsFillChatSquareTextFill } from "react-icons/bs";
 import { BsFillSendExclamationFill } from "react-icons/bs";
 
-
 function UserCityPage() {
   const { city } = useParams();
   const [products, setProducts] = useState([]);
@@ -69,7 +68,12 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2">Items for sale in the community</h2>
           <div className="flex justify-end">
-            <Link to={`/all-products/city/${selectedCity}`} className="text-firstcolor mb-2">See all products</Link>
+            <Link 
+              to={`/all-products/city/${selectedCity}`} 
+              className="min-w-[200px] min-h-[60px] inline-flex items-center justify-center text-lg font-bold text-[#313133] bg-gradient-to-r from-[#81e6d9] to-[#4fd1c5] rounded-full shadow-custom transition-transform duration-300 ease-in-out relative p-2 hover:translate-y-[-6px] before:content-[''] before:absolute before:inset-0 before:min-w-[212px] before:min-h-[72px] before:border-6 before:border-[#00FFCB] before:shadow-glow before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 before:ease-in-out hover:before:opacity-100 after:content-[''] after:w-[30px] after:h-[30px] after:border-6 after:border-[#00FFCB] after:rounded-full after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:animation-ring hover:after:animation-none"
+            >
+              See all products
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.length > 0 ? (
@@ -80,7 +84,6 @@ function UserCityPage() {
                   <p className="flex text-firtstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
                   <p className="flex text-firtstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
                   <p className="flex text-firtstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
-
                 </div>
               ))
             ) : (
@@ -91,7 +94,12 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Upcoming Events in the community</h2>
           <div className="flex justify-end">
-            <Link to={`/all-events/city/${selectedCity}`} className="text-firstcolor mb-2">See all events</Link>
+            <Link 
+              to={`/all-events/city/${selectedCity}`} 
+              className="min-w-[200px] min-h-[60px] inline-flex items-center justify-center text-lg font-bold text-[#313133] bg-gradient-to-r from-[#81e6d9] to-[#4fd1c5] rounded-full shadow-custom transition-transform duration-300 ease-in-out relative p-2 hover:translate-y-[-6px] before:content-[''] before:absolute before:inset-0 before:min-w-[212px] before:min-h-[72px] before:border-6 before:border-[#00FFCB] before:shadow-glow before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 before:ease-in-out hover:before:opacity-100 after:content-[''] after:w-[30px] after:h-[30px] after:border-6 after:border-[#00FFCB] after:rounded-full after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:animation-ring hover:after:animation-none"
+            >
+              See all events
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
@@ -114,7 +122,12 @@ function UserCityPage() {
         <div>
           <h2 className="text-2xl font-bold mb-2 mt-8">Community Posts</h2>
           <div className="flex justify-end">
-            <Link to={`/all-posts/city/${selectedCity}`} className="text-firstcolor mb-2">See all posts</Link>
+            <Link 
+              to={`/all-posts/city/${selectedCity}`} 
+              className="min-w-[200px] min-h-[60px] inline-flex items-center justify-center text-lg font-bold text-[#313133] bg-gradient-to-r from-[#81e6d9] to-[#4fd1c5] rounded-full shadow-custom transition-transform duration-300 ease-in-out relative p-2 hover:translate-y-[-6px] before:content-[''] before:absolute before:inset-0 before:min-w-[212px] before:min-h-[72px] before:border-6 before:border-[#00FFCB] before:shadow-glow before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 before:ease-in-out hover:before:opacity-100 after:content-[''] after:w-[30px] after:h-[30px] after:border-6 after:border-[#00FFCB] after:rounded-full after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:animation-ring hover:after:animation-none"
+            >
+              See all posts
+            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {posts.length > 0 ? (
@@ -126,7 +139,6 @@ function UserCityPage() {
                   <p className="flex text-firstcolor mb-2"><BsFillChatSquareTextFill className="m-1 text-thirdcolor"/>{post.content}</p>
                   <p className="flex text-gray-600 mb-2"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(post.createdAt).toLocaleDateString()}</p>
                   <p className="flex text-firstcolor mb-2 "><BsFillSendExclamationFill className="m-1 text-thirdcolor"/>{post.contactInfo}</p>
-
                 </div>
               ))
             ) : (
