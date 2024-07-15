@@ -27,7 +27,7 @@ const SideNav = () => {
 
   return (
     <div ref={ref}>
-      <nav className="md:hidden fixed left-4 top-800 z-10">
+      <nav className="md:hidden flex left-4 top-800 z-10">
         <button
           className="text-xl p-2"
           onClick={() => setsidenavOpen((prev) => !prev)}
