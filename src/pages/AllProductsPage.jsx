@@ -39,7 +39,6 @@ function AllProductsPage({ session }) {
             if (categoryFilter && product.category !== categoryFilter) return false;
             if (conditionFilter && product.condition !== conditionFilter) return false;
             if (searchTerm && !product.productName.toLowerCase().includes(searchTerm.toLowerCase())) return false;
-            if (product.reservedById !== null) return false;
             return true;
         });
         setFilteredProducts(filtered);

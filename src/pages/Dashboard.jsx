@@ -18,6 +18,7 @@ import { BsFillSendExclamationFill } from "react-icons/bs";
 function UserDashboard({ session }) {
     const [userProducts, setUserProducts] = useState([]);
     const [reservedProducts, setReservedProducts] = useState([]);
+    const [favouriteProducts, setFavouriteProducts] = useState([]);
     const [registeredEvents, setRegisteredEvents] = useState([]);
     const [userPosts, setUserPosts] = useState([]);
     const [editProduct, setEditProduct] = useState(null);
@@ -62,6 +63,19 @@ function UserDashboard({ session }) {
         };
         fetchUserReservedProducts();
     }, [user.id]);
+
+    useEffect(() => {
+      const fetchUserFavouriteProducts = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5005/product/favouriteproducts/${user.id}`);
+          setFavouriteProducts(response.data);
+        } catch (error) {
+          console.error('Failed to fetch favourite products', error);
+        }
+      };
+      fetchUserFavouriteProducts();
+    }, [user.id]);
+
 
     useEffect(() => {
         const fetchUserPosts = async () => {
@@ -313,8 +327,27 @@ function UserDashboard({ session }) {
                         )}
                     </div>
                 </section>
+   <section className="mb-8">
+  <h3 className="text-xl font-semibold mb-2">My Favourite Products</h3>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    {favouriteProducts.length > 0 ? (
+      favouriteProducts.map(product => (
+        <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
+          {product.image && ( <img src={product.image} alt={product.productName} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} /> )}
+          <h4 className="text-lg font-semibold mb-2 text-left">{product.productName}</h4>
+          <p className="flex text-firstcolor mb-2 text-left"><IoIosPricetags className="m-1 text-thirdcolor" /> € {product.price}.00</p>
+          <p className="flex text-firstcolor mb-4 text-left"><BsFillInfoCircleFill className="m-1 text-thirdcolor" />{product.description}</p>
+          <p className="flex text-firstcolor mb-2 text-left"><MdCategory className="m-1 text-thirdcolor" />{product.category}</p>
+          <p className="flex text-firstcolor mb-2 text-left"><TbBox className="m-1 text-thirdcolor" />{product.condition}</p>
+        </div>
+      ))
+    ) : (
+      <p>No favourite products.</p>
+    )}
+  </div>
+</section>             
 
-                <section className="mb-8">
+  <section className="mb-8">
   <h3 className="text-xl font-semibold mb-2">My Registered Events</h3>
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
     {registeredEvents.length > 0 ? (
@@ -462,3 +495,4 @@ function UserDashboard({ session }) {
 }
 
 export default UserDashboard;
+

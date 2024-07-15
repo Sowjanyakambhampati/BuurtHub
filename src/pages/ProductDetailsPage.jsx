@@ -8,21 +8,23 @@ import { IoIosPricetags } from "react-icons/io";
 import { TbBox } from "react-icons/tb";
 import { MdCategory } from "react-icons/md";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { FaUserPlus } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 const ProductDetailsPage = () => {
   const { productId } = useParams();
   const location = useLocation();
   const session = location.state?.session;
-  const navigate = useNavigate();
+
   if (!session) {
     return <Navigate to="/login" />;
   }
   const { user } = session;
+
   const [product, setProduct] = useState({
     reservedById: user.id,
   });
   const [isFavorite, setIsFavorite] = useState(false);
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -35,6 +37,7 @@ const ProductDetailsPage = () => {
     };
     fetchProductDetails();
   }, [productId]);
+
   const handleReserveClick = async (e) => {
     e.preventDefault();
     const confirmReservation = window.confirm("Do you want to reserve this product?");
@@ -52,22 +55,35 @@ const ProductDetailsPage = () => {
       }
     }
   };
-  const handleFavoriteClick = async () => {
-    try {
-      await axios.post(`https://community-forum-backend.adaptable.app/product/${productId}/favorite`, {
-        userId: user.id,
-        isFavorite: !isFavorite,
-      });
-      setIsFavorite(!isFavorite);
-      toast.success(`Product ${!isFavorite ? 'added to' : 'removed from'} favorites.`);
-    } catch (error) {
-      console.error('Failed to update favorite status', error);
-      toast.error('Failed to update favorite status.');
+
+  const handleFavoriteClick = async (e) => {
+    e.preventDefault();
+    const confirmFavorite = window.confirm(`Do you want to ${isFavorite ? 'remove' : 'add'} this product to favorites?`);
+    if (confirmFavorite) {
+      const updateData = {
+        favouriteById: user.id,  // Assuming backend expects 'userId'
+      };
+      try {
+        const response = await axios.put(`http://localhost:5005/product/${productId}`, updateData);
+        if (response.status === 200 || response.status === 201) {
+          toast.success(`Product has been ${isFavorite ? 'removed from' : 'added to'} favorites.`);
+          setIsFavorite(!isFavorite);  // Toggle the favorite state
+        } else {
+          throw new Error('Failed to update favorite status');
+        }
+      } catch (error) {
+        console.error('Failed to update favorite', error);
+        toast.error('Failed to update favorite.');
+      }
     }
   };
+  
+
+
   if (!product) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="flex">
       <ToastContainer />
@@ -106,4 +122,5 @@ const ProductDetailsPage = () => {
     </div>
   );
 };
+
 export default ProductDetailsPage;
