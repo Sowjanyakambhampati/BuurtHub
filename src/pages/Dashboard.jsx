@@ -67,7 +67,7 @@ function UserDashboard({ session }) {
     useEffect(() => {
       const fetchUserFavouriteProducts = async () => {
         try {
-          const response = await axios.get(`http://localhost:5005/product/favouriteproducts/${user.id}`);
+          const response = await axios.get(`https://community-forum-backend.adaptable.app/product/favouriteproducts/${user.id}`);
           setFavouriteProducts(response.data);
         } catch (error) {
           console.error('Failed to fetch favourite products', error);

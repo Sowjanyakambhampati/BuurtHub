@@ -64,7 +64,7 @@ const ProductDetailsPage = () => {
         favouriteById: user.id,  // Assuming backend expects 'userId'
       };
       try {
-        const response = await axios.put(`http://localhost:5005/product/${productId}`, updateData);
+        const response = await axios.put(`https://community-forum-backend.adaptable.app/product/${productId}`, updateData);
         if (response.status === 200 || response.status === 201) {
           toast.success(`Product has been ${isFavorite ? 'removed from' : 'added to'} favorites.`);
           setIsFavorite(!isFavorite);  // Toggle the favorite state
