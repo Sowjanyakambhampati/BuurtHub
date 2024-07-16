@@ -65,11 +65,13 @@ const ProductDetailsPage = () => {
 
             try {
                 await axios.put(`https://community-forum-backend.adaptable.app/product/${productId}`, updateData);
-                await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail-product-owner`, sendProdOwnEmail);
+                toast.success('Your product has been successfully reserved');
                 toast.success('An email has been sent to the product owner. You will receive pickup instructions soon.');
+                await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail-product-owner`, sendProdOwnEmail);
+                
             } catch (error) {
                 console.error('Failed to reserve product', error);
-                toast.error('Failed to reserve product.');
+                // toast.error('Failed to reserve product.');
             }
         }
     };
