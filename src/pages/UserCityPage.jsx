@@ -104,7 +104,7 @@ function UserCityPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {events.length > 0 ? (
               events.map((event) => (
-                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md">
+                <div key={event._id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
                   <img className="w-full h-40 object-cover mb-2" src={event.image} alt={event.title} />
                   <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
                   <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
