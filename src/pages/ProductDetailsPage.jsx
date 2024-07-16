@@ -38,7 +38,7 @@ const ProductDetailsPage = () => {
                 if (responseProdOwner.data && responseProdOwner.data.length > 0) {
                     setProdOwnerEmail(responseProdOwner.data[0].email);
                 } else {
-                    toast.error('Failed to get product owner.');
+                    //toast.error('Failed to get product owner.');
                 }
 
                 setIsFavorite(response.data.isFavorite); // Assuming API returns if product is favorite
@@ -124,7 +124,7 @@ const ProductDetailsPage = () => {
                         </p>
                         <p className="flex text-firstcolor mb-2 text-left"><MdCategory
                             className="m-1"/>{product.category}</p>
-                        <diV className="flex space-x-4">
+                        <div className="flex space-x-4">
                             <button onClick={handleFavoriteClick} className="text-l mt-4 py-3 h-10 px-6 bg-secondcolor">
                                 {isFavorite ? <AiFillHeart className="text-red-500"/> : <AiOutlineHeart/>}
                             </button>
@@ -135,7 +135,7 @@ const ProductDetailsPage = () => {
                             >
                                 Reserve
                             </button>
-                        </diV>
+                        </div>
 
                     </div>
                 </div>

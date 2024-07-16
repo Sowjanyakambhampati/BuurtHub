@@ -92,7 +92,7 @@ function AllEventsPage({ session }) {
               <Link to={`/all-events/city/${selectedCity}/event/${event._id}`} key={event._id} state={{ session }} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
 
                 {event.image && (
-                  <img src={event.image} alt={event.title} className="mt-4 rounded-md" style={{ maxWidth: '100%', height: 'auto' }} />
+                  <img src={event.image} alt={event.title} className="w-full h-40 object-cover mb-2 rounded-lg" />
                 )}
                 <h3 className="text-xl text-firstcolor font-semibold mb-2 text-left">{event.title}</h3>
                 <p className="flex text-firstcolor mb-2 text-left"><BsCalendar2DateFill className="m-1 text-thirdcolor" />{new Date(event.date).toLocaleDateString()}</p>
