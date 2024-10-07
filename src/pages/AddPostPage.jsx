@@ -65,7 +65,7 @@ function AddPostPage() {
 
 
  
-    axios.post(`https://community-forum-backend.adaptable.app/posts`, formData, {
+    axios.post(`https://community-forum-backend.vercel.app/posts`, formData, {
 
       headers: {
         'Content-Type': 'multipart/form-data'

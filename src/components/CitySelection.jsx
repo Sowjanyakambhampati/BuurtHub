@@ -11,7 +11,7 @@ function CitySelection() {
   const session = supabase.auth.getSession();
 
   useEffect(() => {
-    axios.get('https://community-forum-backend.adaptable.app/city')
+    axios.get('https://community-forum-backend.vercel.app/city')
       .then(response => {
         setCities(response.data);
       })

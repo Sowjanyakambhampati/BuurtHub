@@ -27,7 +27,7 @@ const EventDetailsPage = () => {
     }
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/${eventId}`);
+        const response = await axios.get(`https://community-forum-backend.vercel.app/event/${eventId}`);
         setEvent(response.data);
         setCurrentParticipants(response.data.participants);
         setLoading(false);
@@ -51,9 +51,9 @@ const EventDetailsPage = () => {
         email: user.email,
       };
       try {
-        await axios.put(`https://community-forum-backend.adaptable.app/event/register/${eventId}`, updateData);
+        await axios.put(`https://community-forum-backend.vercel.app/event/register/${eventId}`, updateData);
         toast.success('Successfully registered for the event');
-        await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail`, userEmail);
+        await axios.post(`https://community-forum-backend.vercel.app/email/sendemail`, userEmail);
       } catch (error) {
         console.error('Failed to register for event', error);
         // toast.error('Failed to register for event');

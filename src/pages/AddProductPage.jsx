@@ -61,7 +61,7 @@ function AddProductPage() {
     formData.append('category', product.category);
     formData.append('productOwner', product.productOwner);
 
-    axios.post('https://community-forum-backend.adaptable.app/product', formData, {
+    axios.post('https://community-forum-backend.vercel.app/product', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

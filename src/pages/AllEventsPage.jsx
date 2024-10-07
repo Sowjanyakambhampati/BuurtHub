@@ -21,7 +21,7 @@ function AllEventsPage({ session }) {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`https://community-forum-backend.adaptable.app/event/city/${city}`);
+        const response = await axios.get(`https://community-forum-backend.vercel.app/event/city/${city}`);
         setEvents(response.data);
         setFilteredEvents(response.data);
       } catch (error) {

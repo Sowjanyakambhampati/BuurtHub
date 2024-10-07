@@ -32,7 +32,7 @@ const ProductDetailsPage = () => {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await axios.get(`https://community-forum-backend.adaptable.app/product/${productId}`);
+                const response = await axios.get(`https://community-forum-backend.vercel.app/product/${productId}`);
                 setProduct(response.data);
                 const responseProdOwner = await supabase.from('users').select('email').eq('id', response.data.productOwner)
                 if (responseProdOwner.data && responseProdOwner.data.length > 0) {
@@ -64,11 +64,11 @@ const ProductDetailsPage = () => {
             };
 
             try {
-                await axios.put(`https://community-forum-backend.adaptable.app/product/${productId}`, updateData);
+                await axios.put(`https://community-forum-backend.vercel.app/product/${productId}`, updateData);
                 toast.success('Your product has been successfully reserved');
                 toast.success('An email has been sent to the product owner. You will receive pickup instructions soon.');
-                await axios.post(`https://community-forum-backend.adaptable.app/email/sendemail-product-owner`, sendProdOwnEmail);
-                
+                await axios.post(`https://community-forum-backend.vercel.app//email/sendemail-product-owner`, sendProdOwnEmail);
+
             } catch (error) {
                 console.error('Failed to reserve product', error);
                 // toast.error('Failed to reserve product.');
@@ -84,7 +84,7 @@ const ProductDetailsPage = () => {
                 favouriteById: user.id,  // Assuming backend expects 'userId'
             };
             try {
-                const response = await axios.put(`https://community-forum-backend.adaptable.app/product/${productId}`, updateData);
+                const response = await axios.put(`https://community-forum-backend.vercel.app//product/${productId}`, updateData);
                 if (response.status === 200 || response.status === 201) {
                     toast.success(`Product has been ${isFavorite ? 'removed from' : 'added to'} favorites.`);
                     setIsFavorite(!isFavorite);  // Toggle the favorite state

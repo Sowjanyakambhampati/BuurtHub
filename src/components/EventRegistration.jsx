@@ -9,7 +9,7 @@ const EventRegistration = ({ eventId }) => {
     e.preventDefault();
 
     try {
-      await axios.post(`https://community-forum-backend.adaptable.app/event/${eventId}/register`, {
+      await axios.post(`https://community-forum-backend.vercel.app/event/${eventId}/register`, {
         name,
         email,
       });

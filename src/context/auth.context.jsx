@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const API_URL = "https://community-forum-backend.adaptable.app";
+const API_URL = "https://community-forum-backend.vercel.app";
 
 const AuthContext = React.createContext();
 
